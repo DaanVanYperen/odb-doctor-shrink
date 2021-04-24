@@ -21,7 +21,7 @@ import net.mostlyoriginal.game.component.G;
 public class ShadedWaterRenderSystem extends BaseSystem {
 
     public ShaderProgram waterProgram;
-    final SpriteBatch batch = new SpriteBatch(500);
+    final SpriteBatch batch = new SpriteBatch(500);sw
     private CameraSystem cameraSystem;
     private boolean compiled;
     private FrameBuffer frameBuffer;
@@ -33,11 +33,9 @@ public class ShadedWaterRenderSystem extends BaseSystem {
 
     float time = 0f;
 
-    float[] velocity = new float[] {.006f, .007f};
-
     public void framebufferBegin() {
         if ( this.frameBuffer == null ) {
-            this.frameBuffer = new FrameBuffer(Pixmap.Format.RGBA8888, G.SCREEN_WIDTH/2, G.SCREEN_HEIGHT/2, false);
+            this.frameBuffer = new FrameBuffer(Pixmap.Format.RGBA8888, G.SCREEN_WIDTH, G.SCREEN_HEIGHT, false);
         }
 
         //frameBuffer.getColorBufferTexture().setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);

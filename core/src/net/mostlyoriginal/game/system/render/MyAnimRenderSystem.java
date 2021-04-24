@@ -6,8 +6,12 @@ package net.mostlyoriginal.game.system.render;
 import com.artemis.Aspect;
 import com.artemis.E;
 import com.artemis.annotations.Wire;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.controllers.Controller;
+import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
+import com.badlogic.gdx.math.MathUtils;
 import net.mostlyoriginal.api.component.basic.Angle;
 import net.mostlyoriginal.api.component.basic.Origin;
 import net.mostlyoriginal.api.component.basic.Pos;
@@ -57,6 +61,9 @@ public class MyAnimRenderSystem extends DeferredEntityProcessingSystem {
     @Override
     protected void initialize() {
         super.initialize();
+        for (Controller controller : Controllers.getControllers()) {
+            Gdx.app.log("bla", controller.getName());
+        }
         batch = new SpriteBatch(2000);
         font = fontManager.getFont("5x5");
     }
@@ -136,7 +143,7 @@ public class MyAnimRenderSystem extends DeferredEntityProcessingSystem {
 
         final TextureRegion frame = gdxanim.getKeyFrame(animation.age, gdxanim.getPlayMode() != Animation.PlayMode.NORMAL && animation.loop);
 
-        float ox =(animSize != null ? animSize.width : frame.getRegionWidth())* scale * origin.xy.x;
+        float ox =(animSize != null ? animSize.width : frame.getRegionWidth())* scale * (origin.xy.x);
         float oy = (animSize != null ? animSize.height : frame.getRegionHeight()) * scale * origin.xy.y;
         float y = roundToPixels(position.xy.y);
         float x = roundToPixels(position.xy.x);
@@ -149,7 +156,7 @@ public class MyAnimRenderSystem extends DeferredEntityProcessingSystem {
                     ox,
                     oy,
                     animSize != null ? animSize.width : frame.getRegionWidth() * scale,
-                    animSize != null ? animSize.height :                     frame.getRegionHeight() * scale,
+                    animSize != null ? animSize.height : frame.getRegionHeight() * scale,
                     1f,
                     1f,
                     angle.rotation,

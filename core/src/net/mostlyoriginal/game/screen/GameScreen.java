@@ -85,7 +85,7 @@ public class GameScreen extends WorldScreen {
 
                         // Camera.
                         new CameraFollowSystem(),
-                        new CameraShakeSystem(),
+                        //new CameraShakeSystem(),
                         new CameraClampToMapSystem(),
                         new PriorityAnimSystem(),
 

@@ -21,5 +21,11 @@ public class PlayerAnimSystem extends FluidIteratingSystem {
     protected void process(E e) {
         String playerAnimPrefix = e.hasShrunk() ? "doctor-small" : "doctor-big";
         e.animId(playerAnimPrefix);
+
+        if ( e.hasShrunk()) {
+            e.bounds(0, 0, 16,16);
+        } else {
+            e.bounds(16, 0, 48,64);
+        }
     }
 }

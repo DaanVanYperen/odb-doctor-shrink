@@ -51,7 +51,7 @@ public class CameraFollowSystem extends FluidIteratingSystem {
 
         float maxDistance = (Gdx.graphics.getHeight() / G.CAMERA_ZOOM) * 0.5F * 0.6f;
         if (  e.posY() < cameraSystem.camera.position.y - maxDistance) {
-            cameraSystem.camera.position.y = e.posY() + maxDistance;
+            cameraSystem.camera.position.y = myAnimRenderSystem.roundToPixels(e.posY() + maxDistance);
             cameraSystem.camera.update();
         }
     }

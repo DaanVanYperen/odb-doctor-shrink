@@ -15,7 +15,7 @@ import net.mostlyoriginal.game.system.view.GameScreenAssetSystem;
 public class FootstepSystem extends FluidIteratingSystem {
 
     private GameScreenAssetSystem assetSystem;
-    private CameraShakeSystem cameraShakeSystem;
+   // private CameraShakeSystem cameraShakeSystem;
 
     public FootstepSystem() {
         super(Aspect.all(Footsteps.class, Pos.class));
@@ -36,7 +36,7 @@ public class FootstepSystem extends FluidIteratingSystem {
                     E.E().playSound(e.footstepsSfx());
 
                     if ( e.isRobot()) {
-                        cameraShakeSystem.shake(1);
+                        //cameraShakeSystem.shake(1);
                         particleSystem.sprinkleSand(15);
                     }
                 }

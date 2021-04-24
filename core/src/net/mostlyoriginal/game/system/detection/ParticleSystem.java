@@ -109,9 +109,24 @@ public class ParticleSystem extends FluidIteratingSystem {
                 .create(80);
     }
 
+    public void smoke(float x, float y, int count) {
+        E.E().playSound("splat" + MathUtils.random(1, 4));
+        bakery
+                .color(new Color(1, 1, 1,0.5f))
+                .at(x-5, y-5)
+                .angle(0, 360)
+                .speed(50, 80)
+                .slowlySplatDown()
+                .fadeAfter(0.2f)
+                .size(5, 10)
+                .rotateRandomly()
+                .layer(G.LAYER_PLAYER+10000)
+                .create(count);
+    }
+
     Vector2 v2 = new Vector2();
 
-    public E spawnVanillaParticle(float x, float y, float angle, float speed, float scale) {
+    public E spawnVanillaParticle(float x, float y, float angle, float speed, float scale, int layer) {
 
         v2.set(speed, 0).setAngle(angle);
 
@@ -119,7 +134,7 @@ public class ParticleSystem extends FluidIteratingSystem {
                 .pos(x - scale * 0.5f, y - scale * 0.5f)
                 .anim("particle")
                 .scale(scale)
-                .renderLayer(G.LAYER_PARTICLES)
+                .renderLayer(layer)
                 .origin(scale / 2f, scale / 2f)
                 .bounds(0, 0, scale, scale)
                 .physicsVx(v2.x)
@@ -196,6 +211,7 @@ public class ParticleSystem extends FluidIteratingSystem {
         private Tint tmpTo = new Tint();
         private float rotateR = 0;
         private boolean withDeadly;
+        private int layer=G.LAYER_PARTICLES;
 
         public Builder() {
             reset();
@@ -217,7 +233,7 @@ public class ParticleSystem extends FluidIteratingSystem {
                         random(minY, maxY),
                         random(minAngle, maxAngle),
                         random(minSpeed, maxSpeed),
-                        random(minScale, maxScale))
+                        random(minScale, maxScale), layer)
                         .tint(color.r, color.g, color.b, color.a);
 
                 if (withGravity) {
@@ -269,6 +285,11 @@ public class ParticleSystem extends FluidIteratingSystem {
             fadeDelay = -1;
             withSolid = false;
             rotateR = 0;
+        }
+
+        public Builder layer(int layer ){
+            this.layer = layer;
+            return this;
         }
 
         public Builder angle(float minAngle, float maxAngle) {

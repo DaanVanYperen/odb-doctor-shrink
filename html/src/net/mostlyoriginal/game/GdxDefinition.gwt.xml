@@ -9,6 +9,8 @@
     <inherits name='net.mostlyoriginal.ContribPluginOperations'/>
     <inherits name='net.mostlyoriginal.ContribEventBus'/>
     <inherits name='net.mostlyoriginal.ContribJam'/>
+    <inherits name="com.badlogic.gdx.controllers" />
+    <inherits name="com.badlogic.gdx.controllers.controllers-gwt"/>
 
     <!-- Optional modules. -->
     <!--

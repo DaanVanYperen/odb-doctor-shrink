@@ -4,17 +4,19 @@ import com.artemis.Aspect;
 import com.artemis.E;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.controllers.Controller;
+import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.math.MathUtils;
 import net.mostlyoriginal.api.component.graphics.Anim;
 import net.mostlyoriginal.api.component.physics.Physics;
 import net.mostlyoriginal.api.system.physics.SocketSystem;
 import net.mostlyoriginal.game.component.G;
-import net.mostlyoriginal.game.component.Pickup;
 import net.mostlyoriginal.game.component.PlayerControlled;
 import net.mostlyoriginal.game.component.Socket;
 import net.mostlyoriginal.game.component.map.WallSensor;
 import net.mostlyoriginal.game.system.common.FluidIteratingSystem;
 import net.mostlyoriginal.game.system.detection.DialogSystem;
+import net.mostlyoriginal.game.system.detection.ParticleSystem;
 import net.mostlyoriginal.game.system.map.MapCollisionSystem;
 import net.mostlyoriginal.game.system.render.MyAnimRenderSystem;
 import net.mostlyoriginal.game.system.view.GameScreenAssetSystem;
@@ -31,15 +33,23 @@ public class PlayerControlSystem extends FluidIteratingSystem {
     private float SPEED_UP = 1200;
     private float BREAKING = SPEED_UP*2f;
 
-    private float JUMP_FACTOR = 24000;
+    private float JUMP_FACTOR = 24000*2;
     private SocketSystem socketSystem;
     private FollowSystem followSystem;
     private MyAnimRenderSystem animSystem;
     private GameScreenAssetSystem assetSystem;
     private DialogSystem dialogSystem;
+    private ParticleSystem particleSystem;
+    private Controller controller;
 
     public PlayerControlSystem() {
         super(Aspect.all(PlayerControlled.class, Physics.class, WallSensor.class, Anim.class));
+    }
+
+    @Override
+    protected void begin() {
+        super.begin();
+        controller = Controllers.getCurrent();
     }
 
     @Override
@@ -80,14 +90,15 @@ public class PlayerControlSystem extends FluidIteratingSystem {
         e.physicsVr(0);
 
 
+
         float dx = 0;
         float dy = 0;
 
-        if (Gdx.input.isKeyPressed(Input.Keys.A) && !e.hasDead()) {
+        if (leftPressed() && !e.hasDead()) {
             dx = e.physicsVx() > 0 ? -BREAKING : -SPEED_UP;
             e.animFlippedX(true);
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.D) && !e.hasDead()) {
+        if (rightPressed(e)) {
             dx = e.physicsVx() < 0 ? BREAKING : SPEED_UP;
             e.animFlippedX(false);
         }
@@ -106,15 +117,25 @@ public class PlayerControlSystem extends FluidIteratingSystem {
         }
 
         boolean onFloor = e.wallSensorOnFloor() || e.wallSensorOnPlatform();
-        if (Gdx.input.isKeyPressed(Input.Keys.W) || Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
+        if (jumpPressed()) {
             if ( onFloor && !e.hasDead()){
                 e.physicsVy(JUMP_FACTOR * 0.016f);
             }
         }
 
-        if (Gdx.input.isKeyPressed(Input.Keys.S)) {
+        if (shrinkPressed()) {
+            if ( !e.hasShrunk()) {
+                e.posX(e.posX()+16);
+                particleSystem.smoke(e.posX()+8, e.posY()+12, 40);
+            }
             e.shrunk(true);
+
         } else {
+            if ( e.hasShrunk()) {
+                e.posX(e.posX()-16);
+                particleSystem.smoke(e.posX()+32, e.posY()+48, 40);
+                particleSystem.smoke(e.posX()+32, e.posY()+16, 40);
+            }
             e.shrunk(false);
         }
 
@@ -184,6 +205,24 @@ public class PlayerControlSystem extends FluidIteratingSystem {
             }
             e.animLoop(true);
         }
+    }
+
+
+
+    private boolean shrinkPressed() {
+        return Gdx.input.isKeyPressed(Input.Keys.S) || (controller != null && controller.getButton(controller.getMapping().buttonDpadDown));
+    }
+
+    private boolean jumpPressed() {
+        return Gdx.input.isKeyPressed(Input.Keys.W) || Gdx.input.isKeyPressed(Input.Keys.SPACE) || (controller != null && controller.getButton(controller.getMapping().buttonA));
+    }
+
+    private boolean rightPressed(E e) {
+        return Gdx.input.isKeyPressed(Input.Keys.D) && !e.hasDead() || Gdx.input.isKeyPressed(Input.Keys.SPACE) || (controller != null && controller.getButton(controller.getMapping().buttonDpadRight));
+    }
+
+    private boolean leftPressed() {
+        return Gdx.input.isKeyPressed(Input.Keys.A) || (controller != null && controller.getButton(controller.getMapping().buttonDpadLeft));
     }
 
     private void socketCarried(E e, E socket) {

@@ -24,7 +24,7 @@ public class ExitSystem extends FluidIteratingSystem {
     private MyAnimRenderSystem animSystem;
     private GameScreenAssetSystem assetSystem;
     private DialogSystem dialogSystem;
-    private CameraShakeSystem cameraShakeSystem;
+    //private CameraShakeSystem cameraShakeSystem;
 
     public ExitSystem() {
         super(Aspect.all(Exit.class, Pos.class));
@@ -51,16 +51,16 @@ public class ExitSystem extends FluidIteratingSystem {
                     E.E().playSound("door_break");
                     followSystem.expendCharge(e, G.BARS_NEEDED_FOR_BREAKING_DOOR / 2f);
                     E.E().posX(e.posX() - 16).posY(e.posY()).animId("exit-damaged").render(G.LAYER_DOOR);
-                    cameraShakeSystem.shake(10);
+                    //cameraShakeSystem.shake(10);
                 }
                 if (e.exitCooldown() < 1 && !e.exitOpen()) {
                     E.E().playSound("door_break");
                     e.exitOpen(true);
                     followSystem.expendCharge(e, G.BARS_NEEDED_FOR_BREAKING_DOOR / 2f);
                     E.E().posX(e.posX() - 16).posY(e.posY()).animId("exit-open").render(G.LAYER_DOOR + 1);
-                    cameraShakeSystem.shake(10);
+                    //cameraShakeSystem.shake(10);
                 }
-                cameraShakeSystem.shake(4);
+                //cameraShakeSystem.shake(4);
             }
         } else robot.removeNeedsBatteries();
 
