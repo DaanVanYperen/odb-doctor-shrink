@@ -5,6 +5,7 @@ import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import net.mostlyoriginal.api.system.camera.CameraSystem;
 import net.mostlyoriginal.api.system.core.PassiveSystem;
+import net.mostlyoriginal.game.system.PulsatingFramebufferManager;
 
 /**
  * @author Daan van Yperen
@@ -15,7 +16,7 @@ public class MapRenderInFrontSystem extends BaseSystem {
     private CameraSystem cameraSystem;
 
     public MyMapRendererImpl renderer;
-
+    private PulsatingFramebufferManager pulsatingFramebufferManager;
 
     @Override
     protected void initialize() {
@@ -24,6 +25,7 @@ public class MapRenderInFrontSystem extends BaseSystem {
 
     @Override
     protected void processSystem() {
+        pulsatingFramebufferManager.fbBegin();
         for (MapLayer layer : mapSystem.map.getLayers()) {
             if (layer.isVisible()) {
                 if (layer.getName().equals("infront")) {
@@ -31,6 +33,7 @@ public class MapRenderInFrontSystem extends BaseSystem {
                 }
             }
         }
+        pulsatingFramebufferManager.fbEnd(0);
     }
 
     private void renderLayer(final TiledMapTileLayer layer) {

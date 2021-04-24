@@ -116,10 +116,14 @@ public class PlayerControlSystem extends FluidIteratingSystem {
             }
         }
 
-        boolean onFloor = e.wallSensorOnFloor() || e.wallSensorOnPlatform();
+        boolean onFloor = e.wallSensorOnFloor() || e.wallSensorOnPlatform() || e.wallSensorNearFloor();
         if (jumpPressed()) {
             if ( onFloor && !e.hasDead()){
                 e.physicsVy(JUMP_FACTOR * 0.016f);
+                for (int i = 0; i < 4; i++) {
+                    particleSystem.dust(e.posX()+e.boundsCx(), e.posY(), 90+20);
+                    particleSystem.dust(e.posX()+e.boundsCx(), e.posY(), 90-20);
+                }
             }
         }
 
@@ -218,7 +222,7 @@ public class PlayerControlSystem extends FluidIteratingSystem {
     }
 
     private boolean rightPressed(E e) {
-        return Gdx.input.isKeyPressed(Input.Keys.D) && !e.hasDead() || Gdx.input.isKeyPressed(Input.Keys.SPACE) || (controller != null && controller.getButton(controller.getMapping().buttonDpadRight));
+        return Gdx.input.isKeyPressed(Input.Keys.D) && !e.hasDead() || (controller != null && controller.getButton(controller.getMapping().buttonDpadRight));
     }
 
     private boolean leftPressed() {

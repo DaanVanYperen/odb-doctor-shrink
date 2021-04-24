@@ -25,7 +25,8 @@ public class ParticleSystem extends FluidIteratingSystem {
 
     private Color BLOOD_COLOR = Color.valueOf("4B1924");
     private Color COLOR_WHITE = Color.valueOf("FFFFFF");
-    private Color COLOR_DUST = Color.valueOf("D4CFB899");
+    private Color COLOR_DUST = Color.valueOf("f5a097");
+    private Color COLOR_DUST_RED = Color.valueOf("f5c067");
     private Color COLOR_ACID = Color.valueOf("5F411CDD");
     private Color COLOR_SAND = Color.valueOf("D4CFB866");
 
@@ -57,13 +58,16 @@ public class ParticleSystem extends FluidIteratingSystem {
 
     public void dust(float x, float y, float angle) {
         bakery
-                .color(COLOR_DUST)
+                .color(MathUtils.random(0,100) > 25f ? COLOR_DUST : COLOR_DUST_RED)
+                .dropletSplatDown()
                 .at(x, y)
                 .angle(angle, angle)
-                .speed(10, 15)
-                .fadeAfter(0.1f)
+                .speed(60, 80)
+                .fadeAfter(0.4f)
                 .rotateRandomly()
+                .solid()
                 .size(1, 3)
+                .friction(1)
                 .create(1, 3);
     }
 
@@ -126,7 +130,7 @@ public class ParticleSystem extends FluidIteratingSystem {
 
     Vector2 v2 = new Vector2();
 
-    public E spawnVanillaParticle(float x, float y, float angle, float speed, float scale, int layer) {
+    public E spawnVanillaParticle(float x, float y, float angle, float speed, float scale, int layer, float friction) {
 
         v2.set(speed, 0).setAngle(angle);
 
@@ -139,7 +143,7 @@ public class ParticleSystem extends FluidIteratingSystem {
                 .bounds(0, 0, scale, scale)
                 .physicsVx(v2.x)
                 .physicsVy(v2.y)
-                .physicsFriction(0);
+                .physicsFriction(friction);
     }
 
     @Override
@@ -212,6 +216,7 @@ public class ParticleSystem extends FluidIteratingSystem {
         private float rotateR = 0;
         private boolean withDeadly;
         private int layer=G.LAYER_PARTICLES;
+        private float friction=0;
 
         public Builder() {
             reset();
@@ -233,7 +238,7 @@ public class ParticleSystem extends FluidIteratingSystem {
                         random(minY, maxY),
                         random(minAngle, maxAngle),
                         random(minSpeed, maxSpeed),
-                        random(minScale, maxScale), layer)
+                        random(minScale, maxScale), layer, friction)
                         .tint(color.r, color.g, color.b, color.a);
 
                 if (withGravity) {
@@ -264,6 +269,12 @@ public class ParticleSystem extends FluidIteratingSystem {
         Builder slowlySplatDown() {
             this.withGravity = true;
             this.gravityY = -0.5f;
+            return this;
+        }
+
+        Builder dropletSplatDown() {
+            this.withGravity = true;
+            this.gravityY = -4f;
             return this;
         }
 
@@ -330,6 +341,11 @@ public class ParticleSystem extends FluidIteratingSystem {
 
         public Builder solid() {
             withSolid = true;
+            return this;
+        }
+
+        public Builder friction(float friction ) {
+            this.friction = friction;
             return this;
         }
 

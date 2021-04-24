@@ -1,9 +1,10 @@
 package net.mostlyoriginal.game.system;
 
 import com.artemis.BaseSystem;
+import com.artemis.Manager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GLTexture;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -18,10 +19,10 @@ import net.mostlyoriginal.game.component.G;
  *
  * @author Daan van Yperen
  */
-public class ShadedWaterRenderSystem extends BaseSystem {
+public class PulsatingFramebufferManager extends BaseSystem {
 
     public ShaderProgram waterProgram;
-    final SpriteBatch batch = new SpriteBatch(500);sw
+    final SpriteBatch batch = new SpriteBatch(500);
     private CameraSystem cameraSystem;
     private boolean compiled;
     private FrameBuffer frameBuffer;
@@ -29,31 +30,37 @@ public class ShadedWaterRenderSystem extends BaseSystem {
     @Override
     protected void initialize() {
         super.initialize();
+        if ( this.frameBuffer == null ) {
+            this.frameBuffer = new FrameBuffer(Pixmap.Format.RGBA8888, G.SCREEN_WIDTH, G.SCREEN_HEIGHT, false);
+            frameBuffer.getColorBufferTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        }
     }
 
     float time = 0f;
 
-    public void framebufferBegin() {
-        if ( this.frameBuffer == null ) {
-            this.frameBuffer = new FrameBuffer(Pixmap.Format.RGBA8888, G.SCREEN_WIDTH, G.SCREEN_HEIGHT, false);
-        }
-
-        //frameBuffer.getColorBufferTexture().setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
-        frameBuffer.getColorBufferTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-
-        frameBuffer.begin();
-        Gdx.gl.glClearColor(0.01f,0.11f,0.11f,1f);
-        Gdx.gl.glClear(16384);
-    }
-
-    public void framebufferEnd() {
-        frameBuffer.end();
+    @Override
+    protected void processSystem() {
+        time += world.delta;
     }
 
     @Override
-    protected void processSystem() {
+    protected void dispose() {
+        if ( frameBuffer != null ) {
+            frameBuffer.dispose();
+            frameBuffer = null;
+        }
+    }
 
-        framebufferEnd();
+    public void fbBegin() {
+        //frameBuffer.getColorBufferTexture().setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
+        frameBuffer.begin();
+        Gdx.gl.glColorMask(true,true,true,true);
+        Gdx.gl.glClearColor(0f,0f,0f,0f);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+    }
+
+    public void fbEnd(float time_offset) {
+        frameBuffer.end();
 
         // TODO: disable img dependency.
         if ( waterProgram == null ) {
@@ -62,14 +69,11 @@ public class ShadedWaterRenderSystem extends BaseSystem {
             if ( !compiled) Gdx.app.error("Shader", waterProgram.getLog());
         }
 
-
-        time += world.delta;
-
         batch.setProjectionMatrix(cameraSystem.guiCamera.combined);
         batch.setColor(new Color(1f,1f,1f,1f));
         batch.begin();
         if ( compiled ) {
-            waterProgram.setUniformf("u_time", time*2f);
+            waterProgram.setUniformf("u_time", (time+time_offset)*2f);
             waterProgram.setUniformf("u_scrollx", cameraSystem.camera.position.x / (G.SCREEN_WIDTH/2));
             waterProgram.setUniformf("u_scrolly", cameraSystem.camera.position.y / (G.SCREEN_HEIGHT/2));
             batch.setShader(waterProgram);

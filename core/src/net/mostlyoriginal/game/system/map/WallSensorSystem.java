@@ -40,6 +40,9 @@ public class WallSensorSystem extends FluidIteratingSystem {
         final Bounds bounds = e.getBounds();
 
         final boolean onFloor = collides(px + bounds.minx + (bounds.maxx - bounds.minx) * 0.5f, py + bounds.miny - 1);
+        final boolean nearFloor =
+                collides(px + bounds.minx + (bounds.maxx - bounds.minx) * 0.2f, py + bounds.miny - 1) ||
+                collides(px + bounds.maxy - (bounds.maxx - bounds.minx) * 0.2f , py + bounds.miny - 1);
         final boolean onCeiling = collides(px + bounds.minx + (bounds.maxx - bounds.minx) * 0.5f, py + bounds.maxy + 1);
         final boolean onEastWall = collides(px + bounds.maxx + 1, py + bounds.miny + (bounds.maxy - bounds.miny) * 0.5f);
         final boolean onWestWall = collides(px + bounds.minx - 1, py + bounds.miny + (bounds.maxy - bounds.miny) * 0.5f);
@@ -47,6 +50,7 @@ public class WallSensorSystem extends FluidIteratingSystem {
         e
                 .wallSensorOnVerticalSurface(onEastWall || onWestWall)
                 .wallSensorOnFloor(onFloor)
+                .wallSensorNearFloor(nearFloor)
                 .wallSensorOnHorizontalSurface(onCeiling || onFloor)
                 .mapWallSensorWallAngle(onFloor ? 90 :
                         onCeiling ? -90 :

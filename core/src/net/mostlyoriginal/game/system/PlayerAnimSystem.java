@@ -24,8 +24,10 @@ public class PlayerAnimSystem extends FluidIteratingSystem {
 
         if ( e.hasShrunk()) {
             e.bounds(0, 0, 16,16);
+            e.footstepsStepSize(6);
         } else {
             e.bounds(16, 0, 48,64);
+            e.footstepsStepSize(20);
         }
     }
 }

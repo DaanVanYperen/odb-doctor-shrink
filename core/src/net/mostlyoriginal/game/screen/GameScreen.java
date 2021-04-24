@@ -9,10 +9,8 @@ import com.badlogic.gdx.graphics.Color;
 import net.mostlyoriginal.api.SingletonPlugin;
 import net.mostlyoriginal.api.manager.FontManager;
 import net.mostlyoriginal.api.screen.core.WorldScreen;
-import net.mostlyoriginal.api.system.camera.CameraShakeSystem;
 import net.mostlyoriginal.api.system.camera.CameraSystem;
 import net.mostlyoriginal.api.system.graphics.RenderBatchingSystem;
-import net.mostlyoriginal.api.system.mouse.MouseCursorSystem;
 import net.mostlyoriginal.api.system.physics.*;
 import net.mostlyoriginal.api.system.render.ClearScreenSystem;
 import net.mostlyoriginal.game.GdxArtemisGame;
@@ -21,7 +19,6 @@ import net.mostlyoriginal.game.system.*;
 import net.mostlyoriginal.game.system.detection.*;
 import net.mostlyoriginal.game.system.map.*;
 import net.mostlyoriginal.game.system.render.*;
-import net.mostlyoriginal.game.system.ui.MouseClickSystem;
 import net.mostlyoriginal.game.system.view.GameScreenAssetSystem;
 import net.mostlyoriginal.game.system.view.GameScreenSetupSystem;
 import net.mostlyoriginal.plugin.OperationsPlugin;
@@ -45,6 +42,7 @@ public class GameScreen extends WorldScreen {
                         new SuperMapper(),
                         new TagManager(),
                         new FontManager(),
+                        new PulsatingFramebufferManager(),
 
                         new EntitySpawnerSystem(),
                         new MapSystem(),
@@ -93,7 +91,6 @@ public class GameScreen extends WorldScreen {
 
                         new ClearScreenSystem(BACKGROUND_COLOR),
                         new MapRenderSystem(),
-                        new ShadedWaterRenderSystem(),
 
                         renderBatchingSystem = new RenderBatchingSystem(),
                         new MyAnimRenderSystem(renderBatchingSystem),

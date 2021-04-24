@@ -7,6 +7,7 @@ import com.artemis.Component;
  */
 public class WallSensor extends Component {
     public boolean onFloor = false;
+    public boolean nearFloor = false;
     public boolean onHorizontalSurface = false;
     public boolean onVerticalSurface = false;
     public boolean onPlatform = false;

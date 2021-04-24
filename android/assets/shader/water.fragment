@@ -17,6 +17,5 @@ void main() {
     vec2 offset = v_texCoords+vec2(u_scrollx,u_scrolly);
     vec2 waveUV = vec2(cos(u_time + offset.x* 10.0+(offset.y)* 10.0),sin(u_time + offset.y* 10.0))*0.005;
     vec2 uv = v_texCoords + waveUV;
-    vec3 color = texture2D(u_texture, uv).rgb;
-    gl_FragColor = vec4(color, 1.0);
+    gl_FragColor = texture2D(u_texture, uv).rgba;
 }
