@@ -1,0 +1,14 @@
+{
+    "platform": "windows64",
+    "jdk": "c:/dev/zulu8.21.0.1-jdk8.0.131-win_x64.zip",
+    "executable": "artax",
+    "classpath": [
+        "C:/github/ld39/source/desktop/build/libs/desktop-0.1.jar"
+    ],
+    "mainclass": "net.mostlyoriginal.game.desktop.DesktopLauncher",
+    "vmargs": [
+       "Xmx512M"
+    ],
+    "minimizejre": "hard",
+    "output": "w32"
+}
