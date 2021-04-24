@@ -20,7 +20,14 @@
       "width": 16,
       "height": 16
     },  
-  
+    {
+      "id": "particle",
+      "comment": "Pixel particle.",
+      "x": 64,
+      "y": 0,
+      "width": 1,
+      "height": 1
+    }, 
   
   
   
@@ -469,14 +476,6 @@
       "milliseconds": 70,
       "width": 8,
       "height": 8
-    },
-    {
-      "id": "particle",
-      "comment": "Pixel particle.",
-      "x": 21,
-      "y": 80,
-      "width": 1,
-      "height": 1
     },
     {
       "id": "player-whistles",
