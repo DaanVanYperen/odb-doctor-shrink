@@ -1,6 +1,39 @@
 {
   "sprites": [
     {
+      "id": "doctor-big",
+      "comment": "Big player character.",
+      "x": 0,
+      "y": 128,
+      "countX": 1,
+      "countY": 1,
+      "width": 64,
+      "height": 64
+    }, 
+     {
+      "id": "doctor-small",
+      "comment": "Small player character.",
+      "x": 0,
+      "y": 192,
+      "countX": 1,
+      "countY": 1,
+      "width": 16,
+      "height": 16
+    },  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+    {
       "id": "player-idle",
       "comment": "Player character idling.",
       "x": 0,
