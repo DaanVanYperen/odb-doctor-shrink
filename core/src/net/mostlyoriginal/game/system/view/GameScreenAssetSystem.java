@@ -1,5 +1,6 @@
 package net.mostlyoriginal.game.system.view;
 
+import com.artemis.E;
 import com.artemis.annotations.Wire;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
@@ -29,31 +30,6 @@ public class GameScreenAssetSystem extends AbstractAssetSystem {
     public GameScreenAssetSystem() {
         super("tileset.png");
         loadSprites();
-        loadSounds(
-                new String[]{
-                        "MOWV", //
-                        "voice1",
-                        "VWOM",
-                        "deathsound", // done
-                        "battery_eaten", // robot gets battery
-                        "deepsound", //
-                        "door_break", //
-                        "door_openclose", // electrical doors.
-                        "footsteps_girl",
-                        "footsteps_robot",
-                        "landing_girl",
-                        "boss_sound_1",
-                        "poop_pipe",
-                        "robot_attack",
-                        "death_jingle",
-                        "robot_fly",
-                        "gremlin_death",
-                        "splat1",
-                        "splat2",
-                        "splat3",
-                        "splat4",
-                }
-        );
 
         Texture tiles = new Texture("tileset.png");
 
@@ -84,10 +60,6 @@ public class GameScreenAssetSystem extends AbstractAssetSystem {
         music.setLooping(true);
         music.play();
         music.setPan(0, 0.1f);
-
-        if (!G.DEBUG_SKIP_INTRO) {
-            playSfx("LD_troop_prologue");
-        }
     }
 
     public void playMusicInGame(String song) {

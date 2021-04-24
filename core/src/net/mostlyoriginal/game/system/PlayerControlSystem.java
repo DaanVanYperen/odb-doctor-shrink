@@ -214,6 +214,6 @@ public class PlayerControlSystem extends FluidIteratingSystem {
 
     private void callRobot(E e) {
         followSystem.createMarker(e);
-        assetSystem.playSfx("voice1");
+        E.E().playSound("voice1");
     }
 }

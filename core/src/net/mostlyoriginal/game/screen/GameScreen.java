@@ -6,6 +6,8 @@ import com.artemis.WorldConfigurationBuilder;
 import com.artemis.link.EntityLinkManager;
 import com.artemis.managers.TagManager;
 import com.badlogic.gdx.graphics.Color;
+import net.mostlyoriginal.api.SingletonPlugin;
+import net.mostlyoriginal.api.manager.FontManager;
 import net.mostlyoriginal.api.screen.core.WorldScreen;
 import net.mostlyoriginal.api.system.camera.CameraShakeSystem;
 import net.mostlyoriginal.api.system.camera.CameraSystem;
@@ -23,7 +25,6 @@ import net.mostlyoriginal.game.system.ui.MouseClickSystem;
 import net.mostlyoriginal.game.system.view.GameScreenAssetSystem;
 import net.mostlyoriginal.game.system.view.GameScreenSetupSystem;
 import net.mostlyoriginal.plugin.OperationsPlugin;
-import net.mostlyoriginal.plugin.ProfilerPlugin;
 
 /**
  * Example main game screen.
@@ -39,10 +40,11 @@ public class GameScreen extends WorldScreen {
     protected World createWorld() {
         RenderBatchingSystem renderBatchingSystem;
         return new World(new WorldConfigurationBuilder()
-                .dependsOn(EntityLinkManager.class, ProfilerPlugin.class, OperationsPlugin.class)
+                .dependsOn(EntityLinkManager.class, OperationsPlugin.class, SingletonPlugin.class)
                 .with(
                         new SuperMapper(),
                         new TagManager(),
+                        new FontManager(),
 
                         new EntitySpawnerSystem(),
                         new MapSystem(),
@@ -100,6 +102,29 @@ public class GameScreen extends WorldScreen {
                         new ExitSystem(),
                         new DeathSystem(),
                         new DialogSystem(),
+                        new SoundPlaySystem( new String[]{
+                                "MOWV", //
+                                "voice1",
+                                "VWOM",
+                                "deathsound", // done
+                                "battery_eaten", // robot gets battery
+                                "deepsound", //
+                                "door_break", //
+                                "door_openclose", // electrical doors.
+                                "footsteps_girl",
+                                "footsteps_robot",
+                                "landing_girl",
+                                "boss_sound_1",
+                                "poop_pipe",
+                                "robot_attack",
+                                "death_jingle",
+                                "robot_fly",
+                                "gremlin_death",
+                                "splat1",
+                                "splat2",
+                                "splat3",
+                                "splat4",
+                        }),
                         new TransitionSystem(GdxArtemisGame.getInstance())
                 ).build());
     }

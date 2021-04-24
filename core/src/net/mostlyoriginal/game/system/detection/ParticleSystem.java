@@ -97,7 +97,7 @@ public class ParticleSystem extends FluidIteratingSystem {
     }
 
     public void bloodExplosion(float x, float y) {
-        assetSystem.playSfx("splat" + MathUtils.random(1, 4));
+        E.E().playSound("splat" + MathUtils.random(1, 4));
         bakery
                 .color(BLOOD_COLOR)
                 .at(x, y)

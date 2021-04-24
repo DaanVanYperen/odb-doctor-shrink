@@ -46,7 +46,7 @@ public class SocketSystem extends FluidIteratingSystem {
 
     public void socket(E battery, E socket) {
         unsocket(battery);
-        assetSystem.playSfx(socket.socketSfxSocketed());
+        E.E().playSound(socket.socketSfxSocketed());
 
         if (socket.isRobot()) {
             battery.deleteFromWorld();
@@ -88,7 +88,7 @@ public class SocketSystem extends FluidIteratingSystem {
             power(socket, false);
             socket.socketEntityId(0);
             e.removeSocketedInside().removeInvisible();
-            assetSystem.playSfx(socket.socketSfxUnsocketed());
+            E.E().playSound(socket.socketSfxUnsocketed());
         }
     }
 }

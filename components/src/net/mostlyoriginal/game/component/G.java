@@ -30,6 +30,7 @@ public class G {
 
     public static int CAMERA_ZOOM = 2;
     public static final int SCREEN_WIDTH = SIMULATION_WIDTH * 2 * CAMERA_ZOOM;
+    public static boolean sfxOn=true;
     private static int CARD_HEIGHT = 90;
     private static int MARGIN_BETWEEN_CARD_AND_SIM = 10;
 

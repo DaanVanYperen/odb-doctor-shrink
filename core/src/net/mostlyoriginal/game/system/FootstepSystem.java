@@ -33,7 +33,7 @@ public class FootstepSystem extends FluidIteratingSystem {
                 e.footstepsSfxCount(e.footstepsSfxCount() + 1);
                 if (e.footstepsSfxCount() >= 3 && e.footstepsSfx() != null) {
                     e.footstepsSfxCount(0);
-                    assetSystem.playSfx(e.footstepsSfx());
+                    E.E().playSound(e.footstepsSfx());
 
                     if ( e.isRobot()) {
                         cameraShakeSystem.shake(1);

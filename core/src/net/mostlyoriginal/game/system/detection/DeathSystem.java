@@ -69,13 +69,13 @@ public class DeathSystem extends FluidIteratingSystem {
             if (!e.hasInvisible()) {
                 if (e.teamTeam() == 2) {
                     assetSystem.stopMusic();
-                    assetSystem.playSfx("deathsound");
-                    assetSystem.playSfx("death_jingle");
+                    E.E().playSound("deathsound");
+                    E.E().playSound("death_jingle");
                     if (!e.isRobot()) {
                         dialogSystem.robotSay(DialogSystem.Dialog.SAD, 0.5f, 5f);
                     }
                 } else {
-                    assetSystem.playSfx("gremlin_death");
+                    E.E().playSound("gremlin_death");
                 }
                 e.invisible();
                 particleSystem.bloodExplosion(e.posX() + e.boundsCx(), e.posY() + e.boundsCy());

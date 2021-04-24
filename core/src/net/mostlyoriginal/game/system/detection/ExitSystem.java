@@ -48,13 +48,13 @@ public class ExitSystem extends FluidIteratingSystem {
                 }
                 if (e.exitCooldown() < 2 && !e.exitBroken()) {
                     e.exitBroken(true);
-                    assetSystem.playSfx("door_break");
+                    E.E().playSound("door_break");
                     followSystem.expendCharge(e, G.BARS_NEEDED_FOR_BREAKING_DOOR / 2f);
                     E.E().posX(e.posX() - 16).posY(e.posY()).animId("exit-damaged").render(G.LAYER_DOOR);
                     cameraShakeSystem.shake(10);
                 }
                 if (e.exitCooldown() < 1 && !e.exitOpen()) {
-                    assetSystem.playSfx("door_break");
+                    E.E().playSound("door_break");
                     e.exitOpen(true);
                     followSystem.expendCharge(e, G.BARS_NEEDED_FOR_BREAKING_DOOR / 2f);
                     E.E().posX(e.posX() - 16).posY(e.posY()).animId("exit-open").render(G.LAYER_DOOR + 1);
