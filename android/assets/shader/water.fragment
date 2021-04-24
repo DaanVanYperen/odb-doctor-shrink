@@ -1,0 +1,22 @@
+#ifdef GL_ES
+precision mediump float;
+#endif
+
+varying vec4 v_color;
+varying vec2 v_texCoords;
+
+uniform sampler2D u_texture;
+uniform sampler2D u_noise;
+uniform mat4 u_projTrans;
+
+uniform float u_time;
+uniform float u_scrollx;
+uniform float u_scrolly;
+
+void main() {
+    vec2 offset = v_texCoords+vec2(u_scrollx,u_scrolly);
+    vec2 waveUV = vec2(cos(u_time + offset.x* 10.0+(offset.y)* 10.0),sin(u_time + offset.y* 10.0))*0.005;
+    vec2 uv = v_texCoords + waveUV;
+    vec3 color = texture2D(u_texture, uv).rgb;
+    gl_FragColor = vec4(color, 1.0);
+}

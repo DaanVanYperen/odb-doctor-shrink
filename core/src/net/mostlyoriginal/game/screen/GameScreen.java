@@ -33,6 +33,7 @@ import net.mostlyoriginal.plugin.ProfilerPlugin;
 public class GameScreen extends WorldScreen {
 
     public static final String BACKGROUND_COLOR_HEX = "0000FF";
+    private Color BACKGROUND_COLOR= Color.valueOf("031D1E");
 
     @Override
     protected World createWorld() {
@@ -66,6 +67,7 @@ public class GameScreen extends WorldScreen {
                         // Control and logic.
                         new FollowSystem(),
                         new PlayerControlSystem(),
+                        new PlayerAnimSystem(),
                         new BirdBrainSystem(),
 
                         // Physics.
@@ -87,12 +89,12 @@ public class GameScreen extends WorldScreen {
 
                         new JumpAttackSystem(),
 
-                        new ClearScreenSystem(Color.valueOf("031D1E")),
+                        new ClearScreenSystem(BACKGROUND_COLOR),
                         new MapRenderSystem(),
+                        new ShadedWaterRenderSystem(),
 
                         renderBatchingSystem = new RenderBatchingSystem(),
                         new MyAnimRenderSystem(renderBatchingSystem),
-
                         new MapRenderInFrontSystem(),
                         new TerminalSystem(),
                         new ExitSystem(),

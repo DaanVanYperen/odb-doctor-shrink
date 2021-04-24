@@ -7,7 +7,6 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.MathUtils;
 import net.mostlyoriginal.api.component.graphics.Anim;
 import net.mostlyoriginal.api.component.physics.Physics;
-import net.mostlyoriginal.api.manager.AbstractAssetSystem;
 import net.mostlyoriginal.api.system.physics.SocketSystem;
 import net.mostlyoriginal.game.component.G;
 import net.mostlyoriginal.game.component.Pickup;
@@ -26,8 +25,13 @@ import net.mostlyoriginal.game.system.view.GameScreenAssetSystem;
 public class PlayerControlSystem extends FluidIteratingSystem {
     private static final float RUN_SLOW_PACE_FACTOR = 500;
     private static final float RUN_FAST_PACE_FACTOR = 1000;
-    private float MOVEMENT_FACTOR = 500;
-    private float JUMP_FACTOR = 15000;
+
+
+    private static final int TOP_SPEED = 350;
+    private float SPEED_UP = 1200;
+    private float BREAKING = SPEED_UP*2f;
+
+    private float JUMP_FACTOR = 24000;
     private SocketSystem socketSystem;
     private FollowSystem followSystem;
     private MyAnimRenderSystem animSystem;
@@ -42,7 +46,7 @@ public class PlayerControlSystem extends FluidIteratingSystem {
     protected void process(E e) {
 
 
-        String playerAnimPrefix = "player-";
+        String playerAnimPrefix = "doctor-";
 
         // use carry animation group.
         if (e.hasCarries() && e.carriesEntityId() != 0) {
@@ -80,62 +84,78 @@ public class PlayerControlSystem extends FluidIteratingSystem {
         float dy = 0;
 
         if (Gdx.input.isKeyPressed(Input.Keys.A) && !e.hasDead()) {
-            dx = -MOVEMENT_FACTOR;
+            dx = e.physicsVx() > 0 ? -BREAKING : -SPEED_UP;
             e.animFlippedX(true);
         }
         if (Gdx.input.isKeyPressed(Input.Keys.D) && !e.hasDead()) {
-            dx = MOVEMENT_FACTOR;
+            dx = e.physicsVx() < 0 ? BREAKING : SPEED_UP;
             e.animFlippedX(false);
         }
 
-        float veloX = Math.abs(e.physicsVx());
-        if (Math.abs(dx) < 0.05f && veloX >= 0.1f) {
-            e.physicsVx(e.physicsVx() - (e.physicsVx() * world.delta * 8f));
+        if ( dx != 0 ) {
+                e.physicsVx(e.physicsVx() + (dx * world.delta));
+        } else {
+            if ( e.physicsVx() > 0 ) {
+                e.physicsVx(e.physicsVx() - (BREAKING * world.delta));
+                if ( e.physicsVx() <= 0 ) e.physicsVx(0);
+            }
+            if ( e.physicsVx() < 0 ) {
+                e.physicsVx(e.physicsVx() + (BREAKING * world.delta));
+                if ( e.physicsVx() >= 0 ) e.physicsVx(0);
+            }
         }
 
         boolean onFloor = e.wallSensorOnFloor() || e.wallSensorOnPlatform();
-        if (Gdx.input.isKeyPressed(Input.Keys.W) && onFloor && !e.hasDead()) {
-            e.physicsVy(JUMP_FACTOR * 0.016f);
+        if (Gdx.input.isKeyPressed(Input.Keys.W) || Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
+            if ( onFloor && !e.hasDead()){
+                e.physicsVy(JUMP_FACTOR * 0.016f);
+            }
+        }
+
+        if (Gdx.input.isKeyPressed(Input.Keys.S)) {
+            e.shrunk(true);
+        } else {
+            e.shrunk(false);
         }
 
         if (!G.PRODUCTION) {
             if (Gdx.input.isKeyJustPressed(Input.Keys.F6)) MapCollisionSystem.DEBUG = !MapCollisionSystem.DEBUG;
         }
-
-        if (Gdx.input.isKeyJustPressed(Input.Keys.E) || Gdx.input.isKeyJustPressed(Input.Keys.X)) {
-            if (e.hasCarries()) {
-                E socket = firstTouchingEntityMatching(e, Aspect.all(Socket.class));
-                if (socket != null) {
-                    socketCarried(e, socket);
-                } else {
-                    callRobot(e);
-                    animSystem.forceAnim(e, playerAnimPrefix + "whistles");
-                    //dropCarried(e);
-                }
-            } else {
-                E pickup = firstTouchingEntityMatching(e, Aspect.all(Pickup.class));
-                if (pickup != null) {
-                    carryItem(e, pickup);
-                } else if (onFloor) {
-                    callRobot(e);
-                    animSystem.forceAnim(e, playerAnimPrefix + "whistles");
-                }
-            }
-        }
+//
+//        if (Gdx.input.isKeyJustPressed(Input.Keys.E) || Gdx.input.isKeyJustPressed(Input.Keys.X)) {
+//            if (e.hasCarries()) {
+//                E socket = firstTouchingEntityMatching(e, Aspect.all(Socket.class));
+//                if (socket != null) {
+//                    socketCarried(e, socket);
+//                } else {
+//                    callRobot(e);
+//                    animSystem.forceAnim(e, playerAnimPrefix + "whistles");
+//                    //dropCarried(e);
+//                }
+//            } else {
+//                E pickup = firstTouchingEntityMatching(e, Aspect.all(Pickup.class));
+//                if (pickup != null) {
+//                    carryItem(e, pickup);
+//                } else if (onFloor) {
+//                    callRobot(e);
+//                    animSystem.forceAnim(e, playerAnimPrefix + "whistles");
+//                }
+//            }
+//        }
 
         if (e.isRunning()) {
             if (dx != 0) {
-                e.physicsVx(e.physicsVx() + (dx * world.delta));
                 e.animId(playerAnimPrefix + "run");
                 e.removePriorityAnim();
             }
         } else {
             if (dx != 0) {
-                e.physicsVx(e.physicsVx() + (dx * world.delta));
                 e.animId(playerAnimPrefix + "walk");
                 e.removePriorityAnim();
             }
         }
+
+        e.physicsVx(MathUtils.clamp(e.physicsVx(),-TOP_SPEED, TOP_SPEED));
 
 
         if (e.hasCarries() && e.carriesEntityId() != 0) {

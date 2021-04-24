@@ -5,6 +5,7 @@ import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import net.mostlyoriginal.api.system.camera.CameraSystem;
 import net.mostlyoriginal.api.system.core.PassiveSystem;
+import net.mostlyoriginal.game.system.ShadedWaterRenderSystem;
 
 /**
  * @author Daan van Yperen
@@ -13,6 +14,7 @@ public class MapRenderSystem extends BaseSystem {
 
     private MapSystem mapSystem;
     private CameraSystem cameraSystem;
+    private ShadedWaterRenderSystem shadedWaterRenderSystem;
 
     public MyMapRendererImpl renderer;
 
@@ -24,6 +26,7 @@ public class MapRenderSystem extends BaseSystem {
 
     @Override
     protected void processSystem() {
+        shadedWaterRenderSystem.framebufferBegin();
         for (MapLayer layer : mapSystem.map.getLayers()) {
             if (layer.isVisible()) {
                 if (!layer.getName().equals("infront")) {

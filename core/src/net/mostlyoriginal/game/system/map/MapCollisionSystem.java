@@ -56,8 +56,27 @@ public class MapCollisionSystem extends FluidIteratingSystem {
         //  no math required here.
         if (physics.vx != 0 || physics.vy != 0) {
 
+            // potential distance.s
             float px = pos.xy.x + physics.vx * world.delta;
             float py = pos.xy.y + physics.vy * world.delta;
+
+            if ((physics.vy > 0 && collides(e, px + bounds.minx + (bounds.maxx - bounds.minx) * 0.5f, py + bounds.maxy)) ||
+                    (physics.vy < 0 && collides(e, px + bounds.minx + (bounds.maxx - bounds.minx) * 0.5f, py + bounds.miny))) {
+                physics.vy = physics.bounce > 0 ? -physics.vy * physics.bounce : 0;
+                py = pos.xy.y;
+            }
+
+            if ((physics.vy > 0 && collides(e, px + bounds.minx + (bounds.maxx - bounds.minx) * 0.25f, py + bounds.maxy)) ||
+                    (physics.vy < 0 && collides(e, px + bounds.minx + (bounds.maxx - bounds.minx) * 0.25f, py + bounds.miny))) {
+                physics.vy = physics.bounce > 0 ? -physics.vy * physics.bounce : 0;
+                py = pos.xy.y;
+            }
+
+            if ((physics.vy > 0 && collides(e, px + bounds.minx + (bounds.maxx - bounds.minx) * 0.75f, py + bounds.maxy)) ||
+                    (physics.vy < 0 && collides(e, px + bounds.minx + (bounds.maxx - bounds.minx) * 0.75f, py + bounds.miny))) {
+                physics.vy = physics.bounce > 0 ? -physics.vy * physics.bounce : 0;
+                py = pos.xy.y;
+            }
 
             if ((physics.vx > 0 && collides(e, px + bounds.maxx, py + bounds.miny + (bounds.maxy - bounds.miny) * 0.5f )) ||
                     (physics.vx < 0 && collides(e, px + bounds.minx, py + bounds.miny + (bounds.maxy - bounds.miny) * 0.5f))) {
@@ -75,21 +94,6 @@ public class MapCollisionSystem extends FluidIteratingSystem {
                     (physics.vx < 0 && collides(e, px + bounds.minx, py + bounds.miny + (bounds.maxy - bounds.miny) * 0.75f))) {
                 physics.vx = physics.bounce > 0 ? -physics.vx * physics.bounce : 0;
                 px = pos.xy.x;
-            }
-
-            if ((physics.vy > 0 && collides(e, px + bounds.minx + (bounds.maxx - bounds.minx) * 0.5f, py + bounds.maxy)) ||
-                    (physics.vy < 0 && collides(e, px + bounds.minx + (bounds.maxx - bounds.minx) * 0.5f, py + bounds.miny))) {
-                physics.vy = physics.bounce > 0 ? -physics.vy * physics.bounce : 0;
-            }
-
-            if ((physics.vy > 0 && collides(e, px + bounds.minx + (bounds.maxx - bounds.minx) * 0.25f, py + bounds.maxy)) ||
-                    (physics.vy < 0 && collides(e, px + bounds.minx + (bounds.maxx - bounds.minx) * 0.25f, py + bounds.miny))) {
-                physics.vy = physics.bounce > 0 ? -physics.vy * physics.bounce : 0;
-            }
-
-            if ((physics.vy > 0 && collides(e, px + bounds.minx + (bounds.maxx - bounds.minx) * 0.75f, py + bounds.maxy)) ||
-                    (physics.vy < 0 && collides(e, px + bounds.minx + (bounds.maxx - bounds.minx) * 0.75f, py + bounds.miny))) {
-                physics.vy = physics.bounce > 0 ? -physics.vy * physics.bounce : 0;
             }
 
         }
