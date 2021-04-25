@@ -94,16 +94,29 @@
       "y": 192,
       "countX": 1,
       "countY": 1,
+	  "repeat": true,
       "width": 16,
       "height": 16
     },  	
     {
-      "id": "doctor-small-jump",
+      "id": "doctor-small-jump-charge",
       "comment": "Small player character jumping.",
       "x": 0,
       "y": 192,
       "countX": 1,
       "countY": 1,
+	  "repeat": false,
+      "width": 16,
+      "height": 16
+    },  
+    {
+      "id": "doctor-small-jump-release",
+      "comment": "Small player character jumping.",
+      "x": 0,
+      "y": 192,
+      "countX": 1,
+      "countY": 1,
+	  "repeat": false,
       "width": 16,
       "height": 16
     },  	
