@@ -193,6 +193,11 @@
    <property name="entity" value="lock"/>
   </properties>
  </tile>
+ <tile id="62">
+  <properties>
+   <property name="entity" value="nodule_c"/>
+  </properties>
+ </tile>
  <tile id="66">
   <properties>
    <property name="solid" type="bool" value="true"/>

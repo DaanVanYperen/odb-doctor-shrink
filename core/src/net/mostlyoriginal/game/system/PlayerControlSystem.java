@@ -32,7 +32,7 @@ public class PlayerControlSystem extends FluidIteratingSystem {
 
     private static final int TOP_SPEED = 350;
     private static final float MAX_SHRINK_COOLDOWN = 2f;
-    private static final float RESHRINK_COOLDOWN = 3f;
+    private static final float RESHRINK_COOLDOWN = 0.2f;
     private float SPEED_UP = 1200;
     private float BREAKING = SPEED_UP * 2f;
 
@@ -117,12 +117,12 @@ public class PlayerControlSystem extends FluidIteratingSystem {
                 if (!shrinkDown) {
                     if (e.hasShrunk()) {
                         E.E().playSound("shrink_up");
+                        e.controlsRechargeCooldown(RESHRINK_COOLDOWN);
                     } else {
                         E.E().playSound("shrink_down");
                         e.controlsAutoGrowCooldown(MAX_SHRINK_COOLDOWN);
-                        e.controlsRechargeCooldown(RESHRINK_COOLDOWN);
                     }
-                    e.controlsShrinkToggleCooldown(0.4f);
+                    e.controlsShrinkToggleCooldown(0.1f);
                 }
             }
             shrinkDown = true;
@@ -134,6 +134,7 @@ public class PlayerControlSystem extends FluidIteratingSystem {
                 if (e.controlsAutoGrowCooldown() <= 0) {
                     E.E().playSound("shrink_up");
                     e.controlsShrinkToggleCooldown(0.4f);
+                    e.controlsRechargeCooldown(RESHRINK_COOLDOWN);
                 }
             }
         }
