@@ -39,7 +39,6 @@ public class PlayerControlSystem extends FluidIteratingSystem {
     private float JUMP_FACTOR_SMALL = 16000 * 2; //24000 * 2;
     private float JUMP_FACTOR_LARGE = 30000 * 2;
     private SocketSystem socketSystem;
-    private FollowSystem followSystem;
     private MyAnimRenderSystem animSystem;
     private GameScreenAssetSystem assetSystem;
     private DialogSystem dialogSystem;
@@ -307,7 +306,5 @@ public class PlayerControlSystem extends FluidIteratingSystem {
     }
 
     private void callRobot(E e) {
-        followSystem.createMarker(e);
-        E.E().playSound("voice1");
     }
 }

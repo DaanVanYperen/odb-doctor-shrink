@@ -22,11 +22,12 @@ public class MapSystem extends BaseSystem {
     public int height;
     private Array<TiledMapTileLayer> layers;
     private boolean isSetup;
+    public int mapVersion=1;
+
 
     private EntitySpawnerSystem entitySpawnerSystem;
     private GameScreenAssetSystem assetSystem;
-    private MapCollisionSystem mapCollisionSystem;
-    private MapLayer entityLayer;
+     private MapLayer entityLayer;
 
     @Override
     protected void initialize() {
@@ -44,9 +45,6 @@ public class MapSystem extends BaseSystem {
         height = layers.get(0).getHeight();
 
         // need to do this before we purge the indicators from the map.
-        mapCollisionSystem.canHoverMask = getMask("canhover");
-        mapCollisionSystem.deadlyMask = getMask("deadly");
-        mapCollisionSystem.solidForRobotMask = getMask("solidforrobot");
 
         for (TiledMapTileSet tileSet : map.getTileSets()) {
             for (TiledMapTile tile : tileSet) {
@@ -118,6 +116,7 @@ public class MapSystem extends BaseSystem {
                 layer.setCell((int)x/32,(int)y/32, null);
             }
         }
+        mapVersion++;
     }
 
     @Override

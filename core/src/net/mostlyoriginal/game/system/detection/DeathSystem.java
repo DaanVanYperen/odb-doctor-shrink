@@ -10,7 +10,6 @@ import net.mostlyoriginal.api.manager.AbstractAssetSystem;
 import net.mostlyoriginal.api.system.camera.CameraSystem;
 import net.mostlyoriginal.game.component.*;
 import net.mostlyoriginal.game.screen.GameScreen;
-import net.mostlyoriginal.game.system.FollowSystem;
 import net.mostlyoriginal.game.system.common.FluidIteratingSystem;
 import net.mostlyoriginal.game.system.map.EntitySpawnerSystem;
 import net.mostlyoriginal.game.system.map.MapCollisionSystem;
@@ -24,8 +23,6 @@ import net.mostlyoriginal.game.system.view.GameScreenAssetSystem;
 public class DeathSystem extends FluidIteratingSystem {
 
     public TransitionSystem transitionSystem;
-    private FollowSystem followSystem;
-    private MapCollisionSystem mapCollisionSystem;
     private EntitySpawnerSystem entitySpawnerSystem;
     private ParticleSystem particleSystem;
     private MyAnimRenderSystem animSystem;
@@ -55,9 +52,6 @@ public class DeathSystem extends FluidIteratingSystem {
                 }
             }
         } else if (!e.hasDead()) {
-            if (mapCollisionSystem.isLava(e.posX(), e.posY()) || touchingDeadlyStuffs(e, false) != null) {
-                e.dead();
-            }
 
             float halfScreenWidth = (Gdx.graphics.getWidth() / G.CAMERA_ZOOM) * 0.5f + 16;
 

@@ -3,6 +3,7 @@ package net.mostlyoriginal.game.system.map;
 import com.artemis.Aspect;
 import com.artemis.E;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.math.Vector2;
 import net.mostlyoriginal.api.component.basic.Bounds;
 import net.mostlyoriginal.api.component.basic.Pos;
 import net.mostlyoriginal.api.component.physics.Physics;
@@ -47,6 +48,8 @@ public class MapCollisionSystem extends FluidIteratingSystem {
     protected void end() {
     }
 
+    Vector2 vtmp = new Vector2();
+
     @Override
     protected void process(E e) {
         final Physics physics = e.getPhysics();
@@ -55,6 +58,12 @@ public class MapCollisionSystem extends FluidIteratingSystem {
 
         //  no math required here.
         if (physics.vx != 0 || physics.vy != 0) {
+
+            vtmp.set(physics.vx * world.delta,physics.vy * world.delta);
+
+            // Y Do we hit a FLOOR or CEILING?
+            // X Do we hit a WALL?
+
 
             // potential distance.s
             float px = pos.xy.x + physics.vx * world.delta;

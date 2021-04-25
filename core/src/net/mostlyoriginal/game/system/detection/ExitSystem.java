@@ -8,7 +8,6 @@ import net.mostlyoriginal.api.system.camera.CameraShakeSystem;
 import net.mostlyoriginal.game.component.Exit;
 import net.mostlyoriginal.game.component.G;
 import net.mostlyoriginal.game.screen.GameScreen;
-import net.mostlyoriginal.game.system.FollowSystem;
 import net.mostlyoriginal.game.system.common.FluidIteratingSystem;
 import net.mostlyoriginal.game.system.render.MyAnimRenderSystem;
 import net.mostlyoriginal.game.system.render.TransitionSystem;
@@ -20,7 +19,6 @@ import net.mostlyoriginal.game.system.view.GameScreenAssetSystem;
 public class ExitSystem extends FluidIteratingSystem {
 
     public TransitionSystem transitionSystem;
-    private FollowSystem followSystem;
     private MyAnimRenderSystem animSystem;
     private GameScreenAssetSystem assetSystem;
     private DialogSystem dialogSystem;
@@ -49,14 +47,12 @@ public class ExitSystem extends FluidIteratingSystem {
                 if (e.exitCooldown() < 2 && !e.exitBroken()) {
                     e.exitBroken(true);
                     E.E().playSound("door_break");
-                    followSystem.expendCharge(e, G.BARS_NEEDED_FOR_BREAKING_DOOR / 2f);
                     E.E().posX(e.posX() - 16).posY(e.posY()).animId("exit-damaged").render(G.LAYER_DOOR);
                     //cameraShakeSystem.shake(10);
                 }
                 if (e.exitCooldown() < 1 && !e.exitOpen()) {
                     E.E().playSound("door_break");
                     e.exitOpen(true);
-                    followSystem.expendCharge(e, G.BARS_NEEDED_FOR_BREAKING_DOOR / 2f);
                     E.E().posX(e.posX() - 16).posY(e.posY()).animId("exit-open").render(G.LAYER_DOOR + 1);
                     //cameraShakeSystem.shake(10);
                 }
