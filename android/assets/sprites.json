@@ -10,6 +10,17 @@
       "width": 64,
       "height": 64
     }, 
+    {
+      "id": "doctor-big-walk",
+      "comment": "Big player character walking.",
+      "x": 256,
+      "y": 128,
+      "countX": 4,
+      "countY": 1,
+      "milliseconds": 150,
+      "width": 64,
+      "height": 64
+    }, 
      {
       "id": "doctor-small",
       "comment": "Small player character.",
