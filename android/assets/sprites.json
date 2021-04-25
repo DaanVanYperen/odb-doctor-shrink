@@ -17,7 +17,7 @@
       "y": 128,
       "countX": 4,
       "countY": 1,
-      "milliseconds": 150,
+      "milliseconds": 100,
 	  "repeat": true,
       "width": 64,
       "height": 64
@@ -27,12 +27,12 @@
     {
       "id": "doctor-big-jump",
       "comment": "Big player character jumping.",
-      "x": 256,
-      "y": 128,
-      "countX": 4,
+      "x": 512,
+      "y": 192,
+      "countX": 5,
       "countY": 1,
-      "milliseconds": 150,
-	  "repeat": true,
+      "milliseconds": 100,
+	  "repeat": false,
       "width": 64,
       "height": 64
     }, 	
