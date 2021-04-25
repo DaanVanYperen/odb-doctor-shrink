@@ -8,6 +8,8 @@ import com.artemis.Component;
 public class Controls extends Component {
 
     public float shrinkToggleCooldown=0;
+    public float autoGrowCooldown = 0;
+    public float rechargeCooldown = 0;
 
     public Controls() {
     }

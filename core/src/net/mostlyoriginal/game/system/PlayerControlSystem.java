@@ -31,10 +31,12 @@ public class PlayerControlSystem extends FluidIteratingSystem {
 
 
     private static final int TOP_SPEED = 350;
+    private static final float MAX_SHRINK_COOLDOWN = 2f;
+    private static final float RESHRINK_COOLDOWN = 3f;
     private float SPEED_UP = 1200;
     private float BREAKING = SPEED_UP * 2f;
 
-    private float JUMP_FACTOR_SMALL = 24000 * 2;
+    private float JUMP_FACTOR_SMALL = 16000 * 2; //24000 * 2;
     private float JUMP_FACTOR_LARGE = 30000 * 2;
     private SocketSystem socketSystem;
     private FollowSystem followSystem;
@@ -109,24 +111,39 @@ public class PlayerControlSystem extends FluidIteratingSystem {
             }
         }
 
+        e.controlsRechargeCooldown(e.controlsRechargeCooldown()-world.delta);
         if (shrinkPressed()) {
-            if (!shrinkDown) {
-                if (e.hasShrunk()) {
-                    E.E().playSound("shrink_up");
-                } else {
-                    E.E().playSound("shrink_down");
+            if (e.hasShrunk() || (e.controlsRechargeCooldown() < 0)) {
+                if (!shrinkDown) {
+                    if (e.hasShrunk()) {
+                        E.E().playSound("shrink_up");
+                    } else {
+                        E.E().playSound("shrink_down");
+                        e.controlsAutoGrowCooldown(MAX_SHRINK_COOLDOWN);
+                        e.controlsRechargeCooldown(RESHRINK_COOLDOWN);
+                    }
+                    e.controlsShrinkToggleCooldown(0.4f);
                 }
-                e.controlsShrinkToggleCooldown(0.4f);
             }
             shrinkDown = true;
         } else shrinkDown = false;
+
+        if (e.hasShrunk()) {
+            if (e.controlsAutoGrowCooldown() > 0) {
+                e.controlsAutoGrowCooldown(e.controlsAutoGrowCooldown() - world.delta);
+                if (e.controlsAutoGrowCooldown() <= 0) {
+                    E.E().playSound("shrink_up");
+                    e.controlsShrinkToggleCooldown(0.4f);
+                }
+            }
+        }
 
 
         String playerAnimPrefix = e.hasShrunk() ? "doctor-small" : "doctor-big";
         e.animId(playerAnimPrefix);
 
         boolean onFloor = e.wallSensorOnFloor() || e.wallSensorOnPlatform() || e.wallSensorNearFloor();
-        if (jumpPressed()) {
+        if (!e.isShrunk() && jumpPressed()) {
             e.animId(playerAnimPrefix + "-jump-charge");
             if (!jumpDown) {
                 e.animLoop(false);
@@ -134,7 +151,7 @@ public class PlayerControlSystem extends FluidIteratingSystem {
             }
             jumpDown=true;
         } else {
-            if ( jumpDown ) {
+            if ( jumpDown || (e.isShrunk() && jumpPressed())) {
                 if (onFloor && !e.hasDead()) {
                     e.physicsVy(e.isShrunk() ? JUMP_FACTOR_SMALL * 0.016f : JUMP_FACTOR_LARGE * 0.016f);
                     boolean blackFloorAt = footstepSystem.isBlackFloorAt(e);
