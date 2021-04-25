@@ -51,15 +51,15 @@
     {
       "id": "doctor-big-fall",
       "comment": "Big player character falling.",
-      "x": 256,
-      "y": 128,
-      "countX": 4,
+      "x": 832,
+      "y": 192,
+      "countX": 2,
       "countY": 1,
-      "milliseconds": 150,
+      "milliseconds": 250,
 	  "repeat": true,
       "width": 64,
       "height": 64
-    }, 		
+    }, 	
     {
       "id": "doctor-big-attack",
       "comment": "Big player character attacking.",
@@ -227,6 +227,17 @@
       "y": 320,
       "countX": 1,
       "countY": 1,
+      "width": 160,
+      "height": 128
+    },	
+    {
+      "id": "wormslug-walk",
+      "comment": "Wormslug thrashing about.",
+      "x": 0,
+      "y": 320,
+      "countX": 4,
+      "countY": 1,
+	  "repeat": true,
       "width": 160,
       "height": 128
     },	
