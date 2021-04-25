@@ -100,6 +100,17 @@ public class GameScreen extends WorldScreen {
                         new DeathSystem(),
                         new DialogSystem(),
                         new SoundPlaySystem( new String[]{
+                                "shrink_down",
+                                "shrink_up",
+                                "jump_landing",
+                                "footstep 1",
+                                "footstep 2",
+                                "footstep 3",
+                                "footstep 4",
+                                "footstep 5",
+                                "footstep 6",
+                                "footstep 7",
+                                "footstep 8",
                                 "MOWV", //
                                 "voice1",
                                 "VWOM",

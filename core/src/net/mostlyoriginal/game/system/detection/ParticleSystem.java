@@ -70,6 +70,7 @@ public class ParticleSystem extends FluidIteratingSystem {
                 .solid()
                 .size(1, 3)
                 .friction(1)
+                .layer(MathUtils.randomBoolean() ? G.LAYER_PARTICLES : G.LAYER_PLAYER+10000)
                 .create(1, 3);
     }
 
@@ -116,7 +117,7 @@ public class ParticleSystem extends FluidIteratingSystem {
     }
 
     public void smoke(float x, float y, int count) {
-        E.E().playSound("splat" + MathUtils.random(1, 4));
+        //E.E().playSound("splat" + MathUtils.random(1, 4));
         bakery
                 .color(new Color(1, 1, 1,0.5f))
                 .at(x-5, y-5)

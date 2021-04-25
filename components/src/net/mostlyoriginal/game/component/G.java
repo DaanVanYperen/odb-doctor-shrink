@@ -11,6 +11,7 @@ public class G {
     public static final int TEAM_PLAYERS = 2;
     public static final int LAYER_BIRDS = 1005;
     public static final int LAYER_DIALOGS = 2000;
+    public static final int TEAM_MONSTERS = 3;
     public static Settings settings;
 
     public static final boolean PRODUCTION = false;

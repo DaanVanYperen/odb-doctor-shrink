@@ -56,6 +56,38 @@
    <property name="solid" type="bool" value="true"/>
   </properties>
  </tile>
+ <tile id="26">
+  <properties>
+   <property name="angle" type="int" value="-90"/>
+   <property name="entity" value="spout"/>
+   <property name="invisible" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="27">
+  <properties>
+   <property name="entity" value="player"/>
+  </properties>
+ </tile>
+ <tile id="28">
+  <properties>
+   <property name="entity" value="wormslug"/>
+  </properties>
+ </tile>
+ <tile id="29">
+  <properties>
+   <property name="entity" value="glorb"/>
+  </properties>
+ </tile>
+ <tile id="30">
+  <properties>
+   <property name="entity" value="nodule_a"/>
+  </properties>
+ </tile>
+ <tile id="31">
+  <properties>
+   <property name="entity" value="nodule_b"/>
+  </properties>
+ </tile>
  <tile id="34">
   <properties>
    <property name="solid" type="bool" value="true"/>
@@ -159,6 +191,11 @@
  <tile id="99">
   <properties>
    <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="130">
+  <properties>
+   <property name="entity" value="nodule_"/>
   </properties>
  </tile>
  <tile id="192">

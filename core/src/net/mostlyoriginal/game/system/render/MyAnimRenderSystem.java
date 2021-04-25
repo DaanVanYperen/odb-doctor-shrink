@@ -27,6 +27,8 @@ import net.mostlyoriginal.api.system.camera.CameraSystem;
 import net.mostlyoriginal.api.system.delegate.DeferredEntityProcessingSystem;
 import net.mostlyoriginal.api.system.delegate.EntityProcessPrincipal;
 import net.mostlyoriginal.game.component.AnimSize;
+import net.mostlyoriginal.game.component.G;
+import net.mostlyoriginal.game.system.PulsatingFramebufferManager;
 
 /**
  * Render and progress animations.
@@ -44,6 +46,7 @@ public class MyAnimRenderSystem extends DeferredEntityProcessingSystem {
     protected M<Scale> mScale;
     protected M<Origin> mOrigin;
     protected M<AnimSize> mAnimSize;
+    protected M<Render> mRender;
     private FontManager fontManager;
     private BitmapFont font;
 
@@ -73,22 +76,28 @@ public class MyAnimRenderSystem extends DeferredEntityProcessingSystem {
         super.processSystem();
     }
 
+    boolean isRenderbuffering = true;
+
     @Override
     protected void begin() {
-        batch.setProjectionMatrix(cameraSystem.camera.combined);
-//        shaderOutline.begin();
-//        shaderOutline.setUniformf("u_viewportInverse", new Vector2(1f / 99, 1f / 94));
-//        shaderOutline.setUniformf("u_offset", 2);
-//        shaderOutline.setUniformf("u_step", Math.min(1f, 99 / 70f));
-//        shaderOutline.setUniformf("u_color", new Vector3(123/255, 1, 71/255));
-//        shaderOutline.end();
 
-//        batch.setShader(shaderOutline);
+        isRenderbuffering = false;
+
+        startBatch();
+    }
+
+    private void startBatch() {
+        batch.setProjectionMatrix(cameraSystem.camera.combined);
         batch.begin();
     }
 
     @Override
     protected void end() {
+        stopRenderBuffering();
+        endBatch();
+    }
+
+    private void endBatch() {
         batch.end();
     }
 
@@ -103,6 +112,12 @@ public class MyAnimRenderSystem extends DeferredEntityProcessingSystem {
         final Origin origin = mOrigin.getSafe(e, DEFAULT_ORIGIN);
         AnimSize animSize = mAnimSize.getSafe(e, null);
 
+        if ( mRender.get(e).layer == G.LAYER_GREMLIN ) {
+            startRenderBuffering();
+        } else {
+            stopRenderBuffering();
+        }
+
         batch.setColor(mTint.getSafe(e, Tint.WHITE).color);
 
         if (anim.id != null) drawAnimation(anim, angle, origin, pos, anim.id, scale,animSize);
@@ -113,6 +128,27 @@ public class MyAnimRenderSystem extends DeferredEntityProcessingSystem {
 //        }
 
         anim.age += world.delta * anim.speed;
+    }
+
+    PulsatingFramebufferManager pulsatingFramebufferManager;
+
+    private void stopRenderBuffering() {
+        if ( isRenderbuffering ) {
+            isRenderbuffering=false;
+            endBatch();
+            pulsatingFramebufferManager.fbEnd(0);
+            startBatch();
+        }
+    }
+
+    private void startRenderBuffering() {
+        // make worms and nodules pulse.
+        if ( !isRenderbuffering ) {
+            isRenderbuffering=true;
+            endBatch();
+            pulsatingFramebufferManager.fbBegin();
+            startBatch();
+        }
     }
 
     Tint FONT_TINT = new Tint(1f,1f,1f,0.8f);

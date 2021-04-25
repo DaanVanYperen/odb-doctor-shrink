@@ -2,6 +2,7 @@ package net.mostlyoriginal.game.system.detection;
 
 import com.artemis.Aspect;
 import com.artemis.E;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import net.mostlyoriginal.api.component.basic.Pos;
@@ -14,6 +15,9 @@ import net.mostlyoriginal.game.system.map.EntitySpawnerSystem;
  */
 public class SpoutSystem extends FluidIteratingSystem {
 
+    private static final Color DROP_COLOR_1 = Color.valueOf("14a02e");
+    private static final Color DROP_COLOR_2 = Color.valueOf("24523b");
+    private static final Color DROP_COLOR_3 = Color.valueOf("1a7a3e");
     private ParticleSystem particleSystem;
     private EntitySpawnerSystem entitySpawnerSystem;
 
@@ -38,6 +42,9 @@ public class SpoutSystem extends FluidIteratingSystem {
                 v2.set(10, 0).setAngle(angle).add(e.posX() + e.boundsCx(), e.posY() + e.boundsCy());
 
                 switch (e.spoutType()) {
+                    case DRIP:
+                        spawnDrop(angle, v2.x+MathUtils.random(0,32), v2.y);
+                        break;
                     case ACID:
                         spawnAcid(angle, v2.x, v2.y, e.spoutAngle() == 90 ? 50 : 20);
                         break;
@@ -63,5 +70,13 @@ public class SpoutSystem extends FluidIteratingSystem {
 
     private void spawnAcid(float angle, float x, float y, int force) {
         particleSystem.acid(x, y, angle, force);
+    }
+
+
+    private void spawnDrop(float angle, float x, float y) {
+        particleSystem.floorDroplet(x, y,angle, MathUtils.randomBoolean() ? DROP_COLOR_1 : DROP_COLOR_2, DROP_COLOR_3);
+
+
+
     }
 }

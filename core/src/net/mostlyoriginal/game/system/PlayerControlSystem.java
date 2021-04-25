@@ -137,12 +137,14 @@ public class PlayerControlSystem extends FluidIteratingSystem {
         if (shrinkPressed()) {
             if ( !e.hasShrunk()) {
                 e.posX(e.posX()+16);
+                E.E().playSound("shrink_down");
                 particleSystem.smoke(e.posX()+8, e.posY()+12, 40);
             }
             e.shrunk(true);
 
         } else {
             if ( e.hasShrunk()) {
+                E.E().playSound("shrink_up");
                 e.posX(e.posX()-16);
                 particleSystem.smoke(e.posX()+32, e.posY()+48, 40);
                 particleSystem.smoke(e.posX()+32, e.posY()+16, 40);

@@ -10,6 +10,7 @@ public class Footsteps extends Component {
     public float lastX = -1;
     public String sfx;
     public float sfxCount = 0;
+    public float count = 1;
     public Footsteps() {
     }
 }

@@ -33,6 +33,18 @@ public class EntitySpawnerSystem extends BaseSystem {
             case "player":
                 assemblePlayer(x, y);
                 break;
+            case "wormslug":
+                assembleWormSlug(x, y);
+                break;
+            case "nodule_a":
+                assembleNodule(x, y-32, "nodule-wall-left-infected","nodule-wall-left-healed", 64, 64);
+                break;
+            case "nodule_b":
+                assembleNodule(x, y, "nodule-floor-infected","nodule-floor-healed", 64, 64);
+                break;
+            case "glorb":
+                assembleGlorb(x, y);
+                break;
             case "exit":
                 assembleExit(x, y);
                 break;
@@ -60,7 +72,7 @@ public class EntitySpawnerSystem extends BaseSystem {
                 }
                 return true;
             case "spout":
-                assembleSpout(x, y, (Integer) properties.get("angle"), "ACID");
+                assembleSpout(x, y, (Integer) properties.get("angle"), "DRIP");
                 return false;
             case "spawner":
                 assembleSpout(x, y, (Integer) properties.get("angle"), (String) properties.get("spawns"))
@@ -77,6 +89,19 @@ public class EntitySpawnerSystem extends BaseSystem {
             //throw new RuntimeException("No idea how to spawn entity of type " + entity);
         }
         return true;
+    }
+
+    private void assembleNodule(float x, float y, String infectedAnim, String curedAnim, int w, int h) {
+        E().anim(infectedAnim)
+                .pos(x, y)
+                .render(G.LAYER_GREMLIN)
+                .gravity(0,-20)
+                .bounds(0, 0, w, h)
+                .wallSensor()
+                .spoutAngle(-90).spoutType(Spout.Type.DRIP).spoutSprayDuration(0.5f).spoutCooldown(1.1f)
+                .teamTeam(G.TEAM_MONSTERS)
+
+                .originX(0.5F);
     }
 
     private void assembleSandSprinkler(float x, float y) {
@@ -103,7 +128,7 @@ public class EntitySpawnerSystem extends BaseSystem {
     }
 
     private E assembleSpout(float x, float y, Integer angle, String spawns) {
-        return E().pos(x, y).bounds(0, 0, 16, 16).spoutAngle(angle).spoutType(Spout.Type.valueOf(spawns));
+        return E().pos(x, y).bounds(0, 16, 32, 32).spoutAngle(angle).spoutType(Spout.Type.valueOf(spawns)).spoutSprayDuration(0.5f).spoutCooldown(1.1f);
     }
 
     private void assembleTrigger(float x, float y, String trigger, String parameter) {
@@ -135,6 +160,29 @@ public class EntitySpawnerSystem extends BaseSystem {
         powerSystem.powerMapCoordsAround((int) (socket.posX() / G.CELL_SIZE + 0.5f), (int) (socket.posY() / G.CELL_SIZE + 0.5f), true);
     }
 
+    private void assembleWormSlug(float x, float y) {
+        E().anim("wormslug-idle")
+                .pos(x, y)
+                .render(G.LAYER_GREMLIN)
+                .gravity(0,-20)
+                .bounds(0, 0, 160, 128)
+                .wallSensor()
+                .teamTeam(G.TEAM_MONSTERS)
+                .originX(0.5F);
+    }
+
+    private void assembleGlorb(float x, float y) {
+        E().anim("glorb-idle")
+                .pos(x, y)
+                .render(G.LAYER_GREMLIN)
+                .gravity(0,-20)
+                .bounds(0, 0, 64, 64)
+                .wallSensor()
+                .teamTeam(G.TEAM_MONSTERS)
+                .originX(0.5F);
+    }
+
+
     private void assemblePlayer(float x, float y) {
         E().anim("player-idle")
                 .pos(x, y)
@@ -149,7 +197,8 @@ public class EntitySpawnerSystem extends BaseSystem {
                 .teamTeam(G.TEAM_PLAYERS)
                 .originX(0.5F)
                 .footsteps()
-                .footstepsSfx("footsteps_girl")
+                .footstepsCount(8)
+                .footstepsSfx("footstep ")
                 .tag("player")
                 .playerControlled();
     }

@@ -2,6 +2,7 @@ package net.mostlyoriginal.game.system;
 
 import com.artemis.Aspect;
 import com.artemis.E;
+import com.badlogic.gdx.math.MathUtils;
 import net.mostlyoriginal.api.component.basic.Pos;
 import net.mostlyoriginal.api.utils.MapMask;
 import net.mostlyoriginal.game.component.*;
@@ -49,7 +50,7 @@ public class FootstepSystem extends FluidIteratingSystem {
                 e.footstepsSfxCount(e.footstepsSfxCount() + 1);
                 if (e.footstepsSfxCount() >= 3 && e.footstepsSfx() != null) {
                     e.footstepsSfxCount(0);
-                    E.E().playSound(e.footstepsSfx());
+                    E.E().playSound(e.footstepsSfx() + MathUtils.random(1,e.footstepsSfxCount()));
 
                     if ( e.isRobot()) {
                         //cameraShakeSystem.shake(1);

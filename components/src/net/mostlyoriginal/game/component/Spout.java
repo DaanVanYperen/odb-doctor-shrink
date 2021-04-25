@@ -16,7 +16,8 @@ public class Spout extends Component {
     public Type type = Type.ACID;
     public enum Type {
         ACID,
-        GREMLIN
+        GREMLIN,
+        DRIP
     }
     public Spout() {
     }
