@@ -6,6 +6,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.controllers.Controllers;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.MathUtils;
 import net.mostlyoriginal.api.component.graphics.Anim;
 import net.mostlyoriginal.api.component.physics.Physics;
@@ -33,7 +34,8 @@ public class PlayerControlSystem extends FluidIteratingSystem {
     private float SPEED_UP = 1200;
     private float BREAKING = SPEED_UP*2f;
 
-    private float JUMP_FACTOR = 24000*2;
+    private float JUMP_FACTOR_SMALL = 24000*2;
+    private float JUMP_FACTOR_LARGE = 30000*2;
     private SocketSystem socketSystem;
     private FollowSystem followSystem;
     private MyAnimRenderSystem animSystem;
@@ -41,6 +43,7 @@ public class PlayerControlSystem extends FluidIteratingSystem {
     private DialogSystem dialogSystem;
     private ParticleSystem particleSystem;
     private Controller controller;
+    private FootstepSystem footstepSystem;
 
     public PlayerControlSystem() {
         super(Aspect.all(PlayerControlled.class, Physics.class, WallSensor.class, Anim.class));
@@ -69,6 +72,7 @@ public class PlayerControlSystem extends FluidIteratingSystem {
         {
             E socket = firstTouchingEntityMatching(e, Aspect.all(Socket.class));
             E carried = e.hasCarries() ? E.E(e.carriesEntityId()) : null;
+
 
             // battery to put.
             if (socket != null
@@ -119,10 +123,13 @@ public class PlayerControlSystem extends FluidIteratingSystem {
         boolean onFloor = e.wallSensorOnFloor() || e.wallSensorOnPlatform() || e.wallSensorNearFloor();
         if (jumpPressed()) {
             if ( onFloor && !e.hasDead()){
-                e.physicsVy(JUMP_FACTOR * 0.016f);
+                e.physicsVy(e.isShrunk() ? JUMP_FACTOR_SMALL * 0.016f : JUMP_FACTOR_LARGE * 0.016f);
+                boolean blackFloorAt = footstepSystem.isBlackFloorAt(e);
                 for (int i = 0; i < 4; i++) {
-                    particleSystem.dust(e.posX()+e.boundsCx(), e.posY(), 90+20);
-                    particleSystem.dust(e.posX()+e.boundsCx(), e.posY(), 90-20);
+                    Color colorDust = blackFloorAt ? particleSystem.COLOR_DUST_BLACK : particleSystem.COLOR_DUST;
+                    Color colorRed = blackFloorAt ? particleSystem.COLOR_DUST_BLACK2 : particleSystem.COLOR_DUST_RED;
+                    particleSystem.floorDroplet(e.posX()+e.boundsCx(), e.posY(), 90+20, colorDust, colorRed);
+                    particleSystem.floorDroplet(e.posX()+e.boundsCx(), e.posY(), 90-20, colorDust, colorRed);
                 }
             }
         }
@@ -167,6 +174,7 @@ public class PlayerControlSystem extends FluidIteratingSystem {
 //                }
 //            }
 //        }
+
 
         if (e.isRunning()) {
             if (dx != 0) {
@@ -214,19 +222,27 @@ public class PlayerControlSystem extends FluidIteratingSystem {
 
 
     private boolean shrinkPressed() {
-        return Gdx.input.isKeyPressed(Input.Keys.S) || (controller != null && controller.getButton(controller.getMapping().buttonDpadDown));
+        return Gdx.input.isKeyPressed(Input.Keys.S)
+                || (controller != null && controller.getButton(controller.getMapping().buttonDpadDown))
+                || (controller != null && controller.getAxis(controller.getMapping().axisLeftY) > 0.4f);
     }
 
     private boolean jumpPressed() {
-        return Gdx.input.isKeyPressed(Input.Keys.W) || Gdx.input.isKeyPressed(Input.Keys.SPACE) || (controller != null && controller.getButton(controller.getMapping().buttonA));
+        return Gdx.input.isKeyPressed(Input.Keys.W)
+                || Gdx.input.isKeyPressed(Input.Keys.SPACE)
+                || (controller != null && controller.getButton(controller.getMapping().buttonA));
     }
 
     private boolean rightPressed(E e) {
-        return Gdx.input.isKeyPressed(Input.Keys.D) && !e.hasDead() || (controller != null && controller.getButton(controller.getMapping().buttonDpadRight));
+        return Gdx.input.isKeyPressed(Input.Keys.D) && !e.hasDead()
+                || (controller != null && controller.getButton(controller.getMapping().buttonDpadRight))
+                || (controller != null && controller.getAxis(controller.getMapping().axisLeftX) > 0.4f);
     }
 
     private boolean leftPressed() {
-        return Gdx.input.isKeyPressed(Input.Keys.A) || (controller != null && controller.getButton(controller.getMapping().buttonDpadLeft));
+        return Gdx.input.isKeyPressed(Input.Keys.A)
+                || (controller != null && controller.getButton(controller.getMapping().buttonDpadLeft))
+                || (controller != null && controller.getAxis(controller.getMapping().axisLeftX) < -0.4f) ;
     }
 
     private void socketCarried(E e, E socket) {

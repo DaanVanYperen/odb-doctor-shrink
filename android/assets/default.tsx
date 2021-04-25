@@ -166,4 +166,357 @@
    <property name="entity" value="player"/>
   </properties>
  </tile>
+ <tile id="513">
+  <properties>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="514">
+  <properties>
+   <property name="blacktile" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="515">
+  <properties>
+   <property name="blacktile" type="bool" value="true"/>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="516">
+  <properties>
+   <property name="blacktile" type="bool" value="true"/>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="517">
+  <properties>
+   <property name="blacktile" type="bool" value="true"/>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="518">
+  <properties>
+   <property name="blacktile" type="bool" value="true"/>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="519">
+  <properties>
+   <property name="blacktile" type="bool" value="true"/>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="520">
+  <properties>
+   <property name="blacktile" type="bool" value="true"/>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="521">
+  <properties>
+   <property name="blacktile" type="bool" value="true"/>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="522">
+  <properties>
+   <property name="blacktile" type="bool" value="true"/>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="523">
+  <properties>
+   <property name="blacktile" type="bool" value="true"/>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="524">
+  <properties>
+   <property name="blacktile" type="bool" value="true"/>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="525">
+  <properties>
+   <property name="blacktile" type="bool" value="true"/>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="526">
+  <properties>
+   <property name="blacktile" type="bool" value="true"/>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="527">
+  <properties>
+   <property name="blacktile" type="bool" value="true"/>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="545">
+  <properties>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="546">
+  <properties>
+   <property name="blacktile" type="bool" value="true"/>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="547">
+  <properties>
+   <property name="blacktile" type="bool" value="true"/>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="548">
+  <properties>
+   <property name="blacktile" type="bool" value="true"/>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="549">
+  <properties>
+   <property name="blacktile" type="bool" value="true"/>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="550">
+  <properties>
+   <property name="blacktile" type="bool" value="true"/>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="551">
+  <properties>
+   <property name="blacktile" type="bool" value="true"/>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="552">
+  <properties>
+   <property name="blacktile" type="bool" value="true"/>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="553">
+  <properties>
+   <property name="blacktile" type="bool" value="true"/>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="554">
+  <properties>
+   <property name="blacktile" type="bool" value="true"/>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="555">
+  <properties>
+   <property name="blacktile" type="bool" value="true"/>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="556">
+  <properties>
+   <property name="blacktile" type="bool" value="true"/>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="557">
+  <properties>
+   <property name="blacktile" type="bool" value="true"/>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="558">
+  <properties>
+   <property name="blacktile" type="bool" value="true"/>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="559">
+  <properties>
+   <property name="blacktile" type="bool" value="true"/>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="577">
+  <properties>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="578">
+  <properties>
+   <property name="blacktile" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="579">
+  <properties>
+   <property name="blacktile" type="bool" value="true"/>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="580">
+  <properties>
+   <property name="blacktile" type="bool" value="true"/>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="581">
+  <properties>
+   <property name="blacktile" type="bool" value="true"/>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="582">
+  <properties>
+   <property name="blacktile" type="bool" value="true"/>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="583">
+  <properties>
+   <property name="blacktile" type="bool" value="true"/>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="584">
+  <properties>
+   <property name="blacktile" type="bool" value="true"/>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="585">
+  <properties>
+   <property name="blacktile" type="bool" value="true"/>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="586">
+  <properties>
+   <property name="blacktile" type="bool" value="true"/>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="587">
+  <properties>
+   <property name="blacktile" type="bool" value="true"/>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="588">
+  <properties>
+   <property name="blacktile" type="bool" value="true"/>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="589">
+  <properties>
+   <property name="blacktile" type="bool" value="true"/>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="590">
+  <properties>
+   <property name="blacktile" type="bool" value="true"/>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="591">
+  <properties>
+   <property name="blacktile" type="bool" value="true"/>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="609">
+  <properties>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="610">
+  <properties>
+   <property name="blacktile" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="611">
+  <properties>
+   <property name="blacktile" type="bool" value="true"/>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="612">
+  <properties>
+   <property name="blacktile" type="bool" value="true"/>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="613">
+  <properties>
+   <property name="blacktile" type="bool" value="true"/>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="614">
+  <properties>
+   <property name="blacktile" type="bool" value="true"/>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="615">
+  <properties>
+   <property name="blacktile" type="bool" value="true"/>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="616">
+  <properties>
+   <property name="blacktile" type="bool" value="true"/>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="617">
+  <properties>
+   <property name="blacktile" type="bool" value="true"/>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="618">
+  <properties>
+   <property name="blacktile" type="bool" value="true"/>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="619">
+  <properties>
+   <property name="blacktile" type="bool" value="true"/>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="620">
+  <properties>
+   <property name="blacktile" type="bool" value="true"/>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="621">
+  <properties>
+   <property name="blacktile" type="bool" value="true"/>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="622">
+  <properties>
+   <property name="blacktile" type="bool" value="true"/>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="623">
+  <properties>
+   <property name="blacktile" type="bool" value="true"/>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
 </tileset>

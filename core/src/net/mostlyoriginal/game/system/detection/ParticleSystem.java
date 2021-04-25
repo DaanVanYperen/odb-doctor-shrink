@@ -25,8 +25,10 @@ public class ParticleSystem extends FluidIteratingSystem {
 
     private Color BLOOD_COLOR = Color.valueOf("4B1924");
     private Color COLOR_WHITE = Color.valueOf("FFFFFF");
-    private Color COLOR_DUST = Color.valueOf("f5a097");
-    private Color COLOR_DUST_RED = Color.valueOf("f5c067");
+    public Color COLOR_DUST = Color.valueOf("f5a097");
+    public Color COLOR_DUST_BLACK = Color.valueOf("666666");
+    public Color COLOR_DUST_BLACK2 = Color.valueOf("888888");
+    public Color COLOR_DUST_RED = Color.valueOf("f5c067");
     private Color COLOR_ACID = Color.valueOf("5F411CDD");
     private Color COLOR_SAND = Color.valueOf("D4CFB866");
 
@@ -56,9 +58,9 @@ public class ParticleSystem extends FluidIteratingSystem {
     }
 
 
-    public void dust(float x, float y, float angle) {
+    public void floorDroplet(float x, float y, float angle, Color colorA, Color colorB) {
         bakery
-                .color(MathUtils.random(0,100) > 25f ? COLOR_DUST : COLOR_DUST_RED)
+                .color(MathUtils.random(0,100) > 25f ? colorA : colorB)
                 .dropletSplatDown()
                 .at(x, y)
                 .angle(angle, angle)
