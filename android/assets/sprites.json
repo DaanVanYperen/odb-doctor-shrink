@@ -51,12 +51,12 @@
     {
       "id": "doctor-big-attack",
       "comment": "Big player character attacking.",
-      "x": 256,
+      "x": 512,
       "y": 128,
-      "countX": 4,
+      "countX": 5,
       "countY": 1,
       "milliseconds": 150,
-	  "repeat": true,
+	  "repeat": false,
       "width": 64,
       "height": 64
     }, 	
