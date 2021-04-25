@@ -5,6 +5,7 @@
     <inherits name='com.badlogic.gdx.backends.gdx_backends_gwt'/>
     <inherits name='com.artemis.backends.artemis_backends_gwt'/>
     <inherits name='net.mostlyoriginal.ContribPluginOperations'/>
+    <inherits name='net.mostlyoriginal.ContribPluginProfiler' />
     <!--<inherits name='net.mostlyoriginal.ContribEventBus'/>-->
     <inherits name='net.mostlyoriginal.ContribJam'/>
     <inherits name='javax.annotation.Annotation'/>

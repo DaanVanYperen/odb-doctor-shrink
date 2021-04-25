@@ -23,6 +23,7 @@ import net.mostlyoriginal.game.system.render.*;
 import net.mostlyoriginal.game.system.view.GameScreenAssetSystem;
 import net.mostlyoriginal.game.system.view.GameScreenSetupSystem;
 import net.mostlyoriginal.plugin.OperationsPlugin;
+import net.mostlyoriginal.plugin.ProfilerPlugin;
 
 /**
  * Example main game screen.
@@ -38,7 +39,7 @@ public class GameScreen extends WorldScreen {
     protected World createWorld() {
         RenderBatchingSystem renderBatchingSystem;
         return new World(new WorldConfigurationBuilder()
-                .dependsOn(EntityLinkManager.class, OperationsPlugin.class, SingletonPlugin.class)
+                .dependsOn(EntityLinkManager.class, ProfilerPlugin.class, OperationsPlugin.class, SingletonPlugin.class)
                 .with(
                         new SuperMapper(),
                         new TagManager(),
@@ -75,7 +76,7 @@ public class GameScreen extends WorldScreen {
                         //new MapCollisionSystem(),
                         new WallEvictionSystem(),
                         new MapCollisionSystem2(),
-                        new PlatformCollisionSystem(),
+                        //new PlatformCollisionSystem(),
                         new PhysicsSystem(),
 
                         // Interactions
