@@ -22,6 +22,47 @@
       "width": 64,
       "height": 64
     }, 
+	
+	
+    {
+      "id": "doctor-big-jump",
+      "comment": "Big player character jumping.",
+      "x": 256,
+      "y": 128,
+      "countX": 4,
+      "countY": 1,
+      "milliseconds": 150,
+	  "repeat": true,
+      "width": 64,
+      "height": 64
+    }, 	
+    {
+      "id": "doctor-big-fall",
+      "comment": "Big player character falling.",
+      "x": 256,
+      "y": 128,
+      "countX": 4,
+      "countY": 1,
+      "milliseconds": 150,
+	  "repeat": true,
+      "width": 64,
+      "height": 64
+    }, 		
+    {
+      "id": "doctor-big-attack",
+      "comment": "Big player character attacking.",
+      "x": 256,
+      "y": 128,
+      "countX": 4,
+      "countY": 1,
+      "milliseconds": 150,
+	  "repeat": true,
+      "width": 64,
+      "height": 64
+    }, 	
+
+	
+	
      {
       "id": "doctor-small",
       "comment": "Small player character.",
@@ -32,6 +73,50 @@
       "width": 16,
       "height": 16
     },  
+	
+	
+     {
+      "id": "doctor-small-walk",
+      "comment": "Small player character walking.",
+      "x": 0,
+      "y": 192,
+      "countX": 1,
+      "countY": 1,
+      "width": 16,
+      "height": 16
+    },  	
+    {
+      "id": "doctor-small-jump",
+      "comment": "Small player character jumping.",
+      "x": 0,
+      "y": 192,
+      "countX": 1,
+      "countY": 1,
+      "width": 16,
+      "height": 16
+    },  	
+    {
+      "id": "doctor-small-fall",
+      "comment": "Small player character falling.",
+      "x": 0,
+      "y": 192,
+      "countX": 1,
+      "countY": 1,
+      "width": 16,
+      "height": 16
+    },  	
+    {
+      "id": "doctor-small-attack",
+      "comment": "Small player character attacking.",
+      "x": 0,
+      "y": 192,
+      "countX": 1,
+      "countY": 1,
+      "width": 16,
+      "height": 16
+    },  	
+		
+	
     {
       "id": "particle",
       "comment": "Pixel particle.",
