@@ -31,6 +31,9 @@ public class MapRenderSystem extends BaseSystem {
     protected void processSystem() {
         pulsatingFramebufferManager.fbBegin();
         for (MapLayer layer : mapSystem.map.getLayers()) {
+            if ( layer.getName().equals("entities"))
+                continue;
+
             if (layer.isVisible()) {
                 if (layer.getName().equals("background")) {
                     renderLayer((TiledMapTileLayer) layer);
@@ -40,6 +43,9 @@ public class MapRenderSystem extends BaseSystem {
         pulsatingFramebufferManager.fbEnd(5);
         pulsatingFramebufferManager.fbBegin();
         for (MapLayer layer : mapSystem.map.getLayers()) {
+            if ( layer.getName().equals("entities"))
+                continue;
+
             if (layer.isVisible()) {
                 if (!layer.getName().equals("infront") && !layer.getName().equals("background")) {
                     renderLayer((TiledMapTileLayer) layer);

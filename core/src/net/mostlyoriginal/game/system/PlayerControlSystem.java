@@ -32,10 +32,10 @@ public class PlayerControlSystem extends FluidIteratingSystem {
 
     private static final int TOP_SPEED = 350;
     private float SPEED_UP = 1200;
-    private float BREAKING = SPEED_UP*2f;
+    private float BREAKING = SPEED_UP * 2f;
 
-    private float JUMP_FACTOR_SMALL = 24000*2;
-    private float JUMP_FACTOR_LARGE = 30000*2;
+    private float JUMP_FACTOR_SMALL = 24000 * 2;
+    private float JUMP_FACTOR_LARGE = 30000 * 2;
     private SocketSystem socketSystem;
     private FollowSystem followSystem;
     private MyAnimRenderSystem animSystem;
@@ -44,6 +44,8 @@ public class PlayerControlSystem extends FluidIteratingSystem {
     private ParticleSystem particleSystem;
     private Controller controller;
     private FootstepSystem footstepSystem;
+    private boolean shrinkDown = false;
+    private boolean jumpDown = false;
 
     public PlayerControlSystem() {
         super(Aspect.all(PlayerControlled.class, Physics.class, WallSensor.class, Anim.class));
@@ -57,17 +59,6 @@ public class PlayerControlSystem extends FluidIteratingSystem {
 
     @Override
     protected void process(E e) {
-
-
-        String playerAnimPrefix = "doctor-";
-
-        // use carry animation group.
-        if (e.hasCarries() && e.carriesEntityId() != 0) {
-            E carried = E.E(e.carriesEntityId());
-            carried.invisible();
-            playerAnimPrefix = carried.typeType().equals("battery2") ? "player-red-battery-" : "player-green-battery-";
-
-        }
 
         {
             E socket = firstTouchingEntityMatching(e, Aspect.all(Socket.class));
@@ -89,10 +80,8 @@ public class PlayerControlSystem extends FluidIteratingSystem {
             }
         }
 
-        e.animId(playerAnimPrefix + "idle");
         e.angleRotation(0);
         e.physicsVr(0);
-
 
 
         float dx = 0;
@@ -107,49 +96,77 @@ public class PlayerControlSystem extends FluidIteratingSystem {
             e.animFlippedX(false);
         }
 
-        if ( dx != 0 ) {
-                e.physicsVx(e.physicsVx() + (dx * world.delta));
+        if (dx != 0) {
+            e.physicsVx(e.physicsVx() + (dx * world.delta));
         } else {
-            if ( e.physicsVx() > 0 ) {
+            if (e.physicsVx() > 0) {
                 e.physicsVx(e.physicsVx() - (BREAKING * world.delta));
-                if ( e.physicsVx() <= 0 ) e.physicsVx(0);
+                if (e.physicsVx() <= 0) e.physicsVx(0);
             }
-            if ( e.physicsVx() < 0 ) {
+            if (e.physicsVx() < 0) {
                 e.physicsVx(e.physicsVx() + (BREAKING * world.delta));
-                if ( e.physicsVx() >= 0 ) e.physicsVx(0);
-            }
-        }
-
-        boolean onFloor = e.wallSensorOnFloor() || e.wallSensorOnPlatform() || e.wallSensorNearFloor();
-        if (jumpPressed()) {
-            if ( onFloor && !e.hasDead()){
-                e.physicsVy(e.isShrunk() ? JUMP_FACTOR_SMALL * 0.016f : JUMP_FACTOR_LARGE * 0.016f);
-                boolean blackFloorAt = footstepSystem.isBlackFloorAt(e);
-                for (int i = 0; i < 4; i++) {
-                    Color colorDust = blackFloorAt ? particleSystem.COLOR_DUST_BLACK : particleSystem.COLOR_DUST;
-                    Color colorRed = blackFloorAt ? particleSystem.COLOR_DUST_BLACK2 : particleSystem.COLOR_DUST_RED;
-                    particleSystem.floorDroplet(e.posX()+e.boundsCx(), e.posY(), 90+20, colorDust, colorRed);
-                    particleSystem.floorDroplet(e.posX()+e.boundsCx(), e.posY(), 90-20, colorDust, colorRed);
-                }
+                if (e.physicsVx() >= 0) e.physicsVx(0);
             }
         }
 
         if (shrinkPressed()) {
-            if ( !e.hasShrunk()) {
-                e.posX(e.posX()+16);
-                E.E().playSound("shrink_down");
-                particleSystem.smoke(e.posX()+8, e.posY()+12, 40);
+            if (!shrinkDown) {
+                if (e.hasShrunk()) {
+                    E.E().playSound("shrink_up");
+                } else {
+                    E.E().playSound("shrink_down");
+                }
+                e.controlsShrinkToggleCooldown(0.4f);
             }
-            e.shrunk(true);
+            shrinkDown = true;
+        } else shrinkDown = false;
 
-        } else {
-            if ( e.hasShrunk()) {
-                E.E().playSound("shrink_up");
-                e.posX(e.posX()-16);
-                particleSystem.smoke(e.posX()+32, e.posY()+48, 40);
-                particleSystem.smoke(e.posX()+32, e.posY()+16, 40);
+
+        String playerAnimPrefix = e.hasShrunk() ? "doctor-small" : "doctor-big";
+        e.animId(playerAnimPrefix);
+
+        boolean onFloor = e.wallSensorOnFloor() || e.wallSensorOnPlatform() || e.wallSensorNearFloor();
+        if (jumpPressed()) {
+            e.animId(playerAnimPrefix + "-jump-charge");
+            if (!jumpDown) {
+                e.animLoop(false);
+                e.animAge(0);
             }
-            e.shrunk(false);
+            jumpDown=true;
+        } else {
+            if ( jumpDown ) {
+                if (onFloor && !e.hasDead()) {
+                    e.physicsVy(e.isShrunk() ? JUMP_FACTOR_SMALL * 0.016f : JUMP_FACTOR_LARGE * 0.016f);
+                    boolean blackFloorAt = footstepSystem.isBlackFloorAt(e);
+                    for (int i = 0; i < 4; i++) {
+                        Color colorDust = blackFloorAt ? particleSystem.COLOR_DUST_BLACK : particleSystem.COLOR_DUST;
+                        Color colorRed = blackFloorAt ? particleSystem.COLOR_DUST_BLACK2 : particleSystem.COLOR_DUST_RED;
+                        particleSystem.floorDroplet(e.posX() + e.boundsCx(), e.posY(), 90 + 20, colorDust, colorRed);
+                        particleSystem.floorDroplet(e.posX() + e.boundsCx(), e.posY(), 90 - 20, colorDust, colorRed);
+                    }
+                }
+                jumpDown=false;
+            }
+        }
+
+
+        if ( e.controlsShrinkToggleCooldown() > 0 ) {
+            e.controlsShrinkToggleCooldown(e.controlsShrinkToggleCooldown()-world.delta);
+            if (e.controlsShrinkToggleCooldown() <= 0) {
+                if (e.hasShrunk()) {
+
+                    e.mortal(true);
+                    e.posX(e.posX() - 16);
+                    particleSystem.smoke(e.posX() + 32, e.posY() + 48, 40);
+                    particleSystem.smoke(e.posX() + 32, e.posY() + 16, 40);
+                    e.shrunk(false);
+                } else {
+                    e.posX(e.posX() + 16);
+                    e.mortal(false);
+                    particleSystem.smoke(e.posX() + 8, e.posY() + 12, 40);
+                    e.shrunk(true);
+                }
+            }
         }
 
         if (!G.PRODUCTION) {
@@ -180,17 +197,17 @@ public class PlayerControlSystem extends FluidIteratingSystem {
 
         if (e.isRunning()) {
             if (dx != 0) {
-                e.animId(playerAnimPrefix + "run");
-                e.removePriorityAnim();
+                e.animId(playerAnimPrefix + "-walk");
+//                e.removePriorityAnim();
             }
         } else {
             if (dx != 0) {
-                e.animId(playerAnimPrefix + "walk");
-                e.removePriorityAnim();
+                e.animId(playerAnimPrefix + "-walk");
+//                e.removePriorityAnim();
             }
         }
 
-        e.physicsVx(MathUtils.clamp(e.physicsVx(),-TOP_SPEED, TOP_SPEED));
+        e.physicsVx(MathUtils.clamp(e.physicsVx(), -TOP_SPEED, TOP_SPEED));
 
 
         if (e.hasCarries() && e.carriesEntityId() != 0) {
@@ -199,14 +216,14 @@ public class PlayerControlSystem extends FluidIteratingSystem {
 
         if (Math.abs(e.physicsVy()) > 0.05f) {
             if (e.physicsVy() > 0) {
-                e.animId(playerAnimPrefix + "jump");
+                e.animId(playerAnimPrefix + "-jump-release");
                 if (!e.isJumping()) {
                     e.animLoop(false);
                     e.animAge(0);
                 }
                 e.jumping();
             } else {
-                e.animId(playerAnimPrefix + "fall");
+                e.animId(playerAnimPrefix + "-fall");
                 if (!e.isFalling()) {
                     e.animLoop(false);
                     e.animAge(0);
@@ -222,11 +239,9 @@ public class PlayerControlSystem extends FluidIteratingSystem {
     }
 
 
-
     private boolean shrinkPressed() {
-        return Gdx.input.isKeyPressed(Input.Keys.S)
-                || (controller != null && controller.getButton(controller.getMapping().buttonDpadDown))
-                || (controller != null && controller.getAxis(controller.getMapping().axisLeftY) > 0.4f);
+        return Gdx.input.isKeyPressed(Input.Keys.E)
+                || (controller != null && controller.getButton(controller.getMapping().buttonB));
     }
 
     private boolean jumpPressed() {
@@ -244,7 +259,7 @@ public class PlayerControlSystem extends FluidIteratingSystem {
     private boolean leftPressed() {
         return Gdx.input.isKeyPressed(Input.Keys.A)
                 || (controller != null && controller.getButton(controller.getMapping().buttonDpadLeft))
-                || (controller != null && controller.getAxis(controller.getMapping().axisLeftX) < -0.4f) ;
+                || (controller != null && controller.getAxis(controller.getMapping().axisLeftX) < -0.4f);
     }
 
     private void socketCarried(E e, E socket) {

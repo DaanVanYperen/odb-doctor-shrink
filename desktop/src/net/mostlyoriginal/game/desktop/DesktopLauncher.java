@@ -10,7 +10,7 @@ public class DesktopLauncher {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.width = G.SCREEN_WIDTH;
 		config.height = G.SCREEN_HEIGHT;
-		config.title = "Artax - LD39";
+		config.title = "Doctor Shrink - LD48";
 		new LwjglApplication(new GdxArtemisGame(), config);
 	}
 }

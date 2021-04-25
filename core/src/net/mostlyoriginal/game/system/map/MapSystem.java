@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.*;
+import com.badlogic.gdx.maps.tiled.objects.TiledMapTileMapObject;
 import com.badlogic.gdx.utils.Array;
 import net.mostlyoriginal.api.utils.MapMask;
 import net.mostlyoriginal.game.component.G;
@@ -25,6 +26,7 @@ public class MapSystem extends BaseSystem {
     private EntitySpawnerSystem entitySpawnerSystem;
     private GameScreenAssetSystem assetSystem;
     private MapCollisionSystem mapCollisionSystem;
+    private MapLayer entityLayer;
 
     @Override
     protected void initialize() {
@@ -32,6 +34,10 @@ public class MapSystem extends BaseSystem {
 
         layers = new Array<TiledMapTileLayer>();
         for (MapLayer rawLayer : map.getLayers()) {
+            if (rawLayer.getName().equals("entities")) {
+                this.entityLayer = rawLayer;
+                continue;
+            }
             layers.add((TiledMapTileLayer) rawLayer);
         }
         width = layers.get(0).getWidth();
@@ -78,6 +84,14 @@ public class MapSystem extends BaseSystem {
      * Spawn map entities.
      */
     protected void setup() {
+        for (TiledMapTileMapObject o : entityLayer.getObjects().getByType(TiledMapTileMapObject.class)) {
+            final MapProperties extendedProps = o.getProperties();
+            if (o.getTile().getProperties().containsKey("entity")) {
+                MapProperties tileProps = o.getTile().getProperties();
+                entitySpawnerSystem.spawnEntity(o.getX(), o.getY(), tileProps, extendedProps);
+            }
+        }
+
         for (TiledMapTileLayer layer : layers) {
             for (int ty = 0; ty < height; ty++) {
                 for (int tx = 0; tx < width; tx++) {
@@ -85,7 +99,7 @@ public class MapSystem extends BaseSystem {
                     if (cell != null) {
                         final MapProperties properties = cell.getTile().getProperties();
                         if (properties.containsKey("entity")) {
-                            if (entitySpawnerSystem.spawnEntity(tx * G.CELL_SIZE, ty * G.CELL_SIZE, properties)) {
+                            if (entitySpawnerSystem.spawnEntity(tx * G.CELL_SIZE, ty * G.CELL_SIZE, properties, null)) {
                                 layer.setCell(tx, ty, null);
                             }
                         }
@@ -94,6 +108,14 @@ public class MapSystem extends BaseSystem {
                         }
                     }
                 }
+            }
+        }
+    }
+
+    public void removeAt(float x, float y) {
+        for (TiledMapTileLayer layer : layers) {
+            if  (layer.getProperties().containsKey("unlockable")) {
+                layer.setCell((int)x/32,(int)y/32, null);
             }
         }
     }

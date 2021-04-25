@@ -25,7 +25,7 @@ public class EntitySpawnerSystem extends BaseSystem {
     }
 
 
-    public boolean spawnEntity(float x, float y, MapProperties properties) {
+    public boolean spawnEntity(float x, float y, MapProperties properties, MapProperties extendedProps) {
 
         final String entity = (String) properties.get("entity");
 
@@ -34,13 +34,19 @@ public class EntitySpawnerSystem extends BaseSystem {
                 assemblePlayer(x, y);
                 break;
             case "wormslug":
-                assembleWormSlug(x, y);
+                assembleWormSlug(x, y, (String) extendedProps.get("to"), (String) extendedProps.get("sfx"));
                 break;
             case "nodule_a":
-                assembleNodule(x, y-32, "nodule-wall-left-infected","nodule-wall-left-healed", 64, 64);
+                assembleNodule(x-2, y-32, "nodule-wall-left-infected","nodule-wall-left-healed", 64, 64, extendedProps != null ? (String) extendedProps.get("unlock") : null);
                 break;
             case "nodule_b":
-                assembleNodule(x, y, "nodule-floor-infected","nodule-floor-healed", 64, 64);
+                assembleNodule(x, y-2, "nodule-floor-infected","nodule-floor-healed", 64, 64, extendedProps != null ? (String) extendedProps.get("unlock") : null);
+                break;
+            case "marker":
+                assembleMarker(x,y, (String) extendedProps.get("name"));
+                break;
+            case "lock":
+                assembleDoor(x,y, (String) extendedProps.get("name"), (Integer) extendedProps.get("keys"));
                 break;
             case "glorb":
                 assembleGlorb(x, y);
@@ -91,12 +97,22 @@ public class EntitySpawnerSystem extends BaseSystem {
         return true;
     }
 
-    private void assembleNodule(float x, float y, String infectedAnim, String curedAnim, int w, int h) {
+    private void assembleMarker(float x, float y, String name) {
+        E.E().pos(x,y).marker(name).tag(name);
+    }
+
+    private void assembleDoor(float x, float y, String name, int keys) {
+        E.E().pos(x,y).doorKeys(keys).doorName(name);
+    }
+
+    private void assembleNodule(float x, float y, String infectedAnim, String curedAnim, int w, int h, String unlock) {
         E().anim(infectedAnim)
                 .pos(x, y)
                 .render(G.LAYER_GREMLIN)
                 .gravity(0,-20)
                 .bounds(0, 0, w, h)
+                .curableCuredAnim(curedAnim)
+                .curableUnlock(unlock)
                 .wallSensor()
                 .spoutAngle(-90).spoutType(Spout.Type.DRIP).spoutSprayDuration(0.5f).spoutCooldown(1.1f)
                 .teamTeam(G.TEAM_MONSTERS)
@@ -111,7 +127,7 @@ public class EntitySpawnerSystem extends BaseSystem {
     private int birdIndex = 0;
 
     private void assembleBird(float x, float y) {
-        String birdType = "bird-" + MathUtils.random(1, 3);
+        String birdType = "bird-1";
         E().pos(x, y)
                 .bounds(0, 0, 2, 2)
                 .anim()
@@ -160,12 +176,15 @@ public class EntitySpawnerSystem extends BaseSystem {
         powerSystem.powerMapCoordsAround((int) (socket.posX() / G.CELL_SIZE + 0.5f), (int) (socket.posY() / G.CELL_SIZE + 0.5f), true);
     }
 
-    private void assembleWormSlug(float x, float y) {
+    private void assembleWormSlug(float x, float y, String destination, String sfx) {
         E().anim("wormslug-idle")
                 .pos(x, y)
                 .render(G.LAYER_GREMLIN)
                 .gravity(0,-20)
                 .bounds(0, 0, 160, 128)
+                .telegulp(destination)
+                .telegulpSfx(sfx)
+                .deadly()
                 .wallSensor()
                 .teamTeam(G.TEAM_MONSTERS)
                 .originX(0.5F);
@@ -177,6 +196,7 @@ public class EntitySpawnerSystem extends BaseSystem {
                 .render(G.LAYER_GREMLIN)
                 .gravity(0,-20)
                 .bounds(0, 0, 64, 64)
+                .deadly()
                 .wallSensor()
                 .teamTeam(G.TEAM_MONSTERS)
                 .originX(0.5F);
@@ -193,6 +213,7 @@ public class EntitySpawnerSystem extends BaseSystem {
                 .gravity(0,-60)
                 .bounds(8, 0, 16, 12)
                 .wallSensor()
+                .controls()
                 .cameraFocus()
                 .teamTeam(G.TEAM_PLAYERS)
                 .originX(0.5F)

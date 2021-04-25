@@ -131,6 +131,23 @@ public class ParticleSystem extends FluidIteratingSystem {
                 .create(count);
     }
 
+    public void cureSpray(float x, float y, int count) {
+        //E.E().playSound("splat" + MathUtils.random(1, 4));
+        bakery
+                .color(SpoutSystem.DROP_COLOR_1)
+                .at(x-5, y-5)
+                .angle(0, 360)
+                .speed(50, 80)
+                .dropletSplatDown()
+                .fadeAfter(0.4f)
+                .size(5, 10)
+                .solid()
+                .rotateRandomly()
+                .friction(1)
+                .layer(G.LAYER_PLAYER+10000)
+                .create(count);
+    }
+
     Vector2 v2 = new Vector2();
 
     public E spawnVanillaParticle(float x, float y, float angle, float speed, float scale, int layer, float friction) {

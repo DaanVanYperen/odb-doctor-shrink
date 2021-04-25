@@ -24,13 +24,13 @@ public class DialogSystem extends FluidIteratingSystem {
     }
 
     public DialogSystem playerSay(Dialog dialog, float delay, float duration) {
-        say(entityWithTag("player"), "playerDialog", "cloud-" + dialog.toString().toLowerCase(), delay, duration);
+        //say(entityWithTag("player"), "playerDialog", "cloud-" + dialog.toString().toLowerCase(), delay, duration);
         return this;
     }
 
     public DialogSystem robotSay(Dialog dialog, float delay, float duration) {
-        E e = entityWithTag("robot");
-        say(e, "robotDialog", "cloud-" + dialog.toString().toLowerCase(), delay, duration);
+        //E e = entityWithTag("robot");
+        //say(e, "robotDialog", "cloud-" + dialog.toString().toLowerCase(), delay, duration);
         return this;
     }
 

@@ -54,7 +54,7 @@ public class BirdBrainSystem extends FluidIteratingSystem {
             e.physicsFriction(0);
             if (!e.hasSpooked()) {
                 // aim at robot.
-                aimAtRobot(e);
+                //aimAtRobot(e);
             }
         }
 
@@ -76,16 +76,6 @@ public class BirdBrainSystem extends FluidIteratingSystem {
                 e.physicsVx(MathUtils.random(-100, 100) * 0.25f);
                 e.physicsVy(MathUtils.random(200, 250) * 0.25f);
             }
-        }
-    }
-
-    private void aimAtRobot(E e) {
-        E robot = entityWithTag("robot");
-        float targetY = robot.posY() + robot.boundsCy();
-        if (targetY < e.posY() && robot.posXy().dst2(e.posXy()) < 500 * 500) { // only when bird ABOVE robot.
-            v2.set(robot.posX() + robot.boundsCx() * e.birdBrainFavoriteSpot(), targetY).sub(e.posX(), e.posY()).scl(0.5f);
-            e.physicsVy(v2.y);
-            e.physicsVx(v2.x);
         }
     }
 }

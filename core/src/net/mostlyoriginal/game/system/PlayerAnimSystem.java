@@ -19,15 +19,13 @@ public class PlayerAnimSystem extends FluidIteratingSystem {
 
     @Override
     protected void process(E e) {
-        String playerAnimPrefix = e.hasShrunk() ? "doctor-small" : "doctor-big";
-        e.animId(playerAnimPrefix);
 
         if ( e.hasShrunk()) {
             e.bounds(0, 0, 16,16);
-            e.footstepsStepSize(6);
+            e.footstepsStepSize(10);
         } else {
             e.bounds(16, 0, 48,64);
-            e.footstepsStepSize(20);
+            e.footstepsStepSize(30);
         }
     }
 }

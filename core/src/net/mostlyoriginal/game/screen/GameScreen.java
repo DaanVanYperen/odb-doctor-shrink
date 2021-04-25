@@ -15,6 +15,7 @@ import net.mostlyoriginal.api.system.physics.*;
 import net.mostlyoriginal.api.system.render.ClearScreenSystem;
 import net.mostlyoriginal.game.GdxArtemisGame;
 import net.mostlyoriginal.game.component.G;
+import net.mostlyoriginal.game.component.Telegulp;
 import net.mostlyoriginal.game.system.*;
 import net.mostlyoriginal.game.system.detection.*;
 import net.mostlyoriginal.game.system.map.*;
@@ -26,7 +27,7 @@ import net.mostlyoriginal.plugin.OperationsPlugin;
 /**
  * Example main game screen.
  *
- * @author Daan van Yperen
+ * @authorDaan van Yperen
  */
 public class GameScreen extends WorldScreen {
 
@@ -63,7 +64,6 @@ public class GameScreen extends WorldScreen {
                         new FarewellSystem(),
                         new SpoutSystem(),
 
-
                         // Control and logic.
                         new FollowSystem(),
                         new PlayerControlSystem(),
@@ -75,6 +75,11 @@ public class GameScreen extends WorldScreen {
                         new MapCollisionSystem(),
                         new PlatformCollisionSystem(),
                         new PhysicsSystem(),
+
+                        // Interactions
+                        new DeathSystem(),
+                        new CurableSystem(),
+                        new SwallowSystem(),
 
                         // Effects.
                         new FootstepSystem(),
@@ -97,9 +102,10 @@ public class GameScreen extends WorldScreen {
                         new MapRenderInFrontSystem(),
                         new TerminalSystem(),
                         new ExitSystem(),
-                        new DeathSystem(),
                         new DialogSystem(),
                         new SoundPlaySystem( new String[]{
+                                "snail_roar",
+                                "fart",
                                 "shrink_down",
                                 "shrink_up",
                                 "jump_landing",
