@@ -36,6 +36,9 @@ public class EntitySpawnerSystem extends BaseSystem {
             case "wormslug":
                 assembleWormSlug(x, y, (String) extendedProps.get("to"), (String) extendedProps.get("sfx"));
                 break;
+            case "anus":
+                assembleAnus(x, y, (String) extendedProps.get("to"), (String) extendedProps.get("sfx"));
+                break;
             case "nodule_a":
                 assembleNodule(x-2, y-32, "nodule-wall-left-infected","nodule-wall-left-healed", 64, 64, extendedProps != null ? (String) extendedProps.get("unlock") : null);
                 break;
@@ -190,6 +193,17 @@ public class EntitySpawnerSystem extends BaseSystem {
                 .deadly()
                 .wallSensor()
                 .teamTeam(G.TEAM_MONSTERS)
+                .originX(0.5F);
+    }
+
+    private void assembleAnus(float x, float y, String destination, String sfx) {
+        E().anim("anus-wall")
+                .pos(x, y)
+                .render(G.LAYER_GREMLIN)
+                .bounds(0, 0, 64, 32)
+                .telegulp(destination)
+                .telegulpSfx(sfx)
+                .wallSensor()
                 .originX(0.5F);
     }
 

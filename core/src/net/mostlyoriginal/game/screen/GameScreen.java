@@ -107,6 +107,7 @@ public class GameScreen extends WorldScreen {
                         new DialogSystem(),
                         new SoundPlaySystem( new String[]{
                                 "jump",
+                                "jump_small",
                                 "spray",
                                 "mucus_door_opens",
                                 "snail_roar",

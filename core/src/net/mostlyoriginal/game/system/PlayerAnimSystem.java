@@ -24,7 +24,7 @@ public class PlayerAnimSystem extends FluidIteratingSystem {
             e.bounds(0, 0, 16,16);
             e.footstepsStepSize(10);
         } else {
-            e.bounds(16, 0, 48,48);
+            e.bounds(16+8, 0, 48,48-8);
             e.footstepsStepSize(30);
         }
     }

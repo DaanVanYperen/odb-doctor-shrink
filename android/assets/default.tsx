@@ -193,6 +193,11 @@
    <property name="entity" value="lock"/>
   </properties>
  </tile>
+ <tile id="61">
+  <properties>
+   <property name="entity" value="anus"/>
+  </properties>
+ </tile>
  <tile id="62">
   <properties>
    <property name="entity" value="nodule_c"/>
