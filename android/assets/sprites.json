@@ -18,6 +18,7 @@
       "countX": 4,
       "countY": 1,
       "milliseconds": 150,
+	  "repeat": true,
       "width": 64,
       "height": 64
     }, 
