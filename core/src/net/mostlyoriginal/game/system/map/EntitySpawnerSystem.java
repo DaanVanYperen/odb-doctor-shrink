@@ -39,6 +39,9 @@ public class EntitySpawnerSystem extends BaseSystem {
             case "nodule_a":
                 assembleNodule(x-2, y-32, "nodule-wall-left-infected","nodule-wall-left-healed", 64, 64, extendedProps != null ? (String) extendedProps.get("unlock") : null);
                 break;
+            case "nodule_c":
+                assembleNodule(x-30, y-32, "nodule-wall-right-infected","nodule-wall-right-healed", 64, 64, extendedProps != null ? (String) extendedProps.get("unlock") : null);
+                break;
             case "nodule_b":
                 assembleNodule(x, y-2, "nodule-floor-infected","nodule-floor-healed", 64, 64, extendedProps != null ? (String) extendedProps.get("unlock") : null);
                 break;
