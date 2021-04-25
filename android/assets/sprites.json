@@ -25,17 +25,29 @@
 	
 	
     {
-      "id": "doctor-big-jump",
-      "comment": "Big player character jumping.",
+      "id": "doctor-big-jump-charge",
+      "comment": "Big player character charging a jump.",
       "x": 512,
       "y": 192,
-      "countX": 5,
+      "countX": 2,
       "countY": 1,
       "milliseconds": 100,
 	  "repeat": false,
       "width": 64,
       "height": 64
-    }, 	
+    }, 
+    {
+      "id": "doctor-big-jump-release",
+      "comment": "Big player character jumping.",
+      "x": 640,
+      "y": 192,
+      "countX": 3,
+      "countY": 1,
+      "milliseconds": 150,
+	  "repeat": false,
+      "width": 64,
+      "height": 64
+    }, 		
     {
       "id": "doctor-big-fall",
       "comment": "Big player character falling.",
