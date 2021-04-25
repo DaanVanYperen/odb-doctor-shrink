@@ -56,6 +56,7 @@ public class MapCollisionSystem2 extends FluidIteratingSystem {
 
     private void refresh() {
         solidMask.refresh();
+        dirMask.clear();
         for (int x = 0; x < solidMask.width; x++) {
             for (int y = 0; y < solidMask.height; y++) {
                 if (solidMask.atGrid(x, y, true)) {

@@ -36,16 +36,23 @@ public class CurableSystem extends FluidIteratingSystem {
 
             if ( e.curableUnlock() != null ) {
                 EBag doors = allEntitiesWith(Door.class);
+                boolean doorRemoved=false;
                 for (E door : doors) {
                     if ( door != null && door.doorName().equals(e.curableUnlock())) {
                         door.doorKeys(door.doorKeys() - 1);
                         if (door.doorKeys() <= 0) {
                             mapSystem.removeAt(door.posX()+16, door.posY()+16);
                             door.removeDoor();
+                            doorRemoved=true;
                         }
                     }
                 }
+                if ( doorRemoved ) {
+                    E.E().playSound("mucus_door_opens");
+                }
             }
+
+            E.E().playSound("spray");
 
             particleSystem.cureSpray(e.posX()+e.boundsCx(), e.posY() + e.boundsCy(),40);
             myAnimRenderSystem.forceAnim(player,"doctor-big-attack");

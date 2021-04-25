@@ -212,6 +212,7 @@ public class EntitySpawnerSystem extends BaseSystem {
                 .physics()
                 .physicsFriction(0)
                 .render(G.LAYER_PLAYER)
+                .evictFromWall()
                 .mortal()
                 .gravity(0,-60)
                 .bounds(8, 0, 16, 12)

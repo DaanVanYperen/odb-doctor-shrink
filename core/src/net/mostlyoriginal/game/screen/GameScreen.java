@@ -73,6 +73,7 @@ public class GameScreen extends WorldScreen {
                         // Physics.
                         new GravitySystem(),
                         //new MapCollisionSystem(),
+                        new WallEvictionSystem(),
                         new MapCollisionSystem2(),
                         new PlatformCollisionSystem(),
                         new PhysicsSystem(),
@@ -105,6 +106,9 @@ public class GameScreen extends WorldScreen {
                         new ExitSystem(),
                         new DialogSystem(),
                         new SoundPlaySystem( new String[]{
+                                "jump",
+                                "spray",
+                                "mucus_door_opens",
                                 "snail_roar",
                                 "fart",
                                 "shrink_down",

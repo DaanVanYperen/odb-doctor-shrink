@@ -49,6 +49,15 @@ public class SolidDirections {
         return atGrid(((int) x / tileWidth), ((int) y / tileHeight), blockType, outOfBoundsResult);
     }
 
+
+    public void clear() {
+        for (int ty = 0; ty < height; ty++) {
+            for (int tx = 0; tx < width; tx++) {
+                mask[ty][tx] = 0;
+            }
+        }
+    }
+
     public SolidDirections(int width, int height, int tileWidth, int tileHeight) {
         this.width = width;
         this.height = height;
