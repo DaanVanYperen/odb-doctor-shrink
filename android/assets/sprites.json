@@ -211,8 +211,8 @@
       "height": 64
     }, 
     {
-      "id": "anus-ceiling",
-      "comment": "Sphincter entrance.",
+      "id": "anus-wall",
+      "comment": "Sphincter exit.",
       "x": 480,
       "y": 512,
       "countX": 1,
@@ -221,8 +221,8 @@
       "height": 96
     }, 
     {
-      "id": "anus-wall",
-      "comment": "Sphincter exit.",
+      "id": "anus-ceiling",
+      "comment": "Sphincter entrance.",
       "x": 544,
       "y": 512,
       "countX": 1,
