@@ -16,6 +16,8 @@ import net.mostlyoriginal.game.system.view.GameScreenAssetSystem;
  * @author Daan van Yperen
  */
 public class UiSystem extends BaseSystem {
+
+    private static final float TOP_MARGIN = 48f;
     GameScreenAssetSystem assetSystem;
     private CameraSystem cameraSystem;
     private SpriteBatch batch;
@@ -38,6 +40,8 @@ public class UiSystem extends BaseSystem {
 
     public int previousSyringes=1;
     public float syringeAnimAge=0;
+    public float syringeConsumeAnimAge=0;
+    public int consumedCount = 0;
 
 
     @Override
@@ -51,15 +55,32 @@ public class UiSystem extends BaseSystem {
 
         Inventory inventory = player.getInventory();
 
-        if ( previousSyringes != inventory.syringes) {
+        if ( previousSyringes < inventory.syringes) {
             previousSyringes = inventory.syringes;
             syringeAnimAge = 0;
         }
+        if ( previousSyringes > inventory.syringes) {
+            consumedCount=previousSyringes - inventory.syringes;
+            previousSyringes = inventory.syringes;
+            syringeConsumeAnimAge = 0;
+        }
 
+        int offset = 0;
         syringeAnimAge += world.delta;
-        TextureRegion syringe = (TextureRegion) assetSystem.get("syringe-ui").getKeyFrame(0);
-        for (int i = 0; i < inventory.syringes; i++) {
-            batch.draw(syringe,8+i*40, G.SCREEN_HEIGHT / 2 - 64f);
+        syringeConsumeAnimAge += world.delta;
+        {
+            TextureRegion syringe = (TextureRegion) assetSystem.get("syringe-ui-gain").getKeyFrame(syringeAnimAge);
+            for (int i = 0; i < inventory.syringes; i++) {
+                batch.draw(syringe, 8 + offset++ * 40, G.SCREEN_HEIGHT / 2 - TOP_MARGIN);
+            }
+        }
+
+        {
+            TextureRegion syringe = (TextureRegion) assetSystem.get("syringe-ui-use").getKeyFrame(syringeConsumeAnimAge);
+            for (int i = 0; i < consumedCount; i++) {
+                batch.draw(syringe, 8 + offset++ * 40, G.SCREEN_HEIGHT / 2 - TOP_MARGIN);
+            }
+            if ( syringeConsumeAnimAge > 40*11f*0.001f ) consumedCount=0;
         }
 
 
