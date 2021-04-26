@@ -273,6 +273,16 @@
    <property name="entity" value="spike"/>
   </properties>
  </tile>
+ <tile id="83">
+  <properties>
+   <property name="entity" value="spike"/>
+  </properties>
+ </tile>
+ <tile id="84">
+  <properties>
+   <property name="entity" value="spike"/>
+  </properties>
+ </tile>
  <tile id="87">
   <properties>
    <property name="solid" type="bool" value="true"/>

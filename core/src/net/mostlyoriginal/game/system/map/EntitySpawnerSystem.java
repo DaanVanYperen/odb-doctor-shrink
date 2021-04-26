@@ -42,7 +42,7 @@ public class EntitySpawnerSystem extends BaseSystem {
                 break;
             case "spike":
                 assembleSpike(x, y);
-                break;
+                return false;
             case "wormslug":
                 assembleWormSlug(x, y, (String) extendedProps.get("to"), (String) extendedProps.get("sfx"));
                 break;
@@ -207,7 +207,7 @@ public class EntitySpawnerSystem extends BaseSystem {
     }
 
     private void assembleSpike(float x, float y) {
-        E()    .anim("spike")
+        E()
                 .pos(x, y)
                 .bounds(0,0,32,32)
                 .render(G.LAYER_GREMLIN)
