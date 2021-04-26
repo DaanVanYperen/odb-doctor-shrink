@@ -18,6 +18,7 @@ import net.mostlyoriginal.game.system.CheckpointSystem;
 import net.mostlyoriginal.game.system.common.FluidIteratingSystem;
 import net.mostlyoriginal.game.system.map.EntitySpawnerSystem;
 import net.mostlyoriginal.game.system.map.MapCollisionSystem;
+import net.mostlyoriginal.game.system.map.PriorityAnimSystem;
 import net.mostlyoriginal.game.system.render.MyAnimRenderSystem;
 import net.mostlyoriginal.game.system.render.TransitionSystem;
 import net.mostlyoriginal.game.system.view.GameScreenAssetSystem;
@@ -63,7 +64,6 @@ public class DeathSystem extends FluidIteratingSystem {
                 e.deadCooldown(1);
                 e.physicsVx(0);
                 e.physicsVy(0);
-
                 E.E().physics().gravity().pos(e.getPos()).bounds(0,0,32,32).anim("doctor-big-crushed").renderLayer(G.LAYER_PLAYER-10).script(OperationFactory.sequence(
                         OperationFactory.delay(milliseconds(500)),
                         JamOperationFactory.tintBetween(Tint.WHITE, Tint.TRANSPARENT, seconds(1f),Interpolation.fade),

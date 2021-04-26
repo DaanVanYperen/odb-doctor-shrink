@@ -8,6 +8,7 @@ import net.mostlyoriginal.game.component.Checkpoint;
 import net.mostlyoriginal.game.component.PlayerCanTouch;
 import net.mostlyoriginal.game.system.common.FluidIteratingSystem;
 import net.mostlyoriginal.game.system.detection.ParticleSystem;
+import net.mostlyoriginal.game.system.render.MyAnimRenderSystem;
 
 /**
  * @author Daan van Yperen
@@ -16,6 +17,7 @@ public class CheckpointSystem extends FluidIteratingSystem {
     private static final String RESPAWN_LOCATION_TAG = "respawn-location";
     private static final Aspect.Builder CHECKPOINTS = Aspect.all(Checkpoint.class,PlayerCanTouch.class, Pos.class, Bounds.class);
     private ParticleSystem particleSystem;
+    private MyAnimRenderSystem animRenderSystem;
 
     public CheckpointSystem() {
         super(CHECKPOINTS);
@@ -62,6 +64,7 @@ public class CheckpointSystem extends FluidIteratingSystem {
         E respawnPoint = entityWithTag(RESPAWN_LOCATION_TAG);
         player.posX(respawnPoint.posX() - player.boundsCx());
         player.posY(respawnPoint.posY());
+        animRenderSystem.forceAnim(player,"doctor-big-respawn");
     }
 
     private void setRespawnAt(E checkpoint, float x, float y) {
