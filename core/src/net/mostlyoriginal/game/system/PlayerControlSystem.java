@@ -38,7 +38,7 @@ public class PlayerControlSystem extends FluidIteratingSystem {
     private float BREAKING = SPEED_UP * 2f;
 
     private float JUMP_FACTOR_SMALL = 16000 * 2; //24000 * 2;
-    private float JUMP_FACTOR_LARGE = 30000 * 2;
+    private float JUMP_FACTOR_LARGE = 23000 * 2;
     private SocketSystem socketSystem;
     private MyAnimRenderSystem animSystem;
     private GameScreenAssetSystem assetSystem;
@@ -47,7 +47,7 @@ public class PlayerControlSystem extends FluidIteratingSystem {
     private Controller controller;
     private FootstepSystem footstepSystem;
     private boolean shrinkDown = false;
-    private boolean jumpDown = false;
+    private boolean jumpDown=false;
 
     public PlayerControlSystem() {
         super(Aspect.all(PlayerControlled.class, Physics.class, WallSensor.class, Anim.class).exclude(Dead.class));
@@ -152,21 +152,27 @@ public class PlayerControlSystem extends FluidIteratingSystem {
 //            }
 //            jumpDown=true;
 //        } else {
-        if (jumpDown || (jumpPressed())) {
-            if (onFloor && !e.hasDead()) {
-                E.E().playSound(e.hasShrunk() ? "jump_small" : "jump");
-                e.physicsVy(e.isShrunk() ? JUMP_FACTOR_SMALL * 0.016f : JUMP_FACTOR_LARGE * 0.016f);
-                boolean blackFloorAt = footstepSystem.isBlackFloorAt(e);
-                for (int i = 0; i < 4; i++) {
-                    Color colorDust = blackFloorAt ? particleSystem.COLOR_DUST_BLACK : particleSystem.COLOR_DUST;
-                    Color colorRed = blackFloorAt ? particleSystem.COLOR_DUST_BLACK2 : particleSystem.COLOR_DUST_RED;
-                    particleSystem.floorDroplet(e.posX() + e.boundsCx(), e.posY(), 90 + 20, colorDust, colorRed);
-                    particleSystem.floorDroplet(e.posX() + e.boundsCx(), e.posY(), 90 - 20, colorDust, colorRed);
+        if ( onFloor) {
+            e.controlsJumps(2);
+        }
+
+        if (jumpPressed()) {
+            if (!jumpDown) {
+                if (e.controlsJumps() > 0) {
+                    e.controlsJumps(e.controlsJumps()-1);
+                    E.E().playSound(e.hasShrunk() ? "jump_small" : "jump");
+                    e.physicsVy(e.isShrunk() ? JUMP_FACTOR_SMALL * 0.016f : JUMP_FACTOR_LARGE * 0.016f);
+                    boolean blackFloorAt = footstepSystem.isBlackFloorAt(e);
+                    for (int i = 0; i < 4; i++) {
+                        Color colorDust = blackFloorAt ? particleSystem.COLOR_DUST_BLACK : particleSystem.COLOR_DUST;
+                        Color colorRed = blackFloorAt ? particleSystem.COLOR_DUST_BLACK2 : particleSystem.COLOR_DUST_RED;
+                        particleSystem.floorDroplet(e.posX() + e.boundsCx(), e.posY(), 90 + 20, colorDust, colorRed);
+                        particleSystem.floorDroplet(e.posX() + e.boundsCx(), e.posY(), 90 - 20, colorDust, colorRed);
+                    }
                 }
             }
-//                jumpDown=false;
-        }
-//        }
+            jumpDown = true;
+        } else jumpDown = false;
 
 
         if (e.controlsShrinkToggleCooldown() > 0) {

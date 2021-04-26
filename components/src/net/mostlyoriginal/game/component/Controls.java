@@ -11,6 +11,8 @@ public class Controls extends Component {
     public float autoGrowCooldown = 0;
     public float rechargeCooldown = 0;
 
+    public int jumps = 0;
+
     public Controls() {
     }
 }
