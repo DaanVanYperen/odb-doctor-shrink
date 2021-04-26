@@ -11,6 +11,7 @@ import com.badlogic.gdx.math.MathUtils;
 import net.mostlyoriginal.api.component.graphics.Anim;
 import net.mostlyoriginal.api.component.physics.Physics;
 import net.mostlyoriginal.api.system.physics.SocketSystem;
+import net.mostlyoriginal.game.component.Dead;
 import net.mostlyoriginal.game.component.G;
 import net.mostlyoriginal.game.component.PlayerControlled;
 import net.mostlyoriginal.game.component.Socket;
@@ -49,7 +50,7 @@ public class PlayerControlSystem extends FluidIteratingSystem {
     private boolean jumpDown = false;
 
     public PlayerControlSystem() {
-        super(Aspect.all(PlayerControlled.class, Physics.class, WallSensor.class, Anim.class));
+        super(Aspect.all(PlayerControlled.class, Physics.class, WallSensor.class, Anim.class).exclude(Dead.class));
     }
 
     @Override

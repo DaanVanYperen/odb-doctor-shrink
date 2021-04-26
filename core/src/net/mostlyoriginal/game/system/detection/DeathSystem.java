@@ -54,6 +54,8 @@ public class DeathSystem extends FluidIteratingSystem {
                 E.E().playSound("deathsound");
                 e.invisible();
                 e.deadCooldown(1);
+                e.physicsVx(0);
+                e.physicsVy(0);
                 particleSystem.bloodExplosion(e.posX() + e.boundsCx(), e.posY() + e.boundsCy());
             } else {
                 e.deadCooldown(e.deadCooldown() - world.delta);
