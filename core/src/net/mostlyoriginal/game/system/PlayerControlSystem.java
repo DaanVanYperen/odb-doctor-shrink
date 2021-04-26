@@ -160,7 +160,7 @@ public class PlayerControlSystem extends FluidIteratingSystem {
             if (!jumpDown) {
                 if (e.controlsJumps() > 0) {
                     e.controlsJumps(e.controlsJumps()-1);
-                    E.E().playSound(e.hasShrunk() ? "jump_small" : "jump");
+                    E.E().playSound(e.hasShrunk() ? "jump_small" + MathUtils.random(1,2) : "jump" + MathUtils.random(1,4));
                     e.physicsVy(e.isShrunk() ? JUMP_FACTOR_SMALL * 0.016f : JUMP_FACTOR_LARGE * 0.016f);
                     boolean blackFloorAt = footstepSystem.isBlackFloorAt(e);
                     for (int i = 0; i < 4; i++) {
