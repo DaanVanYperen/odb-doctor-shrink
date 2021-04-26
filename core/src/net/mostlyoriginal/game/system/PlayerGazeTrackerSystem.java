@@ -29,6 +29,8 @@ public class PlayerGazeTrackerSystem extends FluidIteratingSystem {
         PlayerGazeTracker tracker = e.getPlayerGazeTracker();
 
         tracker.target.set(player.getPos().xy);
+        tracker.target.x += player.boundsCx();
+        tracker.target.y += player.boundsCy();
         tracker.target.x += player.animFlippedX() ? -100 : 100;
 //        tracker.target.x += player.physicsVx() > 0.1f ? MOVEMENT_LOOK_AHEAD : player.physicsVx() < -0.1f ? -MOVEMENT_LOOK_AHEAD : 0;
         tracker.target.y += player.physicsVy() > 0.1f ? MOVEMENT_LOOK_AHEAD : player.physicsVy() < -0.1f ? -MOVEMENT_LOOK_AHEAD : 0;

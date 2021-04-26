@@ -203,7 +203,7 @@ public class EntitySpawnerSystem extends BaseSystem {
                 .telegulpSfx(sfx)
                 .monsterAnimIdle("wormslug-idle")
                 .monsterAnimEaten("wormslug-eats")
-                .monsterAnimSwallowed("wormslug-eats")
+                .monsterAnimSwallowed("wormslug-eats-lildoc")
                 .deadly()
                 .wallSensor()
                 .teamTeam(G.TEAM_MONSTERS)
