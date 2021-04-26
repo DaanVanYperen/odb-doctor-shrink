@@ -5,6 +5,8 @@ import com.artemis.World;
 import com.artemis.WorldConfigurationBuilder;
 import com.artemis.managers.TagManager;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
+import net.mostlyoriginal.api.SingletonPlugin;
 import net.mostlyoriginal.api.screen.core.WorldScreen;
 import net.mostlyoriginal.api.system.camera.CameraSystem;
 import net.mostlyoriginal.api.system.graphics.RenderBatchingSystem;
@@ -29,14 +31,13 @@ public class OdbFeatureScreen extends WorldScreen {
 		final RenderBatchingSystem renderBatchingSystem;
 
 		return new World(new WorldConfigurationBuilder()
-				.dependsOn(OperationsPlugin.class)
+				.dependsOn(OperationsPlugin.class, SingletonPlugin.class)
 				.with(WorldConfigurationBuilder.Priority.HIGH,
 						// supportive
 						new SuperMapper(),
 						new TagManager(),
 						new CameraSystem(1),
-						new FeatureScreenAssetSystem(),
-						new OdbFeatureDetectionSystem()
+						new FeatureScreenAssetSystem()
 				).with(WorldConfigurationBuilder.Priority.LOW,
 						// processing
 						new TransitionSystem(GdxArtemisGame.getInstance()),

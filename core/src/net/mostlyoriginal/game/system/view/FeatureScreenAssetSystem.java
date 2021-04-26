@@ -19,6 +19,10 @@ public class FeatureScreenAssetSystem extends AbstractAssetSystem {
     public static final int BACKGROUND_WIDTH = 125;
     public static final int BACKGROUND_HEIGHT = 58;
 
+    public FeatureScreenAssetSystem() {
+        super("tileset.png");
+    }
+
     @Override
     protected void initialize() {
         super.initialize();

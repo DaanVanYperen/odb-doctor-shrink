@@ -38,6 +38,7 @@ public class SwallowSystem extends FluidIteratingSystem {
         e.telegulpRoarCooldown(e.telegulpRoarCooldown()-world.delta);
 
         if ( !player.hasDead() && !player.isFrozen() && overlaps(player, e)) {
+            e.swallowed();
             E destination = entityWithTag(e.telegulpDestination());
             E.E().playSound(e.telegulpSfx());
             //player.pos(destination.getPos());

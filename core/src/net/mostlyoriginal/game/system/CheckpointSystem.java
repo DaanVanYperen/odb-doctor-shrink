@@ -44,7 +44,7 @@ public class CheckpointSystem extends FluidIteratingSystem {
             e.anim("waypoint-on");
             setRespawnAt(entityWithTag(RESPAWN_LOCATION_TAG), e.posX()+16, e.posY());
             particleSystem.bloodSpray(e.posX()+16,e.posY()+16,24);
-            E.E().playSound("checkpoint_active");
+            E.E().playSound("activate_checkpoint");
         }
     }
 

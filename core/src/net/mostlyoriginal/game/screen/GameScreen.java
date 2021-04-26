@@ -84,6 +84,8 @@ public class GameScreen extends WorldScreen {
                         new CheckpointSystem(),
                         new PowerupSystem(),
                         new DeathSystem(),
+                        new EatenSystem(),
+                        new MonsterAnimSystem(),
                         new CurableSystem(),
                         new SwallowSystem(),
 
@@ -113,6 +115,7 @@ public class GameScreen extends WorldScreen {
                         new UiSystem(),
                         new CircleTransitionSystem(),
                         new SoundPlaySystem( new String[]{
+                                "activate_checkpoint",
                                 "syringe_grab",
                                 "jump",
                                 "jump_small",

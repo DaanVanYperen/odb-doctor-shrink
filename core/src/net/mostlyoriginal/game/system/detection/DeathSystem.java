@@ -84,7 +84,10 @@ public class DeathSystem extends FluidIteratingSystem {
     private E touchingDeadlyStuffs(E e, boolean onlyMortals) {
         for (E o : allEntitiesWith(Deadly.class)) {
             if (o == e) continue;
-            if (overlaps(o, e) && o.teamTeam() != e.teamTeam() && (!onlyMortals || o.hasMortal())) return o;
+            if (overlaps(o, e) && o.teamTeam() != e.teamTeam() && (!onlyMortals || o.hasMortal())) {
+                o.eaten();
+                return o;
+            }
         }
 
         return null;

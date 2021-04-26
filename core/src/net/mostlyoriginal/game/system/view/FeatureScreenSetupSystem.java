@@ -1,16 +1,12 @@
 package net.mostlyoriginal.game.system.view;
 
-import com.artemis.E;
-import com.artemis.Entity;
 import com.artemis.annotations.Wire;
 import com.artemis.managers.TagManager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Interpolation;
 import net.mostlyoriginal.api.component.graphics.Tint;
 import net.mostlyoriginal.api.system.core.PassiveSystem;
-import net.mostlyoriginal.game.component.detection.OdbFeatureComponent;
 import net.mostlyoriginal.game.screen.GameScreen;
-import net.mostlyoriginal.game.system.detection.OdbFeatureDetectionSystem;
 import net.mostlyoriginal.game.system.render.TransitionSystem;
 import net.mostlyoriginal.game.util.Anims;
 
@@ -18,7 +14,6 @@ import static com.artemis.E.E;
 import static net.mostlyoriginal.api.operation.JamOperationFactory.moveBetween;
 import static net.mostlyoriginal.api.operation.JamOperationFactory.scaleBetween;
 import static net.mostlyoriginal.api.operation.OperationFactory.*;
-import static net.mostlyoriginal.api.utils.Duration.seconds;
 
 /**
  * @author Daan van Yperen
@@ -26,7 +21,6 @@ import static net.mostlyoriginal.api.utils.Duration.seconds;
 @Wire
 public class FeatureScreenSetupSystem extends PassiveSystem {
 
-    public static final int FEATURE_BORDER_MARGIN = 1;
     public static final Tint COLOR_FEATURE_FADED = new Tint(0.8f, 1.0f, 1.0f, 0.3f);
     private final Tint TINT_FEATURE_FADED = new Tint(COLOR_FEATURE_FADED);
     public static final Tint COLOR_FEATURE_OFF = new Tint(0.8f, 1.0f, 1.0f, 0.0f);
@@ -50,14 +44,6 @@ public class FeatureScreenSetupSystem extends PassiveSystem {
         addBackground();
         addLogo();
 
-        final Entity featureEntity = tagManager.getEntity(OdbFeatureDetectionSystem.FEATURES_TAG);
-        final OdbFeatureComponent featureComponent = featureEntity.getComponent(OdbFeatureComponent.class);
-
-        addFeatureIcon(featureComponent.isHotspotOptimization, "feature-hotspot");
-        addFeatureIcon(featureComponent.isPacked, "feature-packed");
-        addFeatureIcon(featureComponent.isPooled, "feature-pooled");
-        addFeatureIcon(featureComponent.isFactory, "feature-factory");
-
         scheduleTransitionToGameScreen();
     }
 
@@ -72,56 +58,6 @@ public class FeatureScreenSetupSystem extends PassiveSystem {
                 0,
                 "background",
                 Math.max(heightScale, widthScale));
-    }
-
-    private void addFeatureIcon(boolean state, String iconId) {
-
-        final float scale = Anims.scaleToScreenRounded(0.08f, FeatureScreenAssetSystem.FEATURE_WIDTH);
-        final float iconBorderMargin = scale * FEATURE_BORDER_MARGIN;
-        final float iconOffset = ((scale * FeatureScreenAssetSystem.FEATURE_WIDTH) + iconBorderMargin);
-
-        float cX = Gdx.graphics.getWidth() - iconOffset * ++iconIndex;
-        float cY = iconBorderMargin;
-        final E e = Anims.createAnimAt(
-                (int) cX,
-                (int) cY,
-                iconId,
-                scale);
-
-        if (state) {
-            animateAvailable(cX, cY, e);
-        } else {
-            animateMissing(cX, cY, e);
-        }
-    }
-
-    private void animateMissing(float cX, float cY, E e) {
-        e
-                .tint(COLOR_FEATURE_OFF)
-                .script(
-                        sequence(
-                                delay(seconds(0.5f + iconIndex * 0.1f)),
-                                moveBetween(cX, -50, cX, cY, 1f, Interpolation.fade)
-                        ),
-                        sequence(
-                                delay(seconds(0.5f + iconIndex * 0.1f)),
-                                tween(TINT_FEATURE_OFF, TINT_FEATURE_FADED, seconds(2))
-                        ));
-    }
-
-    private void animateAvailable(float cX, float cY, E e) {
-        e
-                .tint(COLOR_FEATURE_OFF)
-                .script(
-                        sequence(
-                                delay(seconds(0.5f + iconIndex * 0.1f)),
-                                moveBetween(cX, -50, cX, cY, 1f, Interpolation.fade)
-                        ),
-                        sequence(
-                                delay(seconds(0.5f + iconIndex * 0.1f)),
-                                tween(TINT_FEATURE_OFF, TINE_FEATURE_ON_OFF, seconds(2)),
-                                tween(TINE_FEATURE_ON_OFF, TINT_FEATURE_ON, seconds(2))
-                        ));
     }
 
     public void addLogo() {
