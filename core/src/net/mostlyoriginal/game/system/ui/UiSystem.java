@@ -8,6 +8,8 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import net.mostlyoriginal.api.system.camera.CameraSystem;
+import net.mostlyoriginal.game.component.G;
+import net.mostlyoriginal.game.component.Inventory;
 import net.mostlyoriginal.game.system.view.GameScreenAssetSystem;
 
 /**
@@ -40,10 +42,15 @@ public class UiSystem extends BaseSystem {
 
     @Override
     protected void processSystem() {
-        //E.E(tagManager.getEntity("player"));
+        E player = E.E(tagManager.getEntity("player"));
 
+        Inventory inventory = player.getInventory();
 
-//
+        TextureRegion syringe = (TextureRegion) assetSystem.get("syringe-ui").getKeyFrame(0);
+        for (int i = 0; i < inventory.syringes; i++) {
+            batch.draw(syringe,8+i*40, G.SCREEN_HEIGHT / 2 - 32f, 32f, 32f);
+        }
+
 //        batch.draw(((TextureRegion)assetSystem.get("icon_reset").getKeyFrame(0)),GameRules.SCREEN_WIDTH / 2 - 20,GameRules.SCREEN_HEIGHT / 2 - 20, 16f, 16f);
 //        batch.draw(((TextureRegion)assetSystem.get(GameRules.musicOn ?"icon_music":"icon_music_off").getKeyFrame(0)),GameRules.SCREEN_WIDTH / 2 - 40,GameRules.SCREEN_HEIGHT / 2 - 20, 16f, 16f);
 //        batch.draw(((TextureRegion)assetSystem.get(GameRules.sfxOn?"icon_sound":"icon_sound_off").getKeyFrame(0)),GameRules.SCREEN_WIDTH / 2 - 60,GameRules.SCREEN_HEIGHT / 2 - 20, 16f, 16f);

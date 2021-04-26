@@ -13,8 +13,6 @@ import net.mostlyoriginal.game.system.PulsatingFramebufferManager;
  * @author Daan van Yperen
  */
 public class MapRenderSystem extends BaseSystem {
-
-    private Color BACKGROUND_COLOR= Color.valueOf("031D1E");
     private MapSystem mapSystem;
     private CameraSystem cameraSystem;
     private PulsatingFramebufferManager pulsatingFramebufferManager;
@@ -35,7 +33,7 @@ public class MapRenderSystem extends BaseSystem {
                 continue;
 
             if (layer.isVisible()) {
-                if (layer.getName().equals("background")) {
+                if (layer.getName().equals("background")||layer.getName().equals("background2")) {
                     renderLayer((TiledMapTileLayer) layer);
                 }
             }
@@ -47,7 +45,7 @@ public class MapRenderSystem extends BaseSystem {
                 continue;
 
             if (layer.isVisible()) {
-                if (!layer.getName().equals("infront") && !layer.getName().equals("background")) {
+                if (!layer.getName().equals("infront") && !layer.getName().equals("background")&& !layer.getName().equals("background2")) {
                     renderLayer((TiledMapTileLayer) layer);
                 }
             }

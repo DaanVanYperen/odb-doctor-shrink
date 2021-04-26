@@ -32,7 +32,7 @@ public class CurableSystem extends FluidIteratingSystem {
 
         E player = entityWithTag("player");
 
-        if ( !player.hasDead() &&  overlaps(player, e) && !player.hasShrunk()) {
+        if ( !player.hasDead() &&  overlaps(player, e) && !player.hasShrunk() && player.inventorySyringes() > 0) {
 
             if ( e.curableUnlock() != null ) {
                 EBag doors = allEntitiesWith(Door.class);
@@ -53,6 +53,7 @@ public class CurableSystem extends FluidIteratingSystem {
             }
 
             E.E().playSound("spray");
+            player.inventorySyringes(player.inventorySyringes()-1);
 
             particleSystem.cureSpray(e.posX()+e.boundsCx(), e.posY() + e.boundsCy(),40);
             myAnimRenderSystem.forceAnim(player,"doctor-big-attack");

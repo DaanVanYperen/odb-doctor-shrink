@@ -34,7 +34,7 @@ import net.mostlyoriginal.plugin.ProfilerPlugin;
 public class GameScreen extends WorldScreen {
 
     public static final String BACKGROUND_COLOR_HEX = "0000FF";
-    private Color BACKGROUND_COLOR= Color.valueOf("031D1E");
+    private Color BACKGROUND_COLOR= Color.valueOf("141013");
 
     @Override
     protected World createWorld() {
