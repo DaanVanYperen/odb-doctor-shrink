@@ -260,6 +260,18 @@
       "height": 64
     },
     {
+      "id": "glorb-walk",
+      "comment": "Glorb in motion.",
+      "x": 0,
+      "y": 256,
+      "countX": 5,
+      "countY": 1,
+      "milliseconds": 150,	  
+	  "repeat": true,
+      "width": 64,
+      "height": 64
+    },
+    {
       "id": "wormslug-idle",
       "comment": "Wormslug idling.",
       "x": 0,
@@ -276,6 +288,7 @@
       "y": 320,
       "countX": 4,
       "countY": 1,
+      "milliseconds": 150,	  
 	  "repeat": true,
       "width": 160,
       "height": 128
