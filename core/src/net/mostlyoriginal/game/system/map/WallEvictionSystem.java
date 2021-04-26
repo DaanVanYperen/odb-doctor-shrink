@@ -32,5 +32,12 @@ public class WallEvictionSystem extends FluidIteratingSystem {
         while ( mapCollisionSystem2.touching(e, SolidDirections.BlockType.EAST_WALL,bounds.maxx, bounds.miny, bounds.maxx, bounds.maxy) ) {
             e.posX(e.posX()-1);
         }
+
+        if ( !e.hasShrunk() && mapCollisionSystem2.touching(e, SolidDirections.BlockType.CEILING, bounds.minx, 32, bounds.maxx, 38) ) {
+            e.dead();
+            E.E().playSound("neck_break");
+            return;
+        }
+
     }
 }

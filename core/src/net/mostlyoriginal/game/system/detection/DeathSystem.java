@@ -4,9 +4,13 @@ import com.artemis.Aspect;
 import com.artemis.E;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.MathUtils;
 import net.mostlyoriginal.api.component.basic.Pos;
+import net.mostlyoriginal.api.component.graphics.Tint;
 import net.mostlyoriginal.api.manager.AbstractAssetSystem;
+import net.mostlyoriginal.api.operation.JamOperationFactory;
+import net.mostlyoriginal.api.operation.OperationFactory;
 import net.mostlyoriginal.api.system.camera.CameraSystem;
 import net.mostlyoriginal.game.component.*;
 import net.mostlyoriginal.game.screen.GameScreen;
@@ -17,6 +21,9 @@ import net.mostlyoriginal.game.system.map.MapCollisionSystem;
 import net.mostlyoriginal.game.system.render.MyAnimRenderSystem;
 import net.mostlyoriginal.game.system.render.TransitionSystem;
 import net.mostlyoriginal.game.system.view.GameScreenAssetSystem;
+
+import static net.mostlyoriginal.api.utils.Duration.milliseconds;
+import static net.mostlyoriginal.api.utils.Duration.seconds;
 
 /**
  * @author Daan van Yperen
@@ -56,6 +63,12 @@ public class DeathSystem extends FluidIteratingSystem {
                 e.deadCooldown(1);
                 e.physicsVx(0);
                 e.physicsVy(0);
+
+                E.E().physics().gravity().pos(e.getPos()).bounds(0,0,32,32).anim("doctor-big-crushed").renderLayer(G.LAYER_PLAYER-10).script(OperationFactory.sequence(
+                        OperationFactory.delay(milliseconds(500)),
+                        JamOperationFactory.tintBetween(Tint.WHITE, Tint.TRANSPARENT, seconds(1f),Interpolation.fade),
+                        OperationFactory.deleteFromWorld()
+                ));;
                 particleSystem.bloodExplosion(e.posX() + e.boundsCx(), e.posY() + e.boundsCy());
             } else {
                 e.deadCooldown(e.deadCooldown() - world.delta);
