@@ -267,10 +267,9 @@ public class EntitySpawnerSystem extends BaseSystem {
                 .inventory()
                 .mortal()
                 .gravity(0,-60)
-                .bounds(8, 0, 16, 12)
+                .bounds(8, 0, 16, 16)
                 .wallSensor()
                 .controls()
-                .cameraFocus()
                 .teamTeam(G.TEAM_PLAYERS)
                 .originX(0.5F)
                 .footsteps()
@@ -278,6 +277,8 @@ public class EntitySpawnerSystem extends BaseSystem {
                 .footstepsSfx("footstep ")
                 .tag("player")
                 .playerControlled();
+
+        E().pos(x,y).tag("camera-focus").playerGazeTracker().cameraFocus().bounds(0,0,16,16);
     }
 
     private void assembleExit(float x, float y) {

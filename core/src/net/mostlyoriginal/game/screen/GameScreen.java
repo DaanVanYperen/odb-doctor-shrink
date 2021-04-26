@@ -15,7 +15,6 @@ import net.mostlyoriginal.api.system.physics.*;
 import net.mostlyoriginal.api.system.render.ClearScreenSystem;
 import net.mostlyoriginal.game.GdxArtemisGame;
 import net.mostlyoriginal.game.component.G;
-import net.mostlyoriginal.game.component.Telegulp;
 import net.mostlyoriginal.game.system.*;
 import net.mostlyoriginal.game.system.detection.*;
 import net.mostlyoriginal.game.system.map.*;
@@ -94,6 +93,7 @@ public class GameScreen extends WorldScreen {
                         new SocketSystem(),
 
                         // Camera.
+                        new PlayerGazeTrackerSystem(),
                         new CameraFollowSystem(),
                         //new CameraShakeSystem(),
                         new CameraClampToMapSystem(),

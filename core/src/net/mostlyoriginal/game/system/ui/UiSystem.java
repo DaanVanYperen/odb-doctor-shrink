@@ -28,12 +28,17 @@ public class UiSystem extends BaseSystem {
     }
 
 
+
     @Override
     protected void begin() {
         batch.setProjectionMatrix(cameraSystem.guiCamera.combined);
-        batch.setColor(new Color(1f,1f,1f,0.4f));
+        batch.setColor(new Color(1f,1f,1f,1f));
         batch.begin();
     }
+
+    public int previousSyringes=1;
+    public float syringeAnimAge=0;
+
 
     @Override
     protected void end() {
@@ -46,10 +51,17 @@ public class UiSystem extends BaseSystem {
 
         Inventory inventory = player.getInventory();
 
+        if ( previousSyringes != inventory.syringes) {
+            previousSyringes = inventory.syringes;
+            syringeAnimAge = 0;
+        }
+
+        syringeAnimAge += world.delta;
         TextureRegion syringe = (TextureRegion) assetSystem.get("syringe-ui").getKeyFrame(0);
         for (int i = 0; i < inventory.syringes; i++) {
-            batch.draw(syringe,8+i*40, G.SCREEN_HEIGHT / 2 - 32f, 32f, 32f);
+            batch.draw(syringe,8+i*40, G.SCREEN_HEIGHT / 2 - 64f);
         }
+
 
 //        batch.draw(((TextureRegion)assetSystem.get("icon_reset").getKeyFrame(0)),GameRules.SCREEN_WIDTH / 2 - 20,GameRules.SCREEN_HEIGHT / 2 - 20, 16f, 16f);
 //        batch.draw(((TextureRegion)assetSystem.get(GameRules.musicOn ?"icon_music":"icon_music_off").getKeyFrame(0)),GameRules.SCREEN_WIDTH / 2 - 40,GameRules.SCREEN_HEIGHT / 2 - 20, 16f, 16f);
