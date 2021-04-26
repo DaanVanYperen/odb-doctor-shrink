@@ -72,7 +72,16 @@
       "width": 64,
       "height": 64
     }, 	
-
+    {
+      "id": "doctor-big-crushed",
+      "comment": "Big player crushed in 32px tall area.",
+      "x": 832,
+      "y": 128,
+      "countX": 1,
+      "countY": 1,
+      "width": 64,
+      "height": 64
+    }, 
 	
 	
      {
@@ -140,7 +149,6 @@
       "width": 16,
       "height": 16
     },  	
-		
 	
     {
       "id": "particle",
@@ -262,6 +270,27 @@
       "height": 128
     },	
     {
+      "id": "babyworm-walk",
+      "comment": "babyworm moving.",
+      "x": 24,
+      "y": 248,
+      "countX": 2,
+      "countY": 1,
+      "milliseconds": 250,
+      "width": 24,
+      "height": 8
+    },
+    {
+      "id": "babyworm-dead",
+      "comment": "RIP babyworm.",
+      "x": 0,
+      "y": 248,
+      "countX": 2,
+      "countY": 1,
+      "width": 24,
+      "height": 8
+    },
+    {
       "id": "bird-1-idle",
       "comment": "Not a bird, a bubble now, embedded in the ground.",
       "x": 772,
@@ -276,15 +305,57 @@
       "y": 0,
       "countX": 4,
       "countY": 1,
+	  "repeat": true,
       "milliseconds": 100,
       "width": 12,
       "height": 12
     },  
-  
-  
-  
-  
-  
+    {
+      "id": "waypoint-off",
+      "comment": "Waypoint for saving, inactive.",
+      "x": 480,
+      "y": 64,
+      "countX": 1,
+      "countY": 1,
+      "width": 32,
+      "height": 32
+    },    
+    {
+      "id": "waypoint-on",
+      "comment": "Waypoint for saving, activated.",
+      "x": 512,
+      "y": 64,
+      "countX": 2,
+      "countY": 1,
+      "milliseconds": 300,
+	  "repeat": true,
+      "width": 32,
+      "height": 32
+    },     
+    {
+      "id": "spike",
+      "comment": "Environmental hazard.",
+      "x": 576,
+      "y": 64,
+      "width": 32,
+      "height": 32
+    },  
+    {
+      "id": "syringe",
+      "comment": "Syringe pickup.",
+      "x": 608,
+      "y": 64,
+      "width": 32,
+      "height": 32
+    },    
+    {
+      "id": "syringe-ui",
+      "comment": "Syringe UI element.",
+      "x": 992,
+      "y": 96,
+      "width": 32,
+      "height": 24
+    },      
   
   
   
