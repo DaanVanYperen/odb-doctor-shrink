@@ -37,7 +37,7 @@ public class PowerupSystem extends FluidIteratingSystem {
                     player.inventorySyringes(player.inventorySyringes()+1);
             }
             e.deleteFromWorld();
-            E.E().playSound("syringe_pickup");
+            E.E().playSound("syringe_grab");
         }
     }
 }

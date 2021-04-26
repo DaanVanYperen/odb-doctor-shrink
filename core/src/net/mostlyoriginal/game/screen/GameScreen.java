@@ -72,7 +72,7 @@ public class GameScreen extends WorldScreen {
                         new BirdBrainSystem(),
 
                         // Physics.
-                        new GravitySystem(),
+                        new MyGravitySystem(),
                         //new MapCollisionSystem(),
                         new WallEvictionSystem(),
                         new MapCollisionSystem2(),
@@ -111,7 +111,9 @@ public class GameScreen extends WorldScreen {
                         new ExitSystem(),
                         new DialogSystem(),
                         new UiSystem(),
+                        new CircleTransitionSystem(),
                         new SoundPlaySystem( new String[]{
+                                "syringe_grab",
                                 "jump",
                                 "jump_small",
                                 "spray",

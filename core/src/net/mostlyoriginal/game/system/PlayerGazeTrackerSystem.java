@@ -20,6 +20,7 @@ public class PlayerGazeTrackerSystem extends FluidIteratingSystem {
     }
 
     Vector3 vTmp = new Vector3();
+    CircleTransitionSystem circleTransitionSystem;
 
     @Override
     protected void process(E e) {
@@ -34,5 +35,13 @@ public class PlayerGazeTrackerSystem extends FluidIteratingSystem {
 
         e.getPos().xy.lerp(tracker.target,world.delta*4f);
         e.bounds(player.getBounds());
+
+         if ( circleTransitionSystem.isFullyCovering() ) {
+             centerOnPlayer();
+         }
+    }
+
+    public void centerOnPlayer() {
+        entityWithTag("camera-focus").pos(entityWithTag("player").getPos());
     }
 }

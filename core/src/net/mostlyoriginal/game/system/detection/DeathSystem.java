@@ -45,7 +45,7 @@ public class DeathSystem extends FluidIteratingSystem {
 
     @Override
     protected void process(E e) {
-        if (!e.hasDead()) {
+        if (!e.hasDead() && !e.hasFrozen()) {
             if (touchingDeadlyStuffs(e, false) != null) {
                 e.dead();
             }
