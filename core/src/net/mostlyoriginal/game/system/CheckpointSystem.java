@@ -4,6 +4,7 @@ import com.artemis.Aspect;
 import com.artemis.E;
 import net.mostlyoriginal.api.component.basic.Bounds;
 import net.mostlyoriginal.api.component.basic.Pos;
+import net.mostlyoriginal.game.component.Checkpoint;
 import net.mostlyoriginal.game.component.PlayerCanTouch;
 import net.mostlyoriginal.game.system.common.FluidIteratingSystem;
 import net.mostlyoriginal.game.system.detection.ParticleSystem;
@@ -13,7 +14,7 @@ import net.mostlyoriginal.game.system.detection.ParticleSystem;
  */
 public class CheckpointSystem extends FluidIteratingSystem {
     private static final String RESPAWN_LOCATION_TAG = "respawn-location";
-    private static final Aspect.Builder CHECKPOINTS = Aspect.all(PlayerCanTouch.class, Pos.class, Bounds.class);
+    private static final Aspect.Builder CHECKPOINTS = Aspect.all(Checkpoint.class,PlayerCanTouch.class, Pos.class, Bounds.class);
     private ParticleSystem particleSystem;
 
     public CheckpointSystem() {

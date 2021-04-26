@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.MathUtils;
 import net.mostlyoriginal.api.system.physics.SocketSystem;
 import net.mostlyoriginal.game.component.G;
 import net.mostlyoriginal.game.component.PlayerCanTouch;
+import net.mostlyoriginal.game.component.Powerup;
 import net.mostlyoriginal.game.component.Spout;
 import net.mostlyoriginal.game.system.detection.SpoutSystem;
 
@@ -226,6 +227,9 @@ public class EntitySpawnerSystem extends BaseSystem {
     private void assembleSyringe(float x, float y) {
         E()    .anim("syringe2")
                 .pos(x, y)
+                .bounds(0,0,32,32)
+                .playerCanTouch()
+                .powerupType(Powerup.Type.SYRINGE)
                 .render(G.LAYER_GREMLIN);
     }
 
@@ -260,6 +264,7 @@ public class EntitySpawnerSystem extends BaseSystem {
                 .physicsFriction(0)
                 .render(G.LAYER_PLAYER)
                 .evictFromWall()
+                .inventory()
                 .mortal()
                 .gravity(0,-60)
                 .bounds(8, 0, 16, 12)

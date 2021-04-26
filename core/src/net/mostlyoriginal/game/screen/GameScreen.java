@@ -20,6 +20,7 @@ import net.mostlyoriginal.game.system.*;
 import net.mostlyoriginal.game.system.detection.*;
 import net.mostlyoriginal.game.system.map.*;
 import net.mostlyoriginal.game.system.render.*;
+import net.mostlyoriginal.game.system.ui.UiSystem;
 import net.mostlyoriginal.game.system.view.GameScreenAssetSystem;
 import net.mostlyoriginal.game.system.view.GameScreenSetupSystem;
 import net.mostlyoriginal.plugin.OperationsPlugin;
@@ -82,6 +83,7 @@ public class GameScreen extends WorldScreen {
                         // Interactions
                         new PlayerTouchSystem(),
                         new CheckpointSystem(),
+                        new PowerupSystem(),
                         new DeathSystem(),
                         new CurableSystem(),
                         new SwallowSystem(),
@@ -108,6 +110,7 @@ public class GameScreen extends WorldScreen {
                         new TerminalSystem(),
                         new ExitSystem(),
                         new DialogSystem(),
+                        new UiSystem(),
                         new SoundPlaySystem( new String[]{
                                 "jump",
                                 "jump_small",
