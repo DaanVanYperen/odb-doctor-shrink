@@ -178,6 +178,11 @@
    <property name="solid" type="bool" value="true"/>
   </properties>
  </tile>
+ <tile id="57">
+  <properties>
+   <property name="entity" value="patient2"/>
+  </properties>
+ </tile>
  <tile id="58">
   <properties>
    <property name="entity" value="birds"/>
@@ -1033,6 +1038,26 @@
   </properties>
  </tile>
  <tile id="755">
+  <properties>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="981">
+  <properties>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="1012">
+  <properties>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="1013">
+  <properties>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="1014">
   <properties>
    <property name="solid" type="bool" value="true"/>
   </properties>

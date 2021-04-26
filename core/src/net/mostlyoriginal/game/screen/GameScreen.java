@@ -159,6 +159,7 @@ public class GameScreen extends WorldScreen {
                                 "splat2",
                                 "splat3",
                                 "splat4",
+                                "joke"
                         }),
                         new TransitionSystem(GdxArtemisGame.getInstance())
                 ).build());

@@ -16,6 +16,7 @@ import net.mostlyoriginal.game.component.Telegulp;
 import net.mostlyoriginal.game.system.CircleTransitionSystem;
 import net.mostlyoriginal.game.system.PlayerGazeTrackerSystem;
 import net.mostlyoriginal.game.system.common.FluidIteratingSystem;
+import net.mostlyoriginal.game.system.view.GameScreenAssetSystem;
 
 import static net.mostlyoriginal.api.utils.Duration.seconds;
 
@@ -54,6 +55,8 @@ public class SwallowSystem extends FluidIteratingSystem {
         }
     }
 
+    GameScreenAssetSystem gameScreenAssetSystem;
+
     @Override
     protected void process(E e) {
 
@@ -64,6 +67,9 @@ public class SwallowSystem extends FluidIteratingSystem {
             e.swallowed();
             E destination = entityWithTag(e.telegulpDestination());
             if (destination != null) {
+                if ( "w4".equals(e.telegulpDestination())) {
+                    gameScreenAssetSystem.playMusicInGame("final.mp3");
+                }
                 E.E().playSound(e.telegulpSfx());
                 //player.pos(destination.getPos());
                 player.frozen().invisible().script(
@@ -75,16 +81,30 @@ public class SwallowSystem extends FluidIteratingSystem {
                                 OperationFactory.remove(Invisible.class)));
                 circleTransitionSystem.close();
             }
-        } else if ( !player.hasShrunk()) {
-            float distance = vtmp.set(player.posXy()).sub(e.posXy()).len();
-            if ( distance < GROWL_RANGE) {
-                float factor = GROWL_RANGE - distance;
-                float range = factor * 0.05f;
-                if ( e.telegulpRoarCooldown() < 0 ) {
-                    e.telegulpRoarCooldown(1f + Interpolation.pow2In.apply(distance / GROWL_RANGE) * 5f);
-                    E.E().playSound("snail_roar");
+        } else {
+            if ("start".equals(e.telegulpDestination())) {
+                float distance = vtmp.set(player.posXy()).sub(e.posXy()).len();
+                if (distance < GROWL_RANGE) {
+                    if (e.telegulpRoarCooldown() < 0) {
+                        e.telegulpRoarCooldown(30);
+                        E.E().playSound("joke");
+                    }
+                    float factor = GROWL_RANGE - distance;
+                    float range = factor * 0.05f;
+                    e.angleRotation(MathUtils.random(-range, range));
                 }
-                e.angleRotation(MathUtils.random(-range, range));
+            }
+            if (!player.hasShrunk()) {
+                float distance = vtmp.set(player.posXy()).sub(e.posXy()).len();
+                if (distance < GROWL_RANGE) {
+                    float factor = GROWL_RANGE - distance;
+                    float range = factor * 0.05f;
+                    if (e.telegulpRoarCooldown() < 0) {
+                        e.telegulpRoarCooldown(1f + Interpolation.pow2In.apply(distance / GROWL_RANGE) * 5f);
+                        E.E().playSound("snail_roar");
+                    }
+                    e.angleRotation(MathUtils.random(-range, range));
+                }
             }
         }
 
