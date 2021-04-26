@@ -274,9 +274,9 @@
       "comment": "babyworm moving.",
       "x": 24,
       "y": 248,
-      "countX": 2,
+      "countX": 6,
       "countY": 1,
-      "milliseconds": 250,
+      "milliseconds": 200,
       "width": 24,
       "height": 8
     },
