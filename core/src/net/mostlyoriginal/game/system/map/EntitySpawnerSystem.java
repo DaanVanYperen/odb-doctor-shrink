@@ -79,6 +79,9 @@ public class EntitySpawnerSystem extends BaseSystem {
             case "god2":
                 assembleGlorb(x, y, (String) extendedProps.get("to"), (String) extendedProps.get("sfx"), "god", "god", "god");
                 break;
+            case "patient2":
+                assembleGlorb(x, y, (String) extendedProps.get("to"), (String) extendedProps.get("sfx"), "patient", "patient", "patient");
+                break;
             case "exit":
                 assembleExit(x, y);
                 break;
