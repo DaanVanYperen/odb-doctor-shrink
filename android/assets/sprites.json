@@ -93,8 +93,7 @@
 	  "repeat": false,
       "width": 64,
       "height": 64
-    }, 	
-	
+    }, 		
      {
       "id": "doctor-small",
       "comment": "Small player character.",
@@ -422,6 +421,16 @@
       "comment": "A sexy god daddy uwu.",
       "x": 448,
       "y": 192,
+      "countX": 1,
+      "countY": 1,
+      "width": 64,
+      "height": 64
+    },
+    {
+      "id": "patient",
+      "comment": "A patient lolmao.",
+      "x": 576,
+      "y": 960,
       "countX": 1,
       "countY": 1,
       "width": 64,
