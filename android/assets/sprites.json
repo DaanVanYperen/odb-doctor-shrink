@@ -374,9 +374,32 @@
       "x": 992,
       "y": 96,
       "width": 32,
-      "height": 24
+      "height": 32
     },      
-  
+    {
+      "id": "syringe-ui-gain",
+      "comment": "Syringe UI element.",
+      "x": 672,
+      "y": 320,
+      "countX": 11,
+      "countY": 1,
+      "milliseconds": 40,
+	  "repeat": false,
+      "width": 32,
+      "height": 32
+    },  
+    {
+      "id": "syringe-ui-use",
+      "comment": "Syringe UI element.",
+      "x": 672,
+      "y": 352,
+      "countX": 11,
+      "countY": 1,
+      "milliseconds": 40,
+	  "repeat": false,
+      "width": 32,
+      "height": 32
+    },  	
   
   
   
