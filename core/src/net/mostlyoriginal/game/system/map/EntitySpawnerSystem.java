@@ -6,7 +6,6 @@ import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.math.MathUtils;
 import net.mostlyoriginal.api.system.physics.SocketSystem;
 import net.mostlyoriginal.game.component.G;
-import net.mostlyoriginal.game.component.PlayerCanTouch;
 import net.mostlyoriginal.game.component.Powerup;
 import net.mostlyoriginal.game.component.Spout;
 import net.mostlyoriginal.game.system.detection.SpoutSystem;
@@ -66,7 +65,19 @@ public class EntitySpawnerSystem extends BaseSystem {
                 assembleDoor(x,y, (String) extendedProps.get("name"), (Integer) extendedProps.get("keys"));
                 break;
             case "glorb":
-                assembleGlorb(x, y);
+                assembleGlorb(x, y, (String) extendedProps.get("to"), (String) extendedProps.get("sfx"), "glorb-idle", "glorb-idle", "glorb-idle");
+                break;
+            case "parasite2":
+                assembleGlorb(x, y, (String) extendedProps.get("to"), (String) extendedProps.get("sfx"), "parasite", "parasite", "parasite");
+                break;
+            case "bacteria2":
+                assembleGlorb(x, y, (String) extendedProps.get("to"), (String) extendedProps.get("sfx"), "bacteria", "bacteria", "bacteria");
+                break;
+            case "dna2":
+                assembleGlorb(x, y, (String) extendedProps.get("to"), (String) extendedProps.get("sfx"), "dna", "dna", "dna");
+                break;
+            case "god2":
+                assembleGlorb(x, y, (String) extendedProps.get("to"), (String) extendedProps.get("sfx"), "god", "god", "god");
                 break;
             case "exit":
                 assembleExit(x, y);
@@ -247,13 +258,18 @@ public class EntitySpawnerSystem extends BaseSystem {
                 .originX(0.5F);
     }
 
-    private void assembleGlorb(float x, float y) {
+    private void assembleGlorb(float x, float y, String destination, String sfx, String idle, String eaten, String swallowed) {
         E().anim("glorb-idle")
                 .pos(x, y)
                 .render(G.LAYER_GREMLIN)
                 .gravity(0,-20)
                 .bounds(0, 0, 64, 64)
                 .deadly()
+                .telegulp(destination)
+                .telegulpSfx(sfx)
+                .monsterAnimIdle(idle)
+                .monsterAnimEaten(eaten)
+                .monsterAnimSwallowed(swallowed)
                 .wallSensor()
                 .teamTeam(G.TEAM_MONSTERS)
                 .originX(0.5F);

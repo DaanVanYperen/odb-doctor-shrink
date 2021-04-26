@@ -9,6 +9,7 @@ import net.mostlyoriginal.api.component.graphics.InterpolationStrategy;
 import net.mostlyoriginal.api.system.camera.CameraSystem;
 import net.mostlyoriginal.game.component.G;
 import net.mostlyoriginal.game.component.render.CameraFocus;
+import net.mostlyoriginal.game.system.CircleTransitionSystem;
 import net.mostlyoriginal.game.system.common.FluidIteratingSystem;
 import com.badlogic.gdx.math.Interpolation;
 
@@ -20,6 +21,7 @@ public class CameraFollowSystem extends FluidIteratingSystem {
     CameraSystem cameraSystem;
     private MyAnimRenderSystem myAnimRenderSystem;
     private boolean lockCamera;
+    private CircleTransitionSystem circleTransitionSystem;
 
     public CameraFollowSystem() {
         super(Aspect.all(Pos.class, CameraFocus.class));
@@ -37,6 +39,13 @@ public class CameraFollowSystem extends FluidIteratingSystem {
 
         float focusX = e.posX() + e.boundsCx();
         float focusY = e.posY() + e.boundsCy();
+
+        if ( circleTransitionSystem.isFullyCovering() ) {
+            cameraSystem.camera.position.x = myAnimRenderSystem.roundToPixels(focusX);
+            cameraSystem.camera.position.y = myAnimRenderSystem.roundToPixels(focusY);
+            cameraSystem.camera.update();
+            return;
+        }
 
         if (true) {
             float newTargetY = myAnimRenderSystem.roundToPixels(focusY);

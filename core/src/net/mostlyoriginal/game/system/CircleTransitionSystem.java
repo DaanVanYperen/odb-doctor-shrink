@@ -32,10 +32,9 @@ public class CircleTransitionSystem extends BaseSystem {
         super.initialize();
     }
 
-    float time = 0f;
-    float age = 0;
-    boolean active=false;
-    boolean closing=false;
+    float age = 1f;
+    boolean active=true;
+    boolean closing=true;
 
     public void close() {
         age=0;

@@ -203,6 +203,11 @@
    <property name="entity" value="nodule_c"/>
   </properties>
  </tile>
+ <tile id="63">
+  <properties>
+   <property name="entity" value="anus"/>
+  </properties>
+ </tile>
  <tile id="66">
   <properties>
    <property name="solid" type="bool" value="true"/>
@@ -291,6 +296,26 @@
  <tile id="88">
   <properties>
    <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="89">
+  <properties>
+   <property name="entity" value="parasite2"/>
+  </properties>
+ </tile>
+ <tile id="90">
+  <properties>
+   <property name="entity" value="bacteria2"/>
+  </properties>
+ </tile>
+ <tile id="91">
+  <properties>
+   <property name="entity" value="dna2"/>
+  </properties>
+ </tile>
+ <tile id="92">
+  <properties>
+   <property name="entity" value="god2"/>
   </properties>
  </tile>
  <tile id="94">
@@ -401,6 +426,36 @@
  <tile id="117">
   <properties>
    <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="121">
+  <properties>
+   <property name="entity" value="spike"/>
+  </properties>
+ </tile>
+ <tile id="122">
+  <properties>
+   <property name="entity" value="spike"/>
+  </properties>
+ </tile>
+ <tile id="123">
+  <properties>
+   <property name="entity" value="spike"/>
+  </properties>
+ </tile>
+ <tile id="124">
+  <properties>
+   <property name="entity" value="spike"/>
+  </properties>
+ </tile>
+ <tile id="125">
+  <properties>
+   <property name="entity" value="spike"/>
+  </properties>
+ </tile>
+ <tile id="126">
+  <properties>
+   <property name="entity" value="spike"/>
   </properties>
  </tile>
  <tile id="130">
@@ -802,6 +857,186 @@
    <property name="solid" type="bool" value="true"/>
   </properties>
  </tile>
+ <tile id="650">
+  <properties>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="651">
+  <properties>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="652">
+  <properties>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="653">
+  <properties>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="654">
+  <properties>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="655">
+  <properties>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="656">
+  <properties>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="657">
+  <properties>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="658">
+  <properties>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="659">
+  <properties>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="660">
+  <properties>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="661">
+  <properties>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="682">
+  <properties>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="684">
+  <properties>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="685">
+  <properties>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="687">
+  <properties>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="688">
+  <properties>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="690">
+  <properties>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="691">
+  <properties>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="693">
+  <properties>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="714">
+  <properties>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="715">
+  <properties>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="716">
+  <properties>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="717">
+  <properties>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="718">
+  <properties>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="719">
+  <properties>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="720">
+  <properties>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="721">
+  <properties>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="722">
+  <properties>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="723">
+  <properties>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="724">
+  <properties>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="725">
+  <properties>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="746">
+  <properties>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="749">
+  <properties>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="752">
+  <properties>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="755">
+  <properties>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+ </tile>
  <wangsets>
   <wangset name="Unnamed Set" type="mixed" tile="-1">
    <wangcolor name="" color="#ff0000" tile="-1" probability="1"/>
@@ -849,6 +1084,53 @@
    <wangtile tileid="115" wangid="1,0,0,0,1,0,1,0"/>
    <wangtile tileid="116" wangid="1,0,0,0,1,1,1,0"/>
    <wangtile tileid="117" wangid="1,0,0,0,1,0,0,1"/>
+  </wangset>
+  <wangset name="Unnamed Set2" type="mixed" tile="-1">
+   <wangcolor name="" color="#ff0000" tile="-1" probability="1"/>
+   <wangtile tileid="513" wangid="1,1,1,1,1,1,1,1"/>
+   <wangtile tileid="515" wangid="1,0,0,0,1,0,0,0"/>
+   <wangtile tileid="518" wangid="1,1,1,0,1,1,1,1"/>
+   <wangtile tileid="519" wangid="1,1,1,0,0,0,1,1"/>
+   <wangtile tileid="520" wangid="1,1,1,1,1,0,1,1"/>
+   <wangtile tileid="521" wangid="0,0,1,1,1,0,0,0"/>
+   <wangtile tileid="523" wangid="0,0,0,0,1,1,1,0"/>
+   <wangtile tileid="524" wangid="0,0,1,0,1,0,0,0"/>
+   <wangtile tileid="526" wangid="0,0,0,0,1,0,1,0"/>
+   <wangtile tileid="546" wangid="0,0,1,0,0,0,0,0"/>
+   <wangtile tileid="547" wangid="1,0,1,0,1,0,1,0"/>
+   <wangtile tileid="548" wangid="0,0,1,0,0,0,1,0"/>
+   <wangtile tileid="549" wangid="0,0,0,0,0,0,1,0"/>
+   <wangtile tileid="550" wangid="1,0,0,0,1,1,1,1"/>
+   <wangtile tileid="552" wangid="1,1,1,1,1,0,0,0"/>
+   <wangtile tileid="579" wangid="1,0,0,0,1,0,0,0"/>
+   <wangtile tileid="580" wangid="0,0,1,0,1,0,1,0"/>
+   <wangtile tileid="581" wangid="1,0,0,0,1,0,1,0"/>
+   <wangtile tileid="582" wangid="1,0,1,1,1,1,1,1"/>
+   <wangtile tileid="583" wangid="0,0,1,1,1,1,1,0"/>
+   <wangtile tileid="584" wangid="1,1,1,1,1,1,1,0"/>
+   <wangtile tileid="585" wangid="1,1,1,0,0,0,0,0"/>
+   <wangtile tileid="587" wangid="1,0,0,0,0,0,1,1"/>
+   <wangtile tileid="588" wangid="1,0,1,0,0,0,0,0"/>
+   <wangtile tileid="590" wangid="1,0,0,0,0,0,1,0"/>
+   <wangtile tileid="611" wangid="1,0,0,0,1,0,0,0"/>
+   <wangtile tileid="612" wangid="1,0,1,0,0,0,1,0"/>
+   <wangtile tileid="613" wangid="1,0,1,0,1,0,0,0"/>
+   <wangtile tileid="614" wangid="0,0,1,1,1,1,1,0"/>
+   <wangtile tileid="615" wangid="1,0,1,0,1,1,1,1"/>
+   <wangtile tileid="616" wangid="1,1,1,0,1,0,1,1"/>
+   <wangtile tileid="617" wangid="1,1,1,1,1,0,1,0"/>
+   <wangtile tileid="618" wangid="0,0,1,0,1,0,1,0"/>
+   <wangtile tileid="619" wangid="0,0,1,1,1,0,1,0"/>
+   <wangtile tileid="620" wangid="0,0,1,0,1,1,1,0"/>
+   <wangtile tileid="621" wangid="1,0,1,0,1,0,0,0"/>
+   <wangtile tileid="622" wangid="1,0,1,1,1,0,0,0"/>
+   <wangtile tileid="623" wangid="1,1,1,0,1,0,0,0"/>
+   <wangtile tileid="624" wangid="1,0,1,0,0,0,1,0"/>
+   <wangtile tileid="625" wangid="1,1,1,0,0,0,1,0"/>
+   <wangtile tileid="626" wangid="1,0,1,0,0,0,1,1"/>
+   <wangtile tileid="627" wangid="1,0,1,0,1,0,1,0"/>
+   <wangtile tileid="628" wangid="1,0,0,0,1,1,1,0"/>
+   <wangtile tileid="629" wangid="1,0,0,0,1,0,1,1"/>
   </wangset>
  </wangsets>
 </tileset>

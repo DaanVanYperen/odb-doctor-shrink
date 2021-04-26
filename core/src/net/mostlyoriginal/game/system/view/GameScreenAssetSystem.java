@@ -33,7 +33,7 @@ public class GameScreenAssetSystem extends AbstractAssetSystem {
 
         Texture tiles = new Texture("tileset.png");
 
-//        playMusicInGame("theme_1_mixed.mp3");
+        playMusicInGame("theme_1_mixed.mp3");
     }
 
     private void playMusicTitle() {

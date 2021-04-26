@@ -2,6 +2,8 @@ package net.mostlyoriginal.game.system.detection;
 
 import com.artemis.Aspect;
 import com.artemis.E;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector3;
@@ -32,6 +34,27 @@ public class SwallowSystem extends FluidIteratingSystem {
     }
 
     @Override
+    protected void begin() {
+        super.begin();
+
+        if ( Gdx.input.isKeyJustPressed(Input.Keys.Y)) {
+            E player = entityWithTag("player");
+            E destination = entityWithTag("debug");
+            if (destination != null) {
+                //player.pos(destination.getPos());
+                player.frozen().invisible().script(
+                        OperationFactory.sequence(
+                                OperationFactory.delay(seconds(0.5f)),
+                                JamOperationFactory.moveTo(destination.posX(), destination.posY()),
+                                OperationFactory.delay(seconds(0.5f)),
+                                OperationFactory.remove(Frozen.class),
+                                OperationFactory.remove(Invisible.class)));
+                circleTransitionSystem.close();
+            }
+        }
+    }
+
+    @Override
     protected void process(E e) {
 
         E player = entityWithTag("player");
@@ -40,16 +63,18 @@ public class SwallowSystem extends FluidIteratingSystem {
         if ( !player.hasDead() && !player.isFrozen() && overlaps(player, e)) {
             e.swallowed();
             E destination = entityWithTag(e.telegulpDestination());
-            E.E().playSound(e.telegulpSfx());
-            //player.pos(destination.getPos());
-            player.frozen().invisible().script(
-                    OperationFactory.sequence(
-                            OperationFactory.delay(seconds(0.5f)),
-                            JamOperationFactory.moveTo(destination.posX(),destination.posY()),
-                            OperationFactory.delay(seconds(0.5f)),
-                            OperationFactory.remove(Frozen.class),
-                            OperationFactory.remove(Invisible.class)));
-            circleTransitionSystem.close();
+            if (destination != null) {
+                E.E().playSound(e.telegulpSfx());
+                //player.pos(destination.getPos());
+                player.frozen().invisible().script(
+                        OperationFactory.sequence(
+                                OperationFactory.delay(seconds(0.5f)),
+                                JamOperationFactory.moveTo(destination.posX(), destination.posY()),
+                                OperationFactory.delay(seconds(0.5f)),
+                                OperationFactory.remove(Frozen.class),
+                                OperationFactory.remove(Invisible.class)));
+                circleTransitionSystem.close();
+            }
         } else if ( !player.hasShrunk()) {
             float distance = vtmp.set(player.posXy()).sub(e.posXy()).len();
             if ( distance < GROWL_RANGE) {
