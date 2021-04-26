@@ -6,6 +6,7 @@ import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.math.MathUtils;
 import net.mostlyoriginal.api.system.physics.SocketSystem;
 import net.mostlyoriginal.game.component.G;
+import net.mostlyoriginal.game.component.PlayerCanTouch;
 import net.mostlyoriginal.game.component.Spout;
 import net.mostlyoriginal.game.system.detection.SpoutSystem;
 
@@ -32,6 +33,15 @@ public class EntitySpawnerSystem extends BaseSystem {
         switch (entity) {
             case "player":
                 assemblePlayer(x, y);
+                break;
+            case "checkpoint":
+                assembleCheckpoint(x, y);
+                break;
+                case "syringe":
+                assembleSyringe(x, y);
+                break;
+            case "spike":
+                assembleSpike(x, y);
                 break;
             case "wormslug":
                 assembleWormSlug(x, y, (String) extendedProps.get("to"), (String) extendedProps.get("sfx"));
@@ -194,6 +204,29 @@ public class EntitySpawnerSystem extends BaseSystem {
                 .wallSensor()
                 .teamTeam(G.TEAM_MONSTERS)
                 .originX(0.5F);
+    }
+
+    private void assembleSpike(float x, float y) {
+        E()    .anim("spike")
+                .pos(x, y)
+                .bounds(0,0,32,32)
+                .render(G.LAYER_GREMLIN)
+                .teamTeam(G.TEAM_MONSTERS)
+                .deadly();
+    }
+    private void assembleCheckpoint(float x, float y) {
+        E()    .anim("waypoint-off")
+                .pos(x, y)
+                .bounds(0,0,32,32)
+                .checkpoint()
+                .playerCanTouch()
+                .render(G.LAYER_GREMLIN);
+    }
+
+    private void assembleSyringe(float x, float y) {
+        E()    .anim("syringe2")
+                .pos(x, y)
+                .render(G.LAYER_GREMLIN);
     }
 
     private void assembleAnus(float x, float y, String destination, String sfx) {

@@ -10,6 +10,7 @@ import net.mostlyoriginal.api.manager.AbstractAssetSystem;
 import net.mostlyoriginal.api.system.camera.CameraSystem;
 import net.mostlyoriginal.game.component.*;
 import net.mostlyoriginal.game.screen.GameScreen;
+import net.mostlyoriginal.game.system.CheckpointSystem;
 import net.mostlyoriginal.game.system.common.FluidIteratingSystem;
 import net.mostlyoriginal.game.system.map.EntitySpawnerSystem;
 import net.mostlyoriginal.game.system.map.MapCollisionSystem;
@@ -29,6 +30,7 @@ public class DeathSystem extends FluidIteratingSystem {
     private GameScreenAssetSystem assetSystem;
     private DialogSystem dialogSystem;
     private CameraSystem cameraSystem;
+    private CheckpointSystem checkpointSystem;
 
     public DeathSystem() {
         super(Aspect.all(Pos.class).one(Mortal.class, Robot.class));
@@ -36,56 +38,35 @@ public class DeathSystem extends FluidIteratingSystem {
 
     @Override
     protected void process(E e) {
-
-        if (e.hasRunning()) {
-            particleSystem.gremlinWave();
-        }
-
-        if (e.hasRobot()) {
-            if (e.chargeCharge() > 0) {
-                E enemy = touchingDeadlyStuffs(e, true);
-                if (enemy != null) {
-                    e.chargeDecrease(0.2f);
-                    particleSystem.bloodExplosion(enemy.posX() + enemy.boundsCx(), enemy.posY() + enemy.boundsCy());
-                    enemy.deleteFromWorld();
-                    animSystem.forceAnim(e, "robot-fight-stand");
-                }
-            }
-        } else if (!e.hasDead()) {
-
-            float halfScreenWidth = (Gdx.graphics.getWidth() / G.CAMERA_ZOOM) * 0.5f + 16;
-
-            if (e.hasRunning() && e.posX() + e.boundsMaxx() < cameraSystem.camera.position.x - halfScreenWidth ) {
+        if (!e.hasDead()) {
+            if (touchingDeadlyStuffs(e, false) != null) {
                 e.dead();
             }
-        } else {
-            e.deadCooldown(e.deadCooldown() - world.delta);
-            if (!e.hasInvisible()) {
-                if (e.teamTeam() == 2) {
-                    assetSystem.stopMusic();
-                    E.E().playSound("deathsound");
-                    E.E().playSound("death_jingle");
-                    if (!e.isRobot()) {
-                        dialogSystem.robotSay(DialogSystem.Dialog.SAD, 0.5f, 5f);
-                    }
-                } else {
-                    E.E().playSound("gremlin_death");
-                }
-                e.invisible();
-                particleSystem.bloodExplosion(e.posX() + e.boundsCx(), e.posY() + e.boundsCy());
-            }
-            if (e.deadCooldown() <= 0 ) {
-                if ( (e.isRobot() || e.isPlayerControlled()) ) {
-                    doExit();
-                    e.removeDead().removeMortal();
-                } else e.deleteFromWorld();
-            }
 
+            float halfScreenWidth = (Gdx.graphics.getWidth() / G.CAMERA_ZOOM) * 0.5f + 16;
+            if (e.hasRunning() && e.posX() + e.boundsMaxx() < cameraSystem.camera.position.x - halfScreenWidth) {
+                e.dead();
+            }
+        }
+
+        if (e.hasDead()) {
+            if (e.deadCooldown() <= 0) {
+                E.E().playSound("deathsound");
+                e.invisible();
+                e.deadCooldown(1);
+                particleSystem.bloodExplosion(e.posX() + e.boundsCx(), e.posY() + e.boundsCy());
+            } else {
+                e.deadCooldown(e.deadCooldown() - world.delta);
+                if (e.deadCooldown() <= 0) {
+                    if ((e.isRobot() || e.isPlayerControlled())) {
+                        checkpointSystem.respawn();
+                    } else e.deleteFromWorld();
+                }
+            }
         }
     }
 
     private E touchingDeadlyStuffs(E e, boolean onlyMortals) {
-
         for (E o : allEntitiesWith(Deadly.class)) {
             if (o == e) continue;
             if (overlaps(o, e) && o.teamTeam() != e.teamTeam() && (!onlyMortals || o.hasMortal())) return o;

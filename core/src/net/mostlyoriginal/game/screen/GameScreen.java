@@ -80,6 +80,8 @@ public class GameScreen extends WorldScreen {
                         new PhysicsSystem(),
 
                         // Interactions
+                        new PlayerTouchSystem(),
+                        new CheckpointSystem(),
                         new DeathSystem(),
                         new CurableSystem(),
                         new SwallowSystem(),

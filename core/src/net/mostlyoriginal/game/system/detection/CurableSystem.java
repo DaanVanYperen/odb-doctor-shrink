@@ -32,7 +32,7 @@ public class CurableSystem extends FluidIteratingSystem {
 
         E player = entityWithTag("player");
 
-        if ( overlaps(player, e) && !player.hasShrunk()) {
+        if ( !player.hasDead() &&  overlaps(player, e) && !player.hasShrunk()) {
 
             if ( e.curableUnlock() != null ) {
                 EBag doors = allEntitiesWith(Door.class);

@@ -23,7 +23,11 @@ import static net.mostlyoriginal.api.operation.OperationFactory.*;
  */
 public class ParticleSystem extends FluidIteratingSystem {
 
-    private Color BLOOD_COLOR = Color.valueOf("4B1924");
+    private Color BLOOD_COLOR = Color.valueOf("b4202a");
+    private Color BLOOD_COLOR2 = Color.valueOf("df3e23");
+
+
+
     private Color COLOR_WHITE = Color.valueOf("FFFFFF");
     public Color COLOR_DUST = Color.valueOf("f5a097");
     public Color COLOR_DUST_BLACK = Color.valueOf("666666");
@@ -103,19 +107,6 @@ public class ParticleSystem extends FluidIteratingSystem {
                 .create(1, 5);
     }
 
-    public void bloodExplosion(float x, float y) {
-        E.E().playSound("splat" + MathUtils.random(1, 4));
-        bakery
-                .color(BLOOD_COLOR)
-                .at(x, y)
-                .angle(0, 360)
-                .speed(50, 80)
-                .slowlySplatDown()
-                .size(1, 3)
-                .solid()
-                .create(80);
-    }
-
     public void smoke(float x, float y, int count) {
         //E.E().playSound("splat" + MathUtils.random(1, 4));
         bakery
@@ -145,7 +136,80 @@ public class ParticleSystem extends FluidIteratingSystem {
                 .rotateRandomly()
                 .friction(1)
                 .layer(G.LAYER_PLAYER+10000)
-                .create(count);
+                .create(count/2);
+        bakery
+                .color(SpoutSystem.DROP_COLOR_2)
+                .at(x-5, y-5)
+                .angle(0, 360)
+                .speed(50, 80)
+                .dropletSplatDown()
+                .fadeAfter(0.4f)
+                .size(5, 10)
+                .solid()
+                .rotateRandomly()
+                .friction(1)
+                .layer(G.LAYER_PLAYER+10000)
+                .create(count/2);
+    }
+
+    public void bloodExplosion(float x, float y) {
+        E.E().playSound("splat" + MathUtils.random(1, 4));
+        bakery
+                .color(BLOOD_COLOR2)
+                .at(x, y)
+                .angle(-180, 180)
+                .speed(140, 230)
+                .dropletSplatDown()
+                .rotateRandomly()
+                .fadeAfter(1.2f)
+                .size(3, 5)
+                .solid()
+                .friction(1f)
+                .create(60);
+        bakery
+                .color(BLOOD_COLOR)
+                .at(x, y)
+                .angle(-180, 180)
+                .speed(140, 230)
+                .dropletSplatDown()
+                .rotateRandomly()
+                .fadeAfter(1.2f)
+                .size(3, 5)
+                .solid()
+                .friction(1f)
+                .create(60);
+    }
+
+
+    public void bloodSpray(float x, float y, int count) {
+        //E.E().playSound("splat" + MathUtils.random(1, 4));
+        //E.E().playSound("splat" + MathUtils.random(1, 4));
+        bakery
+                .color(BLOOD_COLOR)
+                .at(x-3, y-3)
+                .angle(-180, 180)
+                .speed(120, 140)
+                .dropletSplatDown()
+                .fadeAfter(0.7f)
+                .size(3, 5)
+                .solid()
+                .rotateRandomly()
+                .friction(0.9f)
+                .layer(G.LAYER_PARTICLES)
+                .create(count/2);
+        bakery
+                .color(BLOOD_COLOR2)
+                .at(x-3, y-3)
+                .angle(-180, 180)
+                .speed(120, 140)
+                .dropletSplatDown()
+                .fadeAfter(0.7f)
+                .size(3, 5)
+                .solid()
+                .rotateRandomly()
+                .friction(0.9f)
+                .layer(G.LAYER_PARTICLES)
+                .create(count/2);
     }
 
     Vector2 v2 = new Vector2();

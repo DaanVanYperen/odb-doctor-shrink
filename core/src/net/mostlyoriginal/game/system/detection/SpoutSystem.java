@@ -16,7 +16,7 @@ import net.mostlyoriginal.game.system.map.EntitySpawnerSystem;
 public class SpoutSystem extends FluidIteratingSystem {
 
     public static final Color DROP_COLOR_1 = Color.valueOf("14a02e");
-    private static final Color DROP_COLOR_2 = Color.valueOf("24523b");
+    public static final Color DROP_COLOR_2 = Color.valueOf("24523b");
     private static final Color DROP_COLOR_3 = Color.valueOf("1a7a3e");
     private ParticleSystem particleSystem;
     private EntitySpawnerSystem entitySpawnerSystem;
