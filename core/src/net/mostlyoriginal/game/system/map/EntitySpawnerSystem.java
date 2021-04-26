@@ -262,10 +262,10 @@ public class EntitySpawnerSystem extends BaseSystem {
     }
 
     private void assembleGlorb(float x, float y, String destination, String sfx, String idle, String eaten, String swallowed) {
-        E().anim("glorb-idle")
+        E e = E().anim("glorb-idle")
                 .pos(x, y)
                 .render(G.LAYER_GREMLIN)
-                .gravity(0,-20)
+                .gravity(0, -20)
                 .bounds(0, 0, 64, 64)
                 .deadly()
                 .telegulp(destination)
@@ -276,6 +276,8 @@ public class EntitySpawnerSystem extends BaseSystem {
                 .wallSensor()
                 .teamTeam(G.TEAM_MONSTERS)
                 .originX(0.5F);
+
+        if (  "patient".equals(idle)) e.removeDeadly();
     }
 
 

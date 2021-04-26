@@ -44,7 +44,7 @@ public class FeatureScreenSetupSystem extends PassiveSystem {
         addBackground();
         addLogo();
 
-        scheduleTransitionToGameScreen();
+        //scheduleTransitionToGameScreen();
     }
 
     private void addBackground() {
@@ -83,7 +83,6 @@ public class FeatureScreenSetupSystem extends PassiveSystem {
 
 
     private void scheduleTransitionToGameScreen() {
-        world.getSystem(TransitionSystem.class).transition(GameScreen.class, DISPLAY_SECONDS);
     }
 
 }

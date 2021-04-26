@@ -12,8 +12,8 @@ import net.mostlyoriginal.api.manager.AbstractAssetSystem;
 @Wire
 public class FeatureScreenAssetSystem extends AbstractAssetSystem {
 
-    public static final int LOGO_WIDTH = 175;
-    public static final int LOGO_HEIGHT = 45;
+    public static final int LOGO_WIDTH = 276;
+    public static final int LOGO_HEIGHT = 109;
     public static final int FEATURE_WIDTH = 21;
     public static final int FEATURE_HEIGHT = 21;
     public static final int BACKGROUND_WIDTH = 125;
@@ -29,7 +29,7 @@ public class FeatureScreenAssetSystem extends AbstractAssetSystem {
 
         add("background", 0, 0, BACKGROUND_WIDTH, BACKGROUND_HEIGHT, 1);
 
-        add("logo", 40, 60, LOGO_WIDTH, LOGO_HEIGHT, 1);
+        add("logo", 748, 916, 276,109, 1);
         add("feature-packed", 160, 114, FEATURE_WIDTH, FEATURE_HEIGHT, 1);
         add("feature-pooled", 182, 114, FEATURE_WIDTH, FEATURE_HEIGHT, 1);
         add("feature-hotspot", 204, 114, FEATURE_WIDTH, FEATURE_HEIGHT, 1);

@@ -30,6 +30,8 @@ public class OdbFeatureScreen extends WorldScreen {
 
 		final RenderBatchingSystem renderBatchingSystem;
 
+
+
 		return new World(new WorldConfigurationBuilder()
 				.dependsOn(OperationsPlugin.class, SingletonPlugin.class)
 				.with(WorldConfigurationBuilder.Priority.HIGH,
@@ -37,7 +39,8 @@ public class OdbFeatureScreen extends WorldScreen {
 						new SuperMapper(),
 						new TagManager(),
 						new CameraSystem(1),
-						new FeatureScreenAssetSystem()
+						new FeatureScreenAssetSystem(),
+						new ButtonPressSystem()
 				).with(WorldConfigurationBuilder.Priority.LOW,
 						// processing
 						new TransitionSystem(GdxArtemisGame.getInstance()),
