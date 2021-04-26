@@ -110,10 +110,11 @@
      {
       "id": "doctor-small-walk",
       "comment": "Small player character walking.",
-      "x": 0,
+      "x": 16,
       "y": 192,
-      "countX": 1,
+      "countX": 4,
       "countY": 1,
+	  "milliseconds": 83,
 	  "repeat": true,
       "width": 16,
       "height": 16
