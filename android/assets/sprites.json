@@ -82,7 +82,18 @@
       "width": 64,
       "height": 64
     }, 
-	
+    {
+      "id": "doctor-big-respawn",
+      "comment": "Big player respawning.",
+      "x": 640,
+      "y": 256,
+      "countX": 6,
+      "countY": 1,
+      "milliseconds": 100,
+	  "repeat": false,
+      "width": 64,
+      "height": 64
+    }, 	
 	
      {
       "id": "doctor-small",
