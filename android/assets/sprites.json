@@ -250,6 +250,58 @@
       "width": 96,
       "height": 64
     }, 
+
+    {
+      "id": "anus-wall-glorb",
+      "comment": "Sphincter exit in glorb.",
+      "x": 480,
+      "y": 512,
+      "countX": 1,
+      "countY": 1,
+      "width": 64,
+      "height": 96
+    }, 
+    {
+      "id": "anus-ceiling-glorb",
+      "comment": "Sphincter entrance in glorb.",
+      "x": 768,
+      "y": 640,
+      "countX": 1,
+      "countY": 1,
+      "width": 96,
+      "height": 64
+    }, 
+    {
+      "id": "anus-ceiling-parasite",
+      "comment": "Sphincter entrance in parasite.",
+      "x": 768,
+      "y": 704,
+      "countX": 1,
+      "countY": 1,
+      "width": 96,
+      "height": 64
+    }, 
+    {
+      "id": "anus-ceiling-bacteria",
+      "comment": "Sphincter entrance in bacteria.",
+      "x": 864,
+      "y": 640,
+      "countX": 1,
+      "countY": 1,
+      "width": 96,
+      "height": 64
+    }, 
+    {
+      "id": "anus-ceiling-dna",
+      "comment": "Sphincter entrance in bacteria.",
+      "x": 864,
+      "y": 704,
+      "countX": 1,
+      "countY": 1,
+      "width": 96,
+      "height": 64
+    }, 
+	
     {
       "id": "glorb-idle",
       "comment": "Glorb idling.",
