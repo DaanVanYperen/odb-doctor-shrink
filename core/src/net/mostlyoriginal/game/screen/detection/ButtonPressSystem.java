@@ -16,7 +16,7 @@ public class ButtonPressSystem extends BaseSystem {
     boolean transitioning=false;
     @Override
     protected void processSystem() {
-        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && !transitioning) {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.ANY_KEY) && !transitioning) {
             transitioning=true;
             world.getSystem(TransitionSystem.class).transition(GameScreen.class, 0.1f);
         }
