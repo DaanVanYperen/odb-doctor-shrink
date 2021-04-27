@@ -186,14 +186,13 @@ public class PlayerControlSystem extends FluidIteratingSystem {
             e.controlsShrinkToggleCooldown(e.controlsShrinkToggleCooldown() - world.delta);
             if (e.controlsShrinkToggleCooldown() <= 0) {
                 if (e.hasShrunk()) {
-
                     e.mortal(true);
-                    e.posX(e.posX() - 16);
+                    e.posX(e.posX() - 24);
                     particleSystem.smoke(e.posX() + 32, e.posY() + 48, 40);
                     particleSystem.smoke(e.posX() + 32, e.posY() + 16, 40);
                     e.shrunk(false);
                 } else {
-                    e.posX(e.posX() + 16);
+                    e.posX(e.posX() + 24);
                     e.mortal(false);
                     particleSystem.smoke(e.posX() + 8, e.posY() + 12, 40);
                     e.shrunk(true);
