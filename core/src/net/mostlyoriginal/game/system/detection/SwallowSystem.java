@@ -38,7 +38,7 @@ public class SwallowSystem extends FluidIteratingSystem {
     protected void begin() {
         super.begin();
 
-        if ( Gdx.input.isKeyJustPressed(Input.Keys.Y)) {
+        if (0==1&& Gdx.input.isKeyJustPressed(Input.Keys.Y)) {
             E player = entityWithTag("player");
             E destination = entityWithTag("debug");
             if (destination != null) {
