@@ -4,7 +4,10 @@ import com.artemis.annotations.Wire;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.utils.Json;
 import net.mostlyoriginal.api.manager.AbstractAssetSystem;
+import net.mostlyoriginal.game.component.SpriteData;
+import net.mostlyoriginal.game.system.render.SpriteLibrary;
 
 /**
  * @author Daan van Yperen
@@ -13,6 +16,7 @@ import net.mostlyoriginal.api.manager.AbstractAssetSystem;
 public class FeatureScreenAssetSystem extends AbstractAssetSystem {
 
     public static final int LOGO_WIDTH = 276;
+    private SpriteLibrary spriteLibrary;
     public static final int LOGO_HEIGHT = 109;
     public static final int FEATURE_WIDTH = 21;
     public static final int FEATURE_HEIGHT = 21;
@@ -26,20 +30,24 @@ public class FeatureScreenAssetSystem extends AbstractAssetSystem {
     @Override
     protected void initialize() {
         super.initialize();
-
-        add("background", 0, 0, BACKGROUND_WIDTH, BACKGROUND_HEIGHT, 1);
-
-        add("logo", 748, 916, 276,109, 1);
-        add("feature-packed", 160, 114, FEATURE_WIDTH, FEATURE_HEIGHT, 1);
-        add("feature-pooled", 182, 114, FEATURE_WIDTH, FEATURE_HEIGHT, 1);
-        add("feature-hotspot", 204, 114, FEATURE_WIDTH, FEATURE_HEIGHT, 1);
-        add("feature-factory", 226, 114, FEATURE_WIDTH, FEATURE_HEIGHT, 1);
-
+        loadSprites();
     }
 
     @Override
     public Animation get(String identifier) {
         return super.get(identifier);
+    }
+
+
+    private void loadSprites() {
+        final Json json = new Json();
+        spriteLibrary = json.fromJson(SpriteLibrary.class, Gdx.files.internal("sprites.json"));
+        for (SpriteData sprite : spriteLibrary.sprites) {
+            Animation animation = add(sprite.id, sprite.x, sprite.y, sprite.width, sprite.height, sprite.countX, sprite.countY, this.tileset, sprite.milliseconds * 0.001f);
+            if (!sprite.repeat) {
+                animation.setPlayMode(Animation.PlayMode.NORMAL);
+            } else animation.setPlayMode(Animation.PlayMode.LOOP);
+        }
     }
 
 }

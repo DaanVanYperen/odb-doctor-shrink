@@ -14,6 +14,7 @@ import net.mostlyoriginal.api.system.render.AnimRenderSystem;
 import net.mostlyoriginal.api.system.render.ClearScreenSystem;
 import net.mostlyoriginal.game.GdxArtemisGame;
 import net.mostlyoriginal.game.system.detection.OdbFeatureDetectionSystem;
+import net.mostlyoriginal.game.system.render.MyAnimRenderSystem2;
 import net.mostlyoriginal.game.system.render.TransitionSystem;
 import net.mostlyoriginal.game.system.view.FeatureScreenAssetSystem;
 import net.mostlyoriginal.game.system.view.FeatureScreenSetupSystem;
@@ -38,16 +39,16 @@ public class OdbFeatureScreen extends WorldScreen {
 						// supportive
 						new SuperMapper(),
 						new TagManager(),
-						new CameraSystem(1),
+						new CameraSystem(2),
 						new FeatureScreenAssetSystem(),
 						new ButtonPressSystem()
 				).with(WorldConfigurationBuilder.Priority.LOW,
 						// processing
 						new TransitionSystem(GdxArtemisGame.getInstance()),
 						// animation
-						new ClearScreenSystem(Color.valueOf("969291")),
+						new ClearScreenSystem(Color.valueOf("422433")),
 						renderBatchingSystem = new RenderBatchingSystem(),
-						new AnimRenderSystem(renderBatchingSystem),
+						new MyAnimRenderSystem2(renderBatchingSystem),
 						new FeatureScreenSetupSystem()
 				).build());
 	}

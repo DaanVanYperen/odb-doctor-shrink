@@ -142,24 +142,25 @@ public class GameScreen extends WorldScreen {
                                 "voice1",
                                 "VWOM",
                                 "deathsound", // done
-                                "battery_eaten", // robot gets battery
+//                                "battery_eaten", // robot gets battery
                                 "deepsound", //
-                                "door_break", //
-                                "door_openclose", // electrical doors.
-                                "footsteps_girl",
-                                "footsteps_robot",
-                                "landing_girl",
-                                "boss_sound_1",
+//                                "door_break", //
+//                                "door_openclose", // electrical doors.
+//                                "footsteps_girl",
+//                                "footsteps_robot",
+//                                "landing_girl",
+//                                "boss_sound_1",
                                 "poop_pipe",
-                                "robot_attack",
+//                                "robot_attack",
                                 "death_jingle",
-                                "robot_fly",
-                                "gremlin_death",
-                                "splat1",
-                                "splat2",
-                                "splat3",
-                                "splat4",
-                                "joke"
+//                                "robot_fly",
+//                                "gremlin_death",
+//                                "splat1",
+//                                "splat2",
+//                                "splat3",
+//                                "splat4",
+                                "joke",
+                                "stretch"
                         }),
                         new TransitionSystem(GdxArtemisGame.getInstance())
                 ).build());
