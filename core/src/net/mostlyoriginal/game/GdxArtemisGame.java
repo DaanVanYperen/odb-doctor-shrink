@@ -22,8 +22,8 @@ public class GdxArtemisGame extends Game {
 
     public void restart() {
         G.level = G.settings.startingLevel;
-        setScreen(new GameScreen());
-        //setScreen(new OdbFeatureScreen());
+        //setScreen(new GameScreen());
+        setScreen(new OdbFeatureScreen());
     }
 
     public static GdxArtemisGame getInstance() {

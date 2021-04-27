@@ -48,6 +48,7 @@ public class PlayerControlSystem extends FluidIteratingSystem {
     private FootstepSystem footstepSystem;
     private boolean shrinkDown = false;
     private boolean jumpDown=false;
+    private boolean stretchPlayed=false;
 
     public PlayerControlSystem() {
         super(Aspect.all(PlayerControlled.class, Physics.class, WallSensor.class, Anim.class).exclude(Dead.class));
@@ -118,9 +119,11 @@ public class PlayerControlSystem extends FluidIteratingSystem {
                     if (e.hasShrunk()) {
                         E.E().playSound("shrink_up");
                         e.controlsRechargeCooldown(RESHRINK_COOLDOWN);
+                        stretchPlayed=false;
                     } else {
                         E.E().playSound("shrink_down");
                         e.controlsAutoGrowCooldown(MAX_SHRINK_COOLDOWN);
+                        stretchPlayed=false;
                     }
                     e.controlsShrinkToggleCooldown(0.1f);
                 }
@@ -131,6 +134,10 @@ public class PlayerControlSystem extends FluidIteratingSystem {
         if (e.hasShrunk()) {
             if (e.controlsAutoGrowCooldown() > 0) {
                 e.controlsAutoGrowCooldown(e.controlsAutoGrowCooldown() - world.delta);
+                if (e.controlsAutoGrowCooldown() <= 0.5 && !stretchPlayed) {
+                    E.E().playSound("stretch");
+                    stretchPlayed=true;
+                }
                 if (e.controlsAutoGrowCooldown() <= 0) {
                     E.E().playSound("shrink_up");
                     e.controlsShrinkToggleCooldown(0.4f);
