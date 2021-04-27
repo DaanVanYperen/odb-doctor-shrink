@@ -437,6 +437,16 @@
       "height": 64
     },
     {
+      "id": "logo",
+      "comment": "The logo!",
+      "x": 748,
+      "y": 916,
+      "countX": 1,
+      "countY": 1,
+      "width": 276,
+      "height": 109
+    },
+    {
       "id": "bird-1-idle",
       "comment": "Not a bird, a bubble now, embedded in the ground.",
       "x": 772,
